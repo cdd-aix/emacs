@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "diminish" "diminish.el" (22906 39787 639826
-;;;;;;  761000))
+;;;### (autoloads nil "diminish" "diminish.el" (22906 55725 123774
+;;;;;;  582000))
 ;;; Generated autoloads from diminish.el
 
 (autoload 'diminish "diminish" "\

@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "ansible-vault" "ansible-vault.el" (22906 49005
-;;;;;;  855519 396000))
+;;;### (autoloads nil "ansible-vault" "ansible-vault.el" (22906 55743
+;;;;;;  523754 440000))
 ;;; Generated autoloads from ansible-vault.el
 
 (autoload 'ansible-vault--is-vault-file "ansible-vault" "\
