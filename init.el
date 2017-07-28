@@ -3,7 +3,7 @@
 ;;; Code:
 ;; -*- emacs-lisp -*-
 
-(setq package-user-dir "~/p/emacs/elpa"
+(setq package-user-dir (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
       package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")
 			 ("elpy" . "http://jorgenscahefer.github.io/packages/")))
@@ -196,7 +196,7 @@
 (use-package neotree
 	     :commands (neotree-toggle errge/neotree-project-dir)
 	     :bind (("<f8>" . errge/neotree-project-dir))
-	     :functions (neo-global--window-exists-p neotree-dir neotree-find)
+	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neo-global--window-exists-p neotree-dir neotree-find)
 	     :config
 	     ;; from https://www.emacswiki.org/emacs/NeoTree
 	     (defun errge/neotree-project-dir ()
