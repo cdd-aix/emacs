@@ -78,6 +78,7 @@
       select-enable-primary t)
 
 (electric-pair-mode 1)
+(subword-mode +1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Second: deferred packages, eval-after-loads and autoloads
@@ -91,6 +92,7 @@
 	     (setq ps-paper-type 'letter
 		   ps-font-size 10))
 
+(use-package elisp-format)
 ;; also-dependency-for-gnus!
 (use-package bbdb
 	     :defer t
@@ -134,7 +136,13 @@
 
 (use-package dockerfile-mode
 	     :functions (s-replace)
-	     :mode ("Dockerfile\\'"))
+	     :mode ("Dockerfile\\'")
+	     :config (add-hook 'dockerfile-mode-hook
+			       '(lambda ()
+				  (setq indent-tabs-mode nil
+					tab-width 4)))
+	     (add-hook 'dockerfile-mode-hook 'subword-mode))
+
 
 (use-package flycheck
 	     :commands (global-flycheck-mode)
@@ -291,7 +299,7 @@
 	     :defer t
 	     :commands (color-theme-initialize color-theme-clarity)
 	     :defines (color-theme-is-global)
-;;	     :init (setq color-theme-is-global t)
+	     ;;	     :init (setq color-theme-is-global t)
 	     :config (color-theme-initialize))
 
 (use-package powerline
