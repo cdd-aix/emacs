@@ -198,7 +198,6 @@
 	     :commands (neotree-toggle errge/neotree-project-dir)
 	     :bind (("<f8>" . errge/neotree-project-dir))
 	     :functions (neo-global--window-exists-p neotree-dir neotree-find)
-	     :defines projectile-project-root
 	     :config
 	     ;; from https://www.emacswiki.org/emacs/NeoTree
 	     (defun errge/neotree-project-dir ()
@@ -223,7 +222,7 @@
 
 (use-package elpy
 	     :defer t
-	     :commands elpy-enable
+	     :commands (elpy-enable)
 	     :init (elpy-enable))
 
 (use-package diff-hl
@@ -236,6 +235,9 @@
 (with-eval-after-load 'vc-git
   (require 'diff-hl))
 
+(use-package projectile
+	     :functions (projectile-project-root))
+
 (use-package helm-projectile
 	     :diminish projectile-mode
 	     :commands (helm-projectile-on)
@@ -247,11 +249,6 @@
 			   uniquify-buffer-name-style 'reverse))
 
 (use-package midnight)
-
-(use-package color-theme
-	     :commands (color-theme-initialize color-theme-clarity)
-	     :init (color-theme-initialize)
-	     (color-theme-clarity))
 
 (use-package ansible)
 
@@ -294,6 +291,41 @@
 	     :functions (sml/setup)
 	     :config (sml/setup))
 
+(use-package color-theme
+	     :commands (color-theme-initialize color-theme-clarity)
+	     :init (color-theme-initialize)
+	     (color-theme-clarity))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Fourth: require, defuns and bind-keys that are evaluated right
+;; here, right now, might be slow, test these first for slowness!
+
+(use-package which-key
+	     :diminish which-key-mode
+	     :config (progn
+		       (setq which-key-idle-secondary-delay 0.1
+			     which-key-idle-delay 0.3)
+		       (which-key-mode 1)))
+
+(use-package ws-butler
+	     :diminish ws-butler-mode
+	     :config
+	     (progn
+	       (setq ws-butler-keep-whitespace-before-point nil)
+	       (ws-butler-global-mode 1)))
+
+(use-package dtrt-indent
+	     :config
+	     (dtrt-indent-mode 1))
+
+;; start server, so we can connect anytime with emacsclient
+(unless noninteractive
+  (setq server-socket-dir (format "/tmp/emacs-%d-%s-%d"
+                                  (user-uid)
+                                  (format-time-string "%Y%m%d-%H%M%S")
+                                  (emacs-pid)))
+  (server-start)
+  (add-hook 'kill-emacs-hook #'(lambda () (delete-directory server-socket-dir t))))
 
 (provide 'init)
 ;;; init.el ends here
