@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "jinja2-mode" "jinja2-mode.el" (22906 49181
-;;;;;;  243426 608000))
+;;;### (autoloads nil "jinja2-mode" "jinja2-mode.el" (22906 55745
+;;;;;;  311752 479000))
 ;;; Generated autoloads from jinja2-mode.el
 
 (autoload 'jinja2-mode "jinja2-mode" "\

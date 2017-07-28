@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "poly-R" "poly-R.el" (22906 49006 475519 146000))
+;;;### (autoloads nil "poly-R" "poly-R.el" (22906 55744 335753 550000))
 ;;; Generated autoloads from poly-R.el
  (autoload 'poly-noweb+r-mode "poly-R")
  (autoload 'poly-markdown+r-mode "poly-R")
@@ -17,14 +17,14 @@
 
 ;;;***
 
-;;;### (autoloads nil "poly-c" "poly-c.el" (22906 49006 471519 147000))
+;;;### (autoloads nil "poly-c" "poly-c.el" (22906 55744 335753 550000))
 ;;; Generated autoloads from poly-c.el
  (autoload 'poly-noweb+c-mode "poly-c")
 
 ;;;***
 
-;;;### (autoloads nil "poly-erb" "poly-erb.el" (22906 49006 471519
-;;;;;;  147000))
+;;;### (autoloads nil "poly-erb" "poly-erb.el" (22906 55744 335753
+;;;;;;  550000))
 ;;; Generated autoloads from poly-erb.el
  (autoload 'poly-coffee+erb-mode "poly-erb")
  (autoload 'poly-javascript+erb-mode "poly-erb")
@@ -32,36 +32,36 @@
 
 ;;;***
 
-;;;### (autoloads nil "poly-markdown" "poly-markdown.el" (22906 49006
-;;;;;;  475519 146000))
+;;;### (autoloads nil "poly-markdown" "poly-markdown.el" (22906 55744
+;;;;;;  335753 550000))
 ;;; Generated autoloads from poly-markdown.el
  (autoload 'poly-markdown-mode "poly-markdown")
 
 ;;;***
 
-;;;### (autoloads nil "poly-noweb" "poly-noweb.el" (22906 49006 471519
-;;;;;;  147000))
+;;;### (autoloads nil "poly-noweb" "poly-noweb.el" (22906 55744 335753
+;;;;;;  550000))
 ;;; Generated autoloads from poly-noweb.el
  (autoload 'poly-noweb-mode "poly-noweb")
 
 ;;;***
 
-;;;### (autoloads nil "poly-org" "poly-org.el" (22906 49006 475519
-;;;;;;  146000))
+;;;### (autoloads nil "poly-org" "poly-org.el" (22906 55744 335753
+;;;;;;  550000))
 ;;; Generated autoloads from poly-org.el
  (autoload 'poly-org-mode "poly-org")
 
 ;;;***
 
-;;;### (autoloads nil "poly-slim" "poly-slim.el" (22906 49006 475519
-;;;;;;  146000))
+;;;### (autoloads nil "poly-slim" "poly-slim.el" (22906 55744 335753
+;;;;;;  550000))
 ;;; Generated autoloads from poly-slim.el
  (autoload 'poly-slim-mode "poly-slim")
 
 ;;;***
 
-;;;### (autoloads nil "polymode" "polymode.el" (22906 49006 475519
-;;;;;;  146000))
+;;;### (autoloads nil "polymode" "polymode.el" (22906 55744 335753
+;;;;;;  550000))
 ;;; Generated autoloads from polymode.el
 
 (autoload 'define-polymode "polymode" "\
@@ -119,7 +119,7 @@ BODY contains code to be executed after the complete
 ;;;;;;  "polymode-compat.el" "polymode-configuration.el" "polymode-core.el"
 ;;;;;;  "polymode-debug.el" "polymode-export.el" "polymode-methods.el"
 ;;;;;;  "polymode-pkg.el" "polymode-tangle.el" "polymode-weave.el")
-;;;;;;  (22906 49006 479519 145000))
+;;;;;;  (22906 55744 339753 545000))
 
 ;;;***
 
