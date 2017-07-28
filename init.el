@@ -73,8 +73,7 @@
       auto-save-file-name-transforms (progn
                                        (make-directory "~/.emacs.d/auto-save-files/" t)
                                        `((".*" "~/.emacs.d/auto-save-files/" t)))
-      mouse-yank-at-point t
-      switch-to-buffer-preserve-window-point t
+      mouse-yank-at-point t      switch-to-buffer-preserve-window-point t
       select-enable-clipboard t
       select-enable-primary t)
 
@@ -139,23 +138,23 @@
 
 (use-package flycheck
 	     :commands (global-flycheck-mode)
-	     :init (global-flycheck-mode))
+	     :config (global-flycheck-mode))
 
 (use-package flycheck-color-mode-line
-	     :init (eval-after-load "flycheck"
-		     '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode)))
+	     :after flycheck
+	     :config (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
 (use-package flycheck-pos-tip)
 
 (use-package flycheck-checkbashisms
 	     :commands (flycheck-checkbashisms-setup)
-	     :init (flycheck-checkbashisms-setup))
+	     :config (flycheck-checkbashisms-setup))
 
 (use-package magit
 	     :bind ("C-c g" . magit-status)
 	     :commands (magit-define-popup-switch)
-	     :init (magit-define-popup-switch 'magit-push-popup ?u
-		     "Set upstream" "--set-upstream"))
+	     :config (magit-define-popup-switch 'magit-push-popup ?u
+		       "Set upstream" "--set-upstream"))
 
 (use-package magithub)
 
@@ -223,7 +222,7 @@
 (use-package elpy
 	     :defer t
 	     :commands (elpy-enable)
-	     :init (elpy-enable))
+	     :config (elpy-enable))
 
 (use-package diff-hl
 	     :commands (global-diff-hl-mode)
@@ -232,6 +231,7 @@
 	     (global-diff-hl-mode 1)
 	     (require 'diff-hl-margin)
 	     (diff-hl-margin-mode))
+
 (with-eval-after-load 'vc-git
   (require 'diff-hl))
 
@@ -241,12 +241,14 @@
 (use-package helm-projectile
 	     :diminish projectile-mode
 	     :commands (helm-projectile-on)
-	     :init (helm-projectile-on)
-
-	     (projectile-mode)
+	     :config
+	     (setq projectile-completion-system 'helm
+		   uniquify-buffer-name-style 'reverse)
 	     (require 'uniquify)
-	     :config (setq projectile-completion-system 'helm
-			   uniquify-buffer-name-style 'reverse))
+	     (helm-projectile-on)
+	     (projectile-mode)
+	     )
+
 
 (use-package midnight)
 
@@ -285,16 +287,25 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Third: the sad ones, nothing to defer on and they are slow, so we defer on time...
+(use-package color-theme
+	     :defer t
+	     :commands (color-theme-initialize color-theme-clarity)
+	     :defines (color-theme-is-global)
+;;	     :init (setq color-theme-is-global t)
+	     :config (color-theme-initialize))
+
+(use-package powerline
+	     :config (powerline-default-theme))
 
 (use-package smart-mode-line
-	     :defer 1
+	     ;;	     :defer 1
 	     :functions (sml/setup)
-	     :config (sml/setup))
-
-(use-package color-theme
-	     :commands (color-theme-initialize color-theme-clarity)
-	     :init (color-theme-initialize)
-	     (color-theme-clarity))
+	     :defines (sml/theme)
+	     :config
+	     (setq sml/theme 'respectful)
+	     (color-theme-clarity)
+	     (sml/setup)
+	     )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fourth: require, defuns and bind-keys that are evaluated right
