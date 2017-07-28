@@ -164,8 +164,8 @@
 	     :config (magit-define-popup-switch 'magit-push-popup ?u
 		       "Set upstream" "--set-upstream"))
 
-(use-package magithub
-	     :if (>= emacs-major-version 25))
+;; (use-package magithub
+;; 	     :if (> emacs-major-version 24))
 
 ;; (use-package multiple-cursors)
 
