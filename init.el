@@ -247,14 +247,17 @@
 (use-package projectile
 	     :functions (projectile-project-root))
 
+(use-package helm)
+
 (use-package helm-projectile
 	     :diminish projectile-mode
 	     :commands (helm-projectile-on)
+	     :init
+	     (helm-projectile-on)
 	     :config
 	     (setq projectile-completion-system 'helm
 		   uniquify-buffer-name-style 'reverse)
 	     (require 'uniquify)
-	     (helm-projectile-on)
 	     (projectile-mode)
 	     )
 
