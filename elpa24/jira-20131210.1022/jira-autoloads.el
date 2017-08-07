@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("jira.el") (22907 11458 922092 144000))
+;;;### (autoloads nil nil ("jira.el") (22907 16488 5525 808000))
 
 ;;;***
 

@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "pyvenv" "pyvenv.el" (22907 11451 911509 193000))
+;;;### (autoloads nil "pyvenv" "pyvenv.el" (22907 16465 54064 0))
 ;;; Generated autoloads from pyvenv.el
 
 (autoload 'pyvenv-activate "pyvenv" "\

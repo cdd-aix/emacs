@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "dockerfile-mode" "dockerfile-mode.el" (22907
-;;;;;;  11446 211515 849000))
+;;;;;;  16438 630590 0))
 ;;; Generated autoloads from dockerfile-mode.el
 
 (autoload 'dockerfile-build-buffer "dockerfile-mode" "\

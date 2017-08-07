@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "flycheck-checkbashisms" "flycheck-checkbashisms.el"
-;;;;;;  (22907 11448 711512 930000))
+;;;;;;  (22907 16443 302490 0))
 ;;; Generated autoloads from flycheck-checkbashisms.el
 
 (autoload 'flycheck-checkbashisms-setup "flycheck-checkbashisms" "\

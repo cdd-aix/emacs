@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "jekyll-modes" "jekyll-modes.el" (22907 11458
-;;;;;;  519501 477000))
+;;;### (autoloads nil "jekyll-modes" "jekyll-modes.el" (22907 16487
+;;;;;;  102634 0))
 ;;; Generated autoloads from jekyll-modes.el
 
 (autoload 'liquid-tags-mode "jekyll-modes" "\

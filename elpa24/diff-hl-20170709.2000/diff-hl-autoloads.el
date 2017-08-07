@@ -3,7 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "diff-hl" "diff-hl.el" (22907 11454 15506 737000))
+;;;### (autoloads nil "diff-hl" "diff-hl.el" (22907 16471 535943
+;;;;;;  0))
 ;;; Generated autoloads from diff-hl.el
 
 (autoload 'diff-hl-mode "diff-hl" "\
@@ -39,8 +40,8 @@ See `diff-hl-mode' for more information on Diff-Hl mode.
 
 ;;;***
 
-;;;### (autoloads nil "diff-hl-amend" "diff-hl-amend.el" (22907 11454
-;;;;;;  15506 737000))
+;;;### (autoloads nil "diff-hl-amend" "diff-hl-amend.el" (22907 16471
+;;;;;;  540940 0))
 ;;; Generated autoloads from diff-hl-amend.el
 
 (autoload 'diff-hl-amend-mode "diff-hl-amend" "\
@@ -74,8 +75,8 @@ See `diff-hl-amend-mode' for more information on Diff-Hl-Amend mode.
 
 ;;;***
 
-;;;### (autoloads nil "diff-hl-dired" "diff-hl-dired.el" (22907 11454
-;;;;;;  15506 737000))
+;;;### (autoloads nil "diff-hl-dired" "diff-hl-dired.el" (22907 16471
+;;;;;;  548942 0))
 ;;; Generated autoloads from diff-hl-dired.el
 
 (autoload 'diff-hl-dired-mode "diff-hl-dired" "\
@@ -91,7 +92,7 @@ Toggle VC diff highlighting on the side of a Dired window.
 ;;;***
 
 ;;;### (autoloads nil "diff-hl-flydiff" "diff-hl-flydiff.el" (22907
-;;;;;;  11454 15506 737000))
+;;;;;;  16471 531935 0))
 ;;; Generated autoloads from diff-hl-flydiff.el
 
 (defvar diff-hl-flydiff-mode nil "\
@@ -112,7 +113,7 @@ This is a global minor mode.  It alters how `diff-hl-mode' works.
 ;;;***
 
 ;;;### (autoloads nil "diff-hl-margin" "diff-hl-margin.el" (22907
-;;;;;;  11454 15506 737000))
+;;;;;;  16471 526944 0))
 ;;; Generated autoloads from diff-hl-margin.el
 
 (defvar diff-hl-margin-mode nil "\
@@ -131,7 +132,8 @@ Toggle displaying `diff-hl-mode' highlights on the margin.
 
 ;;;***
 
-;;;### (autoloads nil nil ("diff-hl-pkg.el") (22907 11454 23497 578000))
+;;;### (autoloads nil nil ("diff-hl-pkg.el") (22907 16471 551972
+;;;;;;  834000))
 
 ;;;***
 

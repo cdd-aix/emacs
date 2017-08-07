@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "expand-region" "expand-region.el" (22907 11437
-;;;;;;  271526 291000))
+;;;### (autoloads nil "expand-region" "expand-region.el" (22907 16430
+;;;;;;  932753 0))
 ;;; Generated autoloads from expand-region.el
 
 (autoload 'er/expand-region "expand-region" "\
@@ -20,7 +20,7 @@ before calling `er/expand-region' for the first time.
 ;;;***
 
 ;;;### (autoloads nil "expand-region-custom" "expand-region-custom.el"
-;;;;;;  (22907 11437 411526 127000))
+;;;;;;  (22907 16431 38748 0))
 ;;; Generated autoloads from expand-region-custom.el
 
 (let ((loads (get 'expand-region 'custom-loads))) (if (member '"expand-region-custom" loads) nil (put 'expand-region 'custom-loads (cons '"expand-region-custom" loads))))
@@ -88,7 +88,7 @@ If set to nil, always place the cursor at the beginning of the region.")
 ;;;;;;  "python-el-expansions.el" "python-el-fgallina-expansions.el"
 ;;;;;;  "python-mode-expansions.el" "ruby-mode-expansions.el" "sml-mode-expansions.el"
 ;;;;;;  "subword-mode-expansions.el" "text-mode-expansions.el" "the-org-mode-expansions.el"
-;;;;;;  "web-mode-expansions.el") (22907 11437 492081 27000))
+;;;;;;  "web-mode-expansions.el") (22907 16431 88698 208000))
 
 ;;;***
 

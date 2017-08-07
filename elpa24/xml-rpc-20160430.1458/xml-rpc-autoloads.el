@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("xml-rpc.el") (22907 11458 636453 883000))
+;;;### (autoloads nil nil ("xml-rpc.el") (22907 16487 406401 940000))
 
 ;;;***
 

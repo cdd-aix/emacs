@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "let-alist" "let-alist.el" (22907 11447 135514
-;;;;;;  772000))
+;;;### (autoloads nil "let-alist" "let-alist.el" (22907 16440 396551
+;;;;;;  0))
 ;;; Generated autoloads from let-alist.el
 
 (autoload 'let-alist "let-alist" "\
