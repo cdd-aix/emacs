@@ -234,7 +234,7 @@
 (use-package elpy
 	     :defer t
 	     :commands (elpy-enable)
-	     :config (elpy-enable))
+	     :init (elpy-enable))
 
 (use-package diff-hl
 	     :commands (global-diff-hl-mode)
