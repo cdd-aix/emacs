@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "bbdb" "bbdb.el" (22907 11435 939527 846000))
+;;;### (autoloads nil "bbdb" "bbdb.el" (22907 16428 41791 0))
 ;;; Generated autoloads from bbdb.el
 
 (defsubst bbdb-records nil "\
@@ -121,8 +121,8 @@ for example only for outgoing messages.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-anniv" "bbdb-anniv.el" (22907 11435 923527
-;;;;;;  865000))
+;;;### (autoloads nil "bbdb-anniv" "bbdb-anniv.el" (22907 16428 30792
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-anniv.el
 
 (autoload 'bbdb-anniv-diary-entries "bbdb-anniv" "\
@@ -136,8 +136,8 @@ To enable this feature, put the following into your .emacs:
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-com" "bbdb-com.el" (22907 11435 999527
-;;;;;;  777000))
+;;;### (autoloads nil "bbdb-com" "bbdb-com.el" (22907 16428 72794
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-com.el
 
 (autoload 'bbdb-do-all-records "bbdb-com" "\
@@ -511,8 +511,8 @@ Interactively, use BBDB prefix \\<bbdb-mode-map>\\[bbdb-do-all-records], see `bb
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-gnus" "bbdb-gnus.el" (22907 11435 967527
-;;;;;;  814000))
+;;;### (autoloads nil "bbdb-gnus" "bbdb-gnus.el" (22907 16428 53795
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-gnus.el
 
 (autoload 'bbdb/gnus-score "bbdb-gnus" "\
@@ -540,8 +540,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-ispell" "bbdb-ispell.el" (22907 11436
-;;;;;;  27527 744000))
+;;;### (autoloads nil "bbdb-ispell" "bbdb-ispell.el" (22907 16428
+;;;;;;  102793 0))
 ;;; Generated autoloads from bbdb-ispell.el
 
 (autoload 'bbdb-ispell-export "bbdb-ispell" "\
@@ -551,8 +551,8 @@ Export BBDB records to ispell personal dictionaries.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-message" "bbdb-message.el" (22907 11435
-;;;;;;  887527 908000))
+;;;### (autoloads nil "bbdb-message" "bbdb-message.el" (22907 16427
+;;;;;;  983795 0))
 ;;; Generated autoloads from bbdb-message.el
 
 (autoload 'bbdb-insinuate-message "bbdb-message" "\
@@ -569,8 +569,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-mhe" "bbdb-mhe.el" (22907 11435 931527
-;;;;;;  856000))
+;;;### (autoloads nil "bbdb-mhe" "bbdb-mhe.el" (22907 16428 34798
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-mhe.el
 
 (autoload 'bbdb-insinuate-mh "bbdb-mhe" "\
@@ -581,8 +581,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-migrate" "bbdb-migrate.el" (22907 11435
-;;;;;;  879527 917000))
+;;;### (autoloads nil "bbdb-migrate" "bbdb-migrate.el" (22907 16427
+;;;;;;  979794 0))
 ;;; Generated autoloads from bbdb-migrate.el
 
 (autoload 'bbdb-migrate "bbdb-migrate" "\
@@ -605,8 +605,8 @@ for outdated BBDB variables that are set via your personal `custom-file'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-mu4e" "bbdb-mu4e.el" (22907 11435 871527
-;;;;;;  926000))
+;;;### (autoloads nil "bbdb-mu4e" "bbdb-mu4e.el" (22907 16427 974795
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-mu4e.el
 
 (autoload 'bbdb-insinuate-mu4e "bbdb-mu4e" "\
@@ -617,8 +617,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-mua" "bbdb-mua.el" (22907 11435 843527
-;;;;;;  959000))
+;;;### (autoloads nil "bbdb-mua" "bbdb-mua.el" (22907 16427 961800
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-mua.el
 
 (autoload 'bbdb-message-header "bbdb-mua" "\
@@ -809,8 +809,8 @@ For use as an element of `bbdb-notice-record-hook'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-pgp" "bbdb-pgp.el" (22907 11435 975527
-;;;;;;  805000))
+;;;### (autoloads nil "bbdb-pgp" "bbdb-pgp.el" (22907 16428 57822
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-pgp.el
 
 (autoload 'bbdb-read-xfield-pgp-mail "bbdb-pgp" "\
@@ -842,8 +842,8 @@ to call the command `bbdb-pgp' manually, then call `mml-preview'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-rmail" "bbdb-rmail.el" (22907 11435 983527
-;;;;;;  796000))
+;;;### (autoloads nil "bbdb-rmail" "bbdb-rmail.el" (22907 16428 62796
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-rmail.el
 
 (autoload 'bbdb-insinuate-rmail "bbdb-rmail" "\
@@ -854,8 +854,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-sc" "bbdb-sc.el" (22907 11435 855527
-;;;;;;  945000))
+;;;### (autoloads nil "bbdb-sc" "bbdb-sc.el" (22907 16427 966795
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-sc.el
 
 (autoload 'bbdb-sc-update-from "bbdb-sc" "\
@@ -875,8 +875,8 @@ BBDB into Supercite.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-snarf" "bbdb-snarf.el" (22907 11435 863527
-;;;;;;  936000))
+;;;### (autoloads nil "bbdb-snarf" "bbdb-snarf.el" (22907 16427 970797
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-snarf.el
 
 (autoload 'bbdb-snarf-paragraph "bbdb-snarf" "\
@@ -906,8 +906,8 @@ See `bbdb-snarf-rule-alist' for details.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-tex" "bbdb-tex.el" (22907 11435 895527
-;;;;;;  898000))
+;;;### (autoloads nil "bbdb-tex" "bbdb-tex.el" (22907 16428 16796
+;;;;;;  0))
 ;;; Generated autoloads from bbdb-tex.el
 
 (autoload 'bbdb-tex "bbdb-tex" "\
@@ -919,8 +919,7 @@ RULE should be an element of `bbdb-tex-alist'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-vm" "bbdb-vm.el" (22907 11435 903527
-;;;;;;  889000))
+;;;### (autoloads nil "bbdb-vm" "bbdb-vm.el" (22907 16428 20806 0))
 ;;; Generated autoloads from bbdb-vm.el
 
 (defvar bbdb/vm-auto-folder-headers '("From:" "To:" "CC:") "\
@@ -985,7 +984,7 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-wl" "bbdb-wl.el" (22907 11436 15527 758000))
+;;;### (autoloads nil "bbdb-wl" "bbdb-wl.el" (22907 16428 98789 0))
 ;;; Generated autoloads from bbdb-wl.el
 
 (autoload 'bbdb-insinuate-wl "bbdb-wl" "\
@@ -995,8 +994,8 @@ Hook BBDB into Wanderlust.
 
 ;;;***
 
-;;;### (autoloads nil nil ("bbdb-pkg.el" "bbdb-site.el") (22907 11436
-;;;;;;  82179 496000))
+;;;### (autoloads nil nil ("bbdb-pkg.el" "bbdb-site.el") (22907 16428
+;;;;;;  118516 882000))
 
 ;;;***
 

@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil nil ("hyde-git.el" "hyde-md.el" "hyde-pkg.el"
-;;;;;;  "hyde.el" "sample-dot-hyde.el") (22907 11457 721387 789000))
+;;;;;;  "hyde.el" "sample-dot-hyde.el") (22907 16484 825347 260000))
 
 ;;;***
 
