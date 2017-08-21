@@ -230,9 +230,7 @@
 
 ;; Silver Searcher
 ;; (use-package ag)
-
 (use-package elpy
-	     :defer t
 	     :commands (elpy-enable)
 	     :init (elpy-enable))
 
@@ -295,7 +293,7 @@
 (use-package yaml-mode)
 
 (use-package groovy-mode
-	     :mode ("\\.groovy\\'" "\\.groovy.override\\'")
+	     :mode ("\\.groovy\\'" "\\.groovy.override\\'"))
 
 (use-package vhdl-mode)
 
