@@ -143,6 +143,9 @@
 					tab-width 4)))
 	     (add-hook 'dockerfile-mode-hook 'subword-mode))
 
+(use-package docker-compose-mode)
+
+(use-package sgml-mode)
 
 (use-package flycheck
 	     :commands (global-flycheck-mode)
@@ -354,3 +357,4 @@
 
 (provide 'init)
 ;;; init.el ends here
+(put 'upcase-region 'disabled nil)
