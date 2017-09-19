@@ -20,7 +20,7 @@
     ("\\`CVS/" "\\`#" "\\`.#" "\\`\\.\\./" "\\`\\./" "\\`/p")))
  '(package-selected-packages
    (quote
-    (powerline dtrt-indent ws-butler which-key smart-mode-line elpy default-text-scale neotree smex rjsx-mode expand-region bbdb yaml-mode xml-rpc use-package rainbow-mode nginx-mode markdown-mode magithub json-reformat json-mode jira jinja2-mode jekyll-modes hyde helm-projectile groovy-mode flycheck-pos-tip flycheck-color-mode-line flycheck-checkbashisms dockerfile-mode color-theme coffee-mode ansible-vault ansible-doc ansible))))
+    (magit-popup yasnippet s pyvenv projectile magit ivy helm-core helm git-commit flycheck find-file-in-project docker-compose-mode company async powerline dtrt-indent ws-butler which-key smart-mode-line elpy default-text-scale neotree smex rjsx-mode expand-region bbdb yaml-mode xml-rpc use-package rainbow-mode nginx-mode markdown-mode magithub json-reformat json-mode jira jinja2-mode jekyll-modes hyde helm-projectile groovy-mode flycheck-pos-tip flycheck-color-mode-line flycheck-checkbashisms dockerfile-mode color-theme coffee-mode ansible-vault ansible-doc ansible))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
