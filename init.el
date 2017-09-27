@@ -168,12 +168,7 @@
 		       "Set upstream" "--set-upstream"))
 
 
-;; (when (> emacs-major-version 24)
-;;   (use-package magithub
-;; 	       :after magit
-;; 	       :config (magithub-feature-autoinject t)))
-
-;; (use-package multiple-cursors)
+(use-package multiple-cursors)
 
 ;; Find better keybindings
 ;; (use-package windmove
