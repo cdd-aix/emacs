@@ -145,7 +145,7 @@
 
 (use-package docker-compose-mode)
 
-(use-package sgml-mode)
+;; (use-package sgml-mode)
 
 (use-package flycheck
 	     :commands (global-flycheck-mode)
@@ -231,6 +231,10 @@
 (use-package elpy
 	     :commands (elpy-enable)
 	     :init (elpy-enable))
+;; (use-package django-html-mode)
+(use-package django-mode)
+(use-package web-mode
+	     :mode ("\\.html\\'"))
 
 (use-package diff-hl
 	     :commands (global-diff-hl-mode)
