@@ -92,6 +92,7 @@
 	     (setq ps-paper-type 'letter
 		   ps-font-size 10))
 
+(use-package apache-mode)
 (use-package elisp-format)
 ;; also-dependency-for-gnus!
 (use-package bbdb
@@ -131,8 +132,11 @@
 (use-package whitespace)
 
 (use-package markdown-mode
-	     :mode ("\\.md\\'" "\\.markdown\\'")
-	     :commands (gfm-mode))
+	     :commands (gfm-mode markdown-mode)
+	     :mode (
+		    ("\\.md\\'" . gfm-mode)
+		    ("\\.markdown\\'" . markdown-mode))
+	     :config (setq markdown-command "multimarkdown"))
 
 (use-package dockerfile-mode
 	     :functions (s-replace)
@@ -229,8 +233,11 @@
 ;; Silver Searcher
 ;; (use-package ag)
 (use-package elpy
-	     :commands (elpy-enable)
-	     :init (elpy-enable))
+	     :commands (elpy-enable elpy-use-ipython)
+	     :config (elpy-use-ipython))
+(use-package python
+	     :mode ("\\.py" . python-mode)
+	     :config (elpy-enable))
 ;; (use-package django-html-mode)
 (use-package django-mode)
 (use-package web-mode
@@ -351,7 +358,7 @@
                                   (user-uid)
                                   (format-time-string "%Y%m%d-%H%M%S")
                                   (emacs-pid)))
-  (server-start)
+(server-start)
   (add-hook 'kill-emacs-hook #'(lambda () (delete-directory server-socket-dir t))))
 
 (provide 'init)
