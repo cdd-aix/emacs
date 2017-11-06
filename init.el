@@ -260,6 +260,7 @@
 (use-package helm)
 
 (use-package helm-projectile
+	     :defer t
 	     :diminish projectile-mode
 	     :commands (helm-projectile-on)
 	     :init
