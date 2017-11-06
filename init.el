@@ -233,6 +233,7 @@
 ;; Silver Searcher
 ;; (use-package ag)
 (use-package elpy
+	     :defer t
 	     :commands (elpy-enable elpy-use-ipython)
 	     :config (elpy-use-ipython))
 (use-package python
