@@ -6,7 +6,7 @@
 (setq package-user-dir (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
       package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")
-			 ("elpy" . "http://jorgenscahefer.github.io/packages/")))
+			 ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 
 					; Disable package initialize after us.  We either initialize it
 ;; anyway in case of interpreted .emacs, or we don't want slow
