@@ -301,7 +301,7 @@
 
 (use-package yaml-mode)
 
-(use-package groovy-modeh
+(use-package groovy-mode
 	     :mode ("\\.groovy\\'" "\\.groovy.override\\'"))
 
 (use-package vhdl-mode)
