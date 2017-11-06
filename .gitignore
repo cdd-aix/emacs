@@ -3,4 +3,5 @@
 *#
 .#*
 cf-own-custom.el
+flycheck_init.el
 elpa*/
