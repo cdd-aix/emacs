@@ -85,6 +85,7 @@
 ;; Second: deferred packages, eval-after-loads and autoloads
 ;; beautiful hungarian letters in ps-print
 
+(use-package pkg-info)
 (use-package ps-print
 	     :defer t
 	     :config
@@ -152,15 +153,17 @@
 
 ;; (use-package sgml-mode)
 
+(use-package exec-path-from-shell)
+
 (use-package flycheck
 	     :commands (global-flycheck-mode)
-	     :config (global-flycheck-mode))
+	     :init (global-flycheck-mode))
 
 (use-package flycheck-color-mode-line
 	     :after flycheck
 	     :config (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
-(use-package flycheck-pos-tip)
+;; (use-package flycheck-pos-tip)
 
 (use-package flycheck-checkbashisms
 	     :commands (flycheck-checkbashisms-setup)
@@ -241,7 +244,11 @@
 	     :mode ("\\.py" . python-mode)
 	     :config (elpy-enable))
 ;; (use-package django-html-mode)
-(use-package django-mode)
+;; Disrupts flycheck...
+;; (use-package django-mode
+;; 	     :commands (django-html-mode)
+;; 	     :mode ("\\.djhtml$" . django-html-mode))
+
 (use-package web-mode
 	     :mode ("\\.html\\'"))
 
