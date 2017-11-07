@@ -8,7 +8,8 @@
 			 ("gnu" . "http://elpa.gnu.org/packages/")
 			 ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 
-					; Disable package initialize after us.  We either initialize it
+;; Many ideas mooched from https://github.com/nilcons/emacs-use-package-fast
+;; Disable package initialize after us.  We either initialize it
 ;; anyway in case of interpreted .emacs, or we don't want slow
 ;; initizlization in case of byte-compiled .emacs.elc.
 (setq package-enable-at-startup nil)
