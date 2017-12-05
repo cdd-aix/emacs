@@ -3,6 +3,8 @@
 ;;; Code:
 ;; -*- emacs-lisp -*-
 
+(defvar package-archives)
+(defvar package--init-file-ensured)
 (setq package-user-dir (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
       package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")
@@ -212,9 +214,9 @@
 	     :defer t)
 
 (use-package neotree
-	     :commands (neotree-toggle errge/neotree-project-dir)
+	     :commands (neotree-toggle errge/neotree-project-dir neo-global--window-exists-p)
 	     :bind (("<f8>" . errge/neotree-project-dir))
-	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neo-global--window-exists-p neotree-dir neotree-find)
+	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find)
 	     :config
 	     ;; from https://www.emacswiki.org/emacs/NeoTree
 	     (defun errge/neotree-project-dir ()
@@ -264,7 +266,8 @@
   (require 'diff-hl))
 
 (use-package projectile
-	     :functions (projectile-project-root))
+	     :commands (projectile-mode)
+	     :functions (projectile-mode projectile-project-root))
 
 (use-package helm)
 
@@ -328,11 +331,13 @@
 	     :config (color-theme-initialize))
 
 (use-package powerline
+	     :functions (powerline-default-theme)
 	     :config (powerline-default-theme))
 
 (use-package smart-mode-line
 	     ;;	     :defer 1
-	     :functions (sml/setup)
+	     :commands (sml/setup)
+	     ;; :functions (sml/setup)
 	     :defines (sml/theme)
 	     :config
 	     (setq sml/theme 'respectful)
@@ -345,6 +350,7 @@
 ;; here, right now, might be slow, test these first for slowness!
 
 (use-package which-key
+	     :commands (which-key-mode)
 	     :diminish which-key-mode
 	     :config (progn
 		       (setq which-key-idle-secondary-delay 0.1
@@ -352,6 +358,7 @@
 		       (which-key-mode 1)))
 
 (use-package ws-butler
+	     :commands (ws-butler-global-mode)
 	     :diminish ws-butler-mode
 	     :config
 	     (progn
@@ -359,6 +366,7 @@
 	       (ws-butler-global-mode 1)))
 
 (use-package dtrt-indent
+	     :commands (dtrt-indent-mode)
 	     :config
 	     (dtrt-indent-mode 1))
 
