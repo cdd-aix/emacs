@@ -186,11 +186,14 @@
 	     :commands (flycheck-checkbashisms-setup)
 	     :config (flycheck-checkbashisms-setup))
 
+(use-package autorevert
+	     :commands (auto-revert-mode)
+	     :delight auto-revert-mode)
 (use-package magit
 	     :commands (magit-define-popup-switch)
 	     :bind ("C-c g" . magit-status)
 	     :config (magit-define-popup-switch 'magit-push-popup ?u
-		       "Set upstream" "--set-upstream"))
+						"Set upstream" "--set-upstream"))
 
 
 
@@ -256,11 +259,16 @@
 
 ;; Silver Searcher
 ;; (use-package ag)
+(use-package highlight-indentation
+	     :delight)
 (use-package elpy
+	     :commands (elpy-enable elpy-use-ipython highlight-indentation-mode)
+	     :delight
+	     ;; (elpy-mode highlight-indentation-mode)
 	     :defer t
-	     :commands (elpy-enable elpy-use-ipython)
 	     :config (elpy-use-ipython))
 (use-package python
+	     :delight
 	     :mode ("\\.py" . python-mode)
 	     :config (elpy-enable))
 ;; (use-package django-html-mode)
@@ -282,13 +290,15 @@
 
 (use-package projectile
 	     :commands (projectile-mode)
+	     :delight '(:eval (concat " " (projectile-project-name)))
+
 	     :functions (projectile-project-root))
 
 (use-package helm)
 
 (use-package helm-projectile
 	     :defer t
-	     :diminish projectile-mode
+	     ;; :diminish projectile-mode
 	     :commands (helm-projectile-on)
 	     :init
 	     (helm-projectile-on)
@@ -338,27 +348,46 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Third: the sad ones, nothing to defer on and they are slow, so we defer on time...
+
+(use-package smart-mode-line-powerline-theme
+	     ;; :defer t
+	     )
+(use-package smart-mode-line
+	     :defer 0.1
+	     :commands (sml/setup)
+	     :defines (sml/theme)
+	     :init
+	     (setq sml/theme 'powerline)
+	     :config
+	     (color-theme-clarity)
+	     (sml/setup)
+	     ;; (color-theme-initialize)
+	     ;; (color-theme-clarity)
+	     )
+
 (use-package color-theme
 	     :defer t
 	     :commands (color-theme-initialize color-theme-clarity)
-	     :defines (color-theme-is-global)
-	     ;;	     :init (setq color-theme-is-global t)
-	     :config (color-theme-initialize))
-
-(use-package powerline
-	     :functions (powerline-default-theme)
-	     :config (powerline-default-theme))
-
-(use-package smart-mode-line
-	     ;;	     :defer 1
-	     :commands (sml/setup)
-	     ;; :functions (sml/setup)
-	     :defines (sml/theme)
+	     :functions(color-theme-clarity)
+	     :defines (color-theme-is-global color-themes)
+     	     :init
+	     (setq color-theme-is-global t)
 	     :config
-	     (setq sml/theme 'respectful)
+	     (color-theme-initialize)
 	     (color-theme-clarity)
-	     (sml/setup)
 	     )
+;; (use-package smart-mode-line
+;; 	     :defer t
+;; 	     ;; :after color-theme
+;; 	     ;;	     :defer 1
+;; 	     :commands (sml/setup)
+;; 	     ;; :functions (sml/setup)
+;; 	     :defines (sml/theme)
+;; 	     :init
+;; 	     (setq sml/theme 'powerline)
+;; 	     :config
+;; 	     (sml/setup)
+;; 	     )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fourth: require, defuns and bind-keys that are evaluated right
@@ -391,7 +420,7 @@
                                   (user-uid)
                                   (format-time-string "%Y%m%d-%H%M%S")
                                   (emacs-pid)))
-(server-start)
+  (server-start)
   (add-hook 'kill-emacs-hook #'(lambda () (delete-directory server-socket-dir t))))
 
 (provide 'init)
