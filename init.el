@@ -47,10 +47,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; real .emacs starts here
 
 ;; use-package for the case when init.el is byte-compiled
+(use-package delight)
 (use-package diminish)
 (use-package bind-key)
 ;; so we can (require 'use-package) even in compiled emacs to e.g. read docs
-(use-package use-package :commands use-package-autoload-keymap)
+(use-package use-package
+	     :commands use-package-autoload-keymap
+	     ;; :defines use-package-handler/:bind
+	     )
 (bind-key "C-z" nil)
 
 ;; First: everything that is only setq
@@ -100,12 +104,17 @@
 (use-package elisp-format)
 ;; also-dependency-for-gnus!
 (use-package bbdb
-	     :defer t
 	     :init (autoload 'bbdb "bbdb-com" nil t))
+
+(use-package web-mode
+	     :mode ("\\.html\\'"))
+
+(use-package multiple-cursors)
 
 (use-package expand-region
 	     :bind (("C-z e" . er/expand-region)
 		    ("C-z C-e" . er/expand-region)))
+
 
 (use-package compile
 	     :bind (("C-z c" . compile)
@@ -121,7 +130,10 @@
 ;; look at nix within docker volumes for EDA tools
 
 (use-package with-editor
-	     :commands (with-editor-async-shell-command with-editor-export-editor)
+	     :commands (
+			with-editor-async-shell-command
+			with-editor-export-editor
+			)
 	     :init
 	     (progn
 	       (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
@@ -168,17 +180,17 @@
 ;; (use-package flycheck-pos-tip)
 
 (use-package flycheck-checkbashisms
+	     :after flycheck
 	     :commands (flycheck-checkbashisms-setup)
 	     :config (flycheck-checkbashisms-setup))
 
 (use-package magit
-	     :bind ("C-c g" . magit-status)
 	     :commands (magit-define-popup-switch)
+	     :bind ("C-c g" . magit-status)
 	     :config (magit-define-popup-switch 'magit-push-popup ?u
 		       "Set upstream" "--set-upstream"))
 
 
-(use-package multiple-cursors)
 
 ;; Find better keybindings
 ;; (use-package windmove
@@ -214,7 +226,11 @@
 	     :defer t)
 
 (use-package neotree
-	     :commands (neotree-toggle errge/neotree-project-dir neo-global--window-exists-p)
+	     :commands (
+			neotree-toggle
+			;; errge/neotree-project-dir
+			neo-global--window-exists-p
+			)
 	     :bind (("<f8>" . errge/neotree-project-dir))
 	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find)
 	     :config
@@ -251,9 +267,6 @@
 ;; 	     :commands (django-html-mode)
 ;; 	     :mode ("\\.djhtml$" . django-html-mode))
 
-(use-package web-mode
-	     :mode ("\\.html\\'"))
-
 (use-package diff-hl
 	     :commands (global-diff-hl-mode)
 	     :functions (diff-hl-margin-mode)
@@ -267,7 +280,7 @@
 
 (use-package projectile
 	     :commands (projectile-mode)
-	     :functions (projectile-mode projectile-project-root))
+	     :functions (projectile-project-root))
 
 (use-package helm)
 
