@@ -290,7 +290,8 @@
 
 (use-package projectile
 	     :commands (projectile-mode)
-	     :delight '(:eval (concat " " (projectile-project-name)))
+	     :delight
+	     ;; '(:eval (concat " " (projectile-project-name)))
 
 	     :functions (projectile-project-root))
 
