@@ -425,24 +425,35 @@
 ;; here, right now, might be slow, test these first for slowness!
 
 (use-package which-key
+	     :defer 0.1
+	     :defines
+	     (which-key-idle-secondary-delay which-key-idle-delay)
 	     :commands (which-key-mode)
-	     :diminish which-key-mode
-	     :config (progn
-		       (setq which-key-idle-secondary-delay 0.1
-			     which-key-idle-delay 0.3)
-		       (which-key-mode 1)))
+	     :delight which-key-mode
+	     :init
+	     (which-key-mode)
+	     ;; :config (progn
+	     ;; 	       (setq which-key-idle-secondary-delay 0.1
+	     ;; 		     which-key-idle-delay 0.3)
+	     ;; 	       (which-key-mode 1))
+	     :config
+	     (setq which-key-idle-secondary-delay 0.1
+		   which-key-idle-delay 0.3)
+	     )
 
 (use-package ws-butler
 	     :commands (ws-butler-global-mode)
-	     :diminish ws-butler-mode
+	     :defines (ws-butler-keep-whitespace-before-point)
+	     :delight ws-butler-mode
+	     :init
+	     (ws-butler-global-mode)
 	     :config
-	     (progn
-	       (setq ws-butler-keep-whitespace-before-point nil)
-	       (ws-butler-global-mode 1)))
+	     (setq ws-butler-keep-whitespace-before-point nil)
+	     )
 
 (use-package dtrt-indent
 	     :commands (dtrt-indent-mode)
-	     :config
+	     :init
 	     (dtrt-indent-mode 1))
 
 ;; start server, so we can connect anytime with emacsclient
