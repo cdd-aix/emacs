@@ -172,7 +172,11 @@
 (use-package exec-path-from-shell)
 
 (use-package flycheck
-	     :commands (global-flycheck-mode)
+	     :commands (global-flycheck-mode flycheck-add-mode)
+	     :defines (flycheck-disabled-checkers)
+	     :config
+	     (append flycheck-disabled-checkers '(javascript-jshint))
+	     (flycheck-add-mode 'javascript-eslint 'web-mode)
 	     :init (global-flycheck-mode))
 
 (use-package flycheck-color-mode-line
@@ -260,22 +264,46 @@
 ;; Silver Searcher
 ;; (use-package ag)
 (use-package highlight-indentation
-	     :delight)
+  :delight)
+
+(use-package importmagic
+  :commands
+  importmagic-fix-imports
+  importmagic-fix-symbol
+  importmagic-fix-symbol-at-point
+  importmagic-update-index
+  importmagic-mode
+  :defines
+  import-magic-mode-map
+  :bind
+  ;; (:map
+  ;;  import-magic-mode-map
+  ;;  ("C-c C-f" . nil)
+  ;;  ("C-c i i" . 'importmagic-fix-symbol-at-point)
+  ;;  ("C-c i l" . 'importmagic-fix-imports)
+  ;;  ("C-c i u" . 'importmagic-update-index)
+  ;;  ("C-c i s" . 'importmagic-fix-symbol)
+  ;;  )
+  :init
+  (add-hook 'python-mode-hook 'importmagic-mode)
+  :config
+  (define-key importmagic-mode-map (kbd "C-c C-l") nil)
+  (define-key importmagic-mode-map (kbd "C-c i i") 'importmagic-fix-symbol-at-point)
+  (define-key importmagic-mode-map (kbd "C-c i l") 'importmagic-fix-imports)
+  
+  )
+(use-package company
+  :delight)
 (use-package elpy
-	     :commands (elpy-enable elpy-use-ipython highlight-indentation-mode)
-	     :delight
-	     ;; (elpy-mode highlight-indentation-mode)
-	     :defer t
-	     :config (elpy-use-ipython))
+  :commands (elpy-enable elpy-use-ipython highlight-indentation-mode)
+  :delight
+  ;; (elpy-mode highlight-indentation-mode)
+  :defer t
+  :config (elpy-use-ipython))
 (use-package python
-	     :delight
-	     :mode ("\\.py" . python-mode)
-	     :config (elpy-enable))
-;; (use-package django-html-mode)
-;; Disrupts flycheck...
-;; (use-package django-mode
-;; 	     :commands (django-html-mode)
-;; 	     :mode ("\\.djhtml$" . django-html-mode))
+  :delight
+  :mode ("\\.py" . python-mode)
+  :config (elpy-enable))
 
 (use-package diff-hl
 	     :commands (global-diff-hl-mode)
@@ -294,6 +322,8 @@
 	     ;; '(:eval (concat " " (projectile-project-name)))
 
 	     :functions (projectile-project-root))
+
+(use-package helm-ag)
 
 (use-package helm)
 
