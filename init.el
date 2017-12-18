@@ -235,6 +235,7 @@
 	     :defer t)
 
 (use-package neotree
+	     :defer t
 	     :commands (
 			neotree-toggle
 			;; errge/neotree-project-dir
@@ -293,6 +294,7 @@
   
   )
 (use-package company
+  :defer t
   :delight)
 (use-package elpy
   :commands (elpy-enable elpy-use-ipython highlight-indentation-mode)
@@ -301,11 +303,13 @@
   :defer t
   :config (elpy-use-ipython))
 (use-package python
+  :defer t
   :delight
   :mode ("\\.py" . python-mode)
   :config (elpy-enable))
 
 (use-package diff-hl
+	     :defer t
 	     :commands (global-diff-hl-mode)
 	     :functions (diff-hl-margin-mode)
 	     :config
@@ -317,15 +321,18 @@
   (require 'diff-hl))
 
 (use-package projectile
+	     :defer t
 	     :commands (projectile-mode)
 	     :delight
 	     ;; '(:eval (concat " " (projectile-project-name)))
 
 	     :functions (projectile-project-root))
 
-(use-package helm-ag)
+(use-package helm-ag
+	     :defer t)
 
-(use-package helm)
+(use-package helm
+	     :defer t)
 
 (use-package helm-projectile
 	     :defer t
@@ -343,7 +350,8 @@
 
 (use-package midnight)
 
-(use-package ansible)
+(use-package ansible
+	     :defer t)
 
 (use-package ansible-doc)
 
@@ -384,28 +392,30 @@
 	     ;; :defer t
 	     )
 (use-package smart-mode-line
-	     :defer 0.1
+	     ;; :defer 0.1
 	     :commands (sml/setup)
 	     :defines (sml/theme)
 	     :init
 	     (setq sml/theme 'powerline)
-	     :config
-	     (color-theme-clarity)
 	     (sml/setup)
+	     ;; :config
+	     ;; (color-theme-clarity)
+	     ;; (sml/setup)
 	     ;; (color-theme-initialize)
 	     ;; (color-theme-clarity)
 	     )
 
 (use-package color-theme
-	     :defer t
 	     :commands (color-theme-initialize color-theme-clarity)
 	     :functions(color-theme-clarity)
 	     :defines (color-theme-is-global color-themes)
      	     :init
 	     (setq color-theme-is-global t)
-	     :config
 	     (color-theme-initialize)
 	     (color-theme-clarity)
+	     ;; :config
+	     ;; (color-theme-initialize)
+	     ;; (color-theme-clarity)
 	     )
 ;; (use-package smart-mode-line
 ;; 	     :defer t
@@ -425,7 +435,7 @@
 ;; here, right now, might be slow, test these first for slowness!
 
 (use-package which-key
-	     :defer 0.1
+	     ;; :defer 0.1
 	     :defines
 	     (which-key-idle-secondary-delay which-key-idle-delay)
 	     :commands (which-key-mode)
