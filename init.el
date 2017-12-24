@@ -296,6 +296,12 @@
 (use-package company
   :defer t
   :delight)
+(use-package yasnippet
+  :defer t
+  :delight)
+(use-package yasnippet-snippets
+  :defer t
+  :delight)
 (use-package elpy
   :commands (elpy-enable elpy-use-ipython highlight-indentation-mode)
   :delight
@@ -466,6 +472,8 @@
 	     :init
 	     (dtrt-indent-mode 1))
 
+;; try emmet-mode for html snippets
+;; try writegood-mode and artbollocks for editing text.
 ;; start server, so we can connect anytime with emacsclient
 (unless noninteractive
   (setq server-socket-dir (format "/tmp/emacs-%d-%s-%d"
