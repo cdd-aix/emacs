@@ -291,7 +291,7 @@
   (define-key importmagic-mode-map (kbd "C-c C-l") nil)
   (define-key importmagic-mode-map (kbd "C-c i i") 'importmagic-fix-symbol-at-point)
   (define-key importmagic-mode-map (kbd "C-c i l") 'importmagic-fix-imports)
-  
+  (define-key importmagic-mode-map (kbd "C-c i m") 'importmagic-mode)
   )
 (use-package company
   :defer t
@@ -303,11 +303,11 @@
   :defer t
   :delight)
 (use-package elpy
-  :commands (elpy-enable elpy-use-ipython highlight-indentation-mode)
+  :commands (elpy-enable highlight-indentation-mode)
   :delight
   ;; (elpy-mode highlight-indentation-mode)
   :defer t
-  :config (elpy-use-ipython))
+  :config )
 (use-package python
   :defer t
   :delight
