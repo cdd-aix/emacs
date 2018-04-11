@@ -55,6 +55,11 @@
 	     :commands use-package-autoload-keymap
 	     ;; :defines use-package-handler/:bind
 	     )
+;; Required projectile and flycheck
+(use-package pkg-info
+	     :functions (pkg-info)
+	     :defer t
+	     )
 (bind-key "C-z" nil)
 
 ;; First: everything that is only setq
@@ -93,7 +98,12 @@
 ;; Second: deferred packages, eval-after-loads and autoloads
 ;; beautiful hungarian letters in ps-print
 
-(use-package pkg-info)
+(use-package move-text
+	     :commands
+	     (move-text-default-bindings)
+	     :init
+	     (move-text-default-bindings)
+	     )
 (use-package ps-print
 	     :defer t
 	     :config
