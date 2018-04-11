@@ -91,18 +91,25 @@
 ;; Second: deferred packages, eval-after-loads and autoloads
 
 ;;;; cursor movement and selection and visualization
+(use-package ace-window
+	     :bind (("C-z o" . ace-window))
+	     :config (setq aw-scope 'frame aw-dispatch-always t))
+
+
+(use-package expand-region
+	     :bind (("C-z e" . er/expand-region)
+		    ("C-z C-e" . er/expand-region)))
 ;; M-up M-down on region
 (use-package move-text
 	     :commands (move-text-default-bindings)
 	     :init (move-text-default-bindings))
 
-(use-package expand-region
-	     :bind (("C-z e" . er/expand-region)
-		    ("C-z C-e" . er/expand-region)))
-
 (use-package multiple-cursors
 	     ;; look at https://github.com/Schnouki/dotfiles/blob/master/emacs/init-60-multiple-cursors.el
 	     )
+
+;; whitespace visualization
+(use-package whitespace)
 
 ;; use current emacs for $EDITOR
 (use-package with-editor
@@ -116,8 +123,19 @@
 		    (term-exec . with-editor-export-editor)
 		    (eshell-mode . with-editor-export-editor)))
 
-;; whitespace visualization
-(use-package whitespace)
+;; Find better keybindings
+;; (use-package windmove
+;;   :config (defun errge/other-window-back ()
+;;             (interactive)
+;;             (other-window -1))
+;;   :bind* (("<S-left>" . windmove-left)
+;;           ("<S-right>" . windmove-right)
+;;           ("<S-up>" . windmove-up)
+;;           ("<S-down>" . windmove-down)
+;;           ("<f1>" . errge/other-window-back)
+;;           ("<f2>" . other-window)))
+
+
 ;;;; output and publishing
 ;; Printing including foreign characters
 (use-package ps-print
@@ -174,6 +192,7 @@
 ;; (use-package sgml-mode)
 
 
+;;;; Syntax checking
 (use-package flycheck
 	     :commands (global-flycheck-mode flycheck-add-mode)
 	     :defines (flycheck-disabled-checkers)
@@ -184,12 +203,12 @@
 (use-package flycheck-color-mode-line
 	     :hook (flycheck-mode . flycheck-color-mode-line-mode))
 
-;; (use-package flycheck-pos-tip)
-
 (use-package flycheck-checkbashisms
 	     :commands (flycheck-checkbashisms-setup)
 	     :hook (flycheck-mode . flycheck-checkbashisms-setup))
 
+;;;; Source Control
+;; magit uses auto-revert
 (use-package autorevert
 	     :commands (auto-revert-mode)
 	     :delight auto-revert-mode)
@@ -203,24 +222,6 @@
 (use-package magit-gitflow
 	     :commands (turn-on-magit-gitflow)
 	     :hook (magit-mode . turn-on-magit-gitflow))
-
-
-
-;; Find better keybindings
-;; (use-package windmove
-;;   :config (defun errge/other-window-back ()
-;;             (interactive)
-;;             (other-window -1))
-;;   :bind* (("<S-left>" . windmove-left)
-;;           ("<S-right>" . windmove-right)
-;;           ("<S-up>" . windmove-up)
-;;           ("<S-down>" . windmove-down)
-;;           ("<f1>" . errge/other-window-back)
-;;           ("<f2>" . other-window)))
-
-(use-package ace-window
-	     :bind (("C-z o" . ace-window))
-	     :config (setq aw-scope 'frame aw-dispatch-always t))
 
 ;; these work because of (describe-variable 'package--builtins)
 (use-package calendar
