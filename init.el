@@ -95,10 +95,17 @@
 	     :bind (("C-z o" . ace-window))
 	     :config (setq aw-scope 'frame aw-dispatch-always t))
 
+(use-package default-text-scale
+	     :bind (("C-M-=" . default-text-scale-increase)
+		    ("C-M--" . default-text-scale-decrease)))
 
 (use-package expand-region
 	     :bind (("C-z e" . er/expand-region)
 		    ("C-z C-e" . er/expand-region)))
+
+(use-package highlight-indentation
+	     :delight)
+
 ;; M-up M-down on region
 (use-package move-text
 	     :commands (move-text-default-bindings)
@@ -219,6 +226,16 @@
 	     :commands (auto-revert-mode)
 	     :delight auto-revert-mode)
 
+(use-package diff-hl
+	     :commands (global-diff-hl-mode)
+	     :functions (diff-hl-margin-mode)
+	     :config (global-diff-hl-mode 1)
+	     (require 'diff-hl-margin)
+	     (diff-hl-margin-mode)
+	     :hook (magit-post-refresh-hook . diff-hl-magit-post-refresh)
+	     :init
+	     (with-eval-after-load 'vc-git  (require 'diff-hl)))
+
 (use-package ediff
 	     :defer t
 	     :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
@@ -262,15 +279,11 @@
 					    (neotree-find file-name)))
 		   (message "Could not find git project root.")))))
 
-(use-package default-text-scale
-	     :bind (("C-M-=" . default-text-scale-increase)
-		    ("C-M--" . default-text-scale-decrease)))
-
 ;; Silver Searcher
 ;; (use-package ag)
-(use-package highlight-indentation
-	     :delight)
 
+;;;; Python
+;; elpy removed importmagic so...
 (use-package importmagic
 	     :commands importmagic-fix-imports
 	     importmagic-fix-symbol importmagic-fix-symbol-at-point importmagic-update-index
@@ -292,9 +305,11 @@
 	     (define-key importmagic-mode-map (kbd "C-c i l") 'importmagic-fix-imports)
 	     (define-key importmagic-mode-map (kbd "C-c i m") 'importmagic-mode)
 	     :delight)
+;; elpy uses company
 (use-package company
 	     :defer t
 	     :delight)
+;; elpy uses yasnippet
 (use-package yasnippet
 	     :defer t
 	     :delight)
@@ -303,25 +318,14 @@
 	     :delight)
 (use-package elpy
 	     :commands (elpy-enable highlight-indentation-mode)
-	     :delight
-	     ;; (elpy-mode highlight-indentation-mode)
-	     :defer t)
+	     :delight)
+
 (use-package python
-	     :defer t
 	     :delight
 	     :mode ("\\.py" . python-mode)
 	     :config (elpy-enable))
 
-(use-package diff-hl
-	     :defer t
-	     :commands (global-diff-hl-mode)
-	     :functions (diff-hl-margin-mode)
-	     :config (global-diff-hl-mode 1)
-	     (require 'diff-hl-margin)
-	     (diff-hl-margin-mode))
 
-(with-eval-after-load 'vc-git
-  (require 'diff-hl))
 
 (use-package projectile
 	     :defer t
