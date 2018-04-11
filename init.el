@@ -161,11 +161,14 @@
 (use-package dockerfile-mode
 	     :functions (s-replace)
 	     :mode ("Dockerfile\\'")
-	     :config (add-hook 'dockerfile-mode-hook
-			       '(lambda ()
-				  (setq indent-tabs-mode nil
-					tab-width 4)))
-	     (add-hook 'dockerfile-mode-hook 'subword-mode))
+	     :hook
+	     (
+	      (dockerfile-mode . subword-mode)
+	      (dockerfile-mode . (lambda()
+				   (setq indent-tabs-mode nil
+					 tab-width 4)))
+	      )
+	     )
 
 (use-package docker-compose-mode)
 
@@ -183,7 +186,8 @@
 
 (use-package flycheck-color-mode-line
 	     :after flycheck
-	     :config (add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+	     :hook flycheck-mode
+	     )
 
 ;; (use-package flycheck-pos-tip)
 
