@@ -292,6 +292,7 @@
   (define-key importmagic-mode-map (kbd "C-c i i") 'importmagic-fix-symbol-at-point)
   (define-key importmagic-mode-map (kbd "C-c i l") 'importmagic-fix-imports)
   (define-key importmagic-mode-map (kbd "C-c i m") 'importmagic-mode)
+  :delight
   )
 (use-package company
   :defer t
