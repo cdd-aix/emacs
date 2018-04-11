@@ -108,6 +108,12 @@
 	     ;; look at https://github.com/Schnouki/dotfiles/blob/master/emacs/init-60-multiple-cursors.el
 	     )
 
+;; Smart meta-X
+(use-package smex
+	     :bind (("M-x" . smex)
+		    ("M-X" . smex-major-mode-commands)
+		    ("C-c C-c M-x" . execute-extended-command)))
+
 ;; whitespace visualization
 (use-package whitespace)
 
@@ -213,31 +219,28 @@
 	     :commands (auto-revert-mode)
 	     :delight auto-revert-mode)
 
+(use-package ediff
+	     :defer t
+	     :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
+
 (use-package magit
 	     :commands (magit-define-popup-switch)
 	     :bind ("C-c g" . magit-status)
 	     :config (magit-define-popup-switch 'magit-push-popup ?u "Set upstream"
-		       "--set-upstream"))
+						"--set-upstream"))
 
 (use-package magit-gitflow
 	     :commands (turn-on-magit-gitflow)
 	     :hook (magit-mode . turn-on-magit-gitflow))
 
-;; these work because of (describe-variable 'package--builtins)
-(use-package calendar
-	     :defer t
-	     :config (setq calendar-week-start-day 6))
-
 (use-package vc
 	     :defer t
 	     :config (setq vc-follow-symlinks t))
 
-(use-package ediff
+;; these work because of (describe-variable 'package--builtins)
+(use-package calendar
 	     :defer t
-	     :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
-
-(use-package smex
-	     :defer t)
+	     :config (setq calendar-week-start-day 6))
 
 (use-package neotree
 	     :defer t
