@@ -306,8 +306,7 @@
   :commands (elpy-enable highlight-indentation-mode)
   :delight
   ;; (elpy-mode highlight-indentation-mode)
-  :defer t
-  :config )
+  :defer t)
 (use-package python
   :defer t
   :delight
