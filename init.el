@@ -185,16 +185,15 @@
 	     :init (global-flycheck-mode))
 
 (use-package flycheck-color-mode-line
-	     :after flycheck
-	     :hook flycheck-mode
+	     :hook (flycheck-mode . flycheck-color-mode-line-mode)
 	     )
 
 ;; (use-package flycheck-pos-tip)
 
 (use-package flycheck-checkbashisms
-	     :after flycheck
 	     :commands (flycheck-checkbashisms-setup)
-	     :config (flycheck-checkbashisms-setup))
+	     :hook (flycheck-mode . flycheck-checkbashisms-setup)
+	     )
 
 (use-package autorevert
 	     :commands (auto-revert-mode)
