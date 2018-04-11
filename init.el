@@ -194,11 +194,17 @@
 (use-package autorevert
 	     :commands (auto-revert-mode)
 	     :delight auto-revert-mode)
+
 (use-package magit
 	     :commands (magit-define-popup-switch)
 	     :bind ("C-c g" . magit-status)
 	     :config (magit-define-popup-switch 'magit-push-popup ?u
-						"Set upstream" "--set-upstream"))
+		       "Set upstream" "--set-upstream"))
+
+(use-package magit-gitflow
+	     :commands (turn-on-magit-gitflow)
+	     :hook (magit-mode . turn-on-magit-gitflow)
+	     )
 
 
 
@@ -286,8 +292,7 @@
   ;;  ("C-c i u" . 'importmagic-update-index)
   ;;  ("C-c i s" . 'importmagic-fix-symbol)
   ;;  )
-  :init
-  (add-hook 'python-mode-hook 'importmagic-mode)
+  :hook (python-mode . importmagic-mode)
   :config
   (define-key importmagic-mode-map (kbd "C-c C-l") nil)
   (define-key importmagic-mode-map (kbd "C-c i i") 'importmagic-fix-symbol-at-point)
