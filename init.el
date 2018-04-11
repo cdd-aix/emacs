@@ -141,12 +141,13 @@
 	     (progn
 	       (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
 	       (define-key (current-global-map) [remap shell-command] 'with-editor-shell-command))
-	     (with-eval-after-load 'shell
-	       (add-hook 'shell-mode-hook 'with-editor-export-editor))
-	     (with-eval-after-load 'term
-	       (add-hook 'term-exec-hook 'with-editor-export-editor))
-	     (with-eval-after-load 'eshell
-	       (add-hook 'eshell-mode-hook 'with-editor-export-editor)))
+	     :hook
+	     (
+	      (shell-mode . with-editor-export-editor)
+	      (term-exec . with-editor-export-editor)
+	      (eshell-mode . with-editor-export-editor)
+	      )
+	     )
 
 (use-package whitespace)
 
