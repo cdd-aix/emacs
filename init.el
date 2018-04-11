@@ -102,6 +102,20 @@
 	     ;; look at https://github.com/Schnouki/dotfiles/blob/master/emacs/init-60-multiple-cursors.el
 	     )
 
+;; use current emacs for $EDITOR
+(use-package with-editor
+	     :commands (with-editor-async-shell-command with-editor-export-editor)
+	     :delight
+	     :init (progn (define-key (current-global-map)
+			    [remap async-shell-command] 'with-editor-async-shell-command)
+			  (define-key (current-global-map)
+			    [remap shell-command] 'with-editor-shell-command))
+	     :hook ((shell-mode . with-editor-export-editor)
+		    (term-exec . with-editor-export-editor)
+		    (eshell-mode . with-editor-export-editor)))
+
+;; whitespace visualization
+(use-package whitespace)
 ;;;; output and publishing
 ;; Printing including foreign characters
 (use-package ps-print
@@ -136,25 +150,8 @@
 (use-package web-mode
 	     :mode ("\\.html\\'"))
 
-
-
-
-
-
 ;; look at nix within docker volumes for EDA tools
 
-(use-package with-editor
-	     :commands (with-editor-async-shell-command with-editor-export-editor)
-	     :delight
-	     :init (progn (define-key (current-global-map)
-			    [remap async-shell-command] 'with-editor-async-shell-command)
-			  (define-key (current-global-map)
-			    [remap shell-command] 'with-editor-shell-command))
-	     :hook ((shell-mode . with-editor-export-editor)
-		    (term-exec . with-editor-export-editor)
-		    (eshell-mode . with-editor-export-editor)))
-
-(use-package whitespace)
 
 (use-package markdown-mode
 	     :commands (gfm-mode markdown-mode)
