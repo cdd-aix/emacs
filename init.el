@@ -58,6 +58,8 @@
 (use-package pkg-info
 	     :functions (pkg-info)
 	     :defer t)
+;; Required for things like flycheck to find in path.
+(use-package exec-path-from-shell)
 (bind-key "C-z" nil)
 
 ;; First: everything that is only setq
@@ -88,7 +90,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Second: deferred packages, eval-after-loads and autoloads
 
-;;;; cursor movement and selection
+;;;; cursor movement and selection and visualization
 ;; M-up M-down on region
 (use-package move-text
 	     :commands (move-text-default-bindings)
@@ -141,6 +143,16 @@
 					    elisp-format-directory elisp-format-dired-mark-files
 					    elisp-format-library))
 
+(use-package dockerfile-mode
+	     :functions (s-replace)
+	     :mode ("Dockerfile.*\\'")
+	     :hook ((dockerfile-mode . subword-mode)
+		    (dockerfile-mode . (lambda()
+					 (setq indent-tabs-mode nil tab-width 4)))))
+
+(use-package docker-compose-mode
+	     :mode (".*docker-compose.*\\.yml\\'"))
+
 ;;;; Web and web development related
 (use-package apache-mode
 	     :defer t)
@@ -152,25 +164,15 @@
 
 ;; look at nix within docker volumes for EDA tools
 
-
+;;;; Markup languages
 (use-package markdown-mode
 	     :commands (gfm-mode markdown-mode)
 	     :mode (("\\.md\\'" . gfm-mode)
 		    ("\\.markdown\\'" . markdown-mode))
 	     :config (setq markdown-command "multimarkdown"))
 
-(use-package dockerfile-mode
-	     :functions (s-replace)
-	     :mode ("Dockerfile\\'")
-	     :hook ((dockerfile-mode . subword-mode)
-		    (dockerfile-mode . (lambda()
-					 (setq indent-tabs-mode nil tab-width 4)))))
-
-(use-package docker-compose-mode)
-
 ;; (use-package sgml-mode)
 
-(use-package exec-path-from-shell)
 
 (use-package flycheck
 	     :commands (global-flycheck-mode flycheck-add-mode)
