@@ -136,6 +136,7 @@
 			with-editor-async-shell-command
 			with-editor-export-editor
 			)
+	     :delight
 	     :init
 	     (progn
 	       (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
