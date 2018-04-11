@@ -22,27 +22,26 @@
 (eval-and-compile
   (setq use-package-verbose (not (bound-and-true-p byte-compile-current-file))))
 ;; Add the macro generated list of package.el loadpaths to load-path.
-(mapc #'(lambda (add) (add-to-list 'load-path add))
+(mapc #'(lambda (add)
+	  (add-to-list 'load-path add))
       (eval-when-compile
         ;; (require 'package)
         (package-initialize)
         ;; Install use-package if not installed yet.
         (unless (package-installed-p 'use-package)
-          (package-refresh-contents)
-          (package-install 'use-package))
+	  (package-refresh-contents)
+	  (package-install 'use-package))
         ;; (require 'use-package)
 	(defvar use-package-always-ensure)
-        (setq use-package-always-ensure t)
-        (let ((package-user-dir-real (file-truename package-user-dir)))
+	(setq use-package-always-ensure t)
+	(let ((package-user-dir-real (file-truename package-user-dir)))
           ;; The reverse is necessary, because outside we mapc
           ;; add-to-list element-by-element, which reverses.
           (nreverse (apply #'nconc
                            ;; Only keep package.el provided loadpaths.
                            (mapcar #'(lambda (path)
-                                       (if (string-prefix-p package-user-dir-real path)
-                                           (list path)
-                                         nil))
-                                   load-path))))))
+				       (if (string-prefix-p package-user-dir-real path)
+					   (list path) nil)) load-path))))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; real .emacs starts here
 
@@ -58,8 +57,7 @@
 ;; Required projectile and flycheck
 (use-package pkg-info
 	     :functions (pkg-info)
-	     :defer t
-	     )
+	     :defer t)
 (bind-key "C-z" nil)
 
 ;; First: everything that is only setq
@@ -76,28 +74,21 @@
 (set-default 'truncate-lines nil)
 (set-default 'show-trailing-whitespace t)
 (set-face-background 'trailing-whitespace "pink")
-(setq inhibit-startup-screen t
-      initial-scratch-message ";; ready\n\n"
-      unibyte-display-via-language-environment t
-      column-number-mode t
-      echo-keystrokes 0.1
-      kill-whole-line t
-      make-backup-files nil
-      auto-save-timeout 10
-      auto-save-file-name-transforms (progn
-                                       (make-directory "~/.emacs.d/auto-save-files/" t)
-                                       `((".*" "~/.emacs.d/auto-save-files/" t)))
-      mouse-yank-at-point t      switch-to-buffer-preserve-window-point t
-      select-enable-clipboard t
-      select-enable-primary t)
+(setq inhibit-startup-screen t initial-scratch-message ";; ready\n\n"
+      unibyte-display-via-language-environment t column-number-mode t echo-keystrokes 0.1
+      kill-whole-line t make-backup-files nil auto-save-timeout 10 auto-save-file-name-transforms
+      (progn (make-directory "~/.emacs.d/auto-save-files/" t)
+	     `((".*" "~/.emacs.d/auto-save-files/" t))) mouse-yank-at-point t
+	     switch-to-buffer-preserve-window-point t select-enable-clipboard t
+	     select-enable-primary t)
 
 (electric-pair-mode 1)
 (subword-mode +1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Second: deferred packages, eval-after-loads and autoloads
-;; beautiful hungarian letters in ps-print
 
+;;;; cursor movement and selection
 ;; M-up M-down on region
 (use-package move-text
 	     :commands (move-text-default-bindings)
@@ -111,28 +102,30 @@
 	     ;; look at https://github.com/Schnouki/dotfiles/blob/master/emacs/init-60-multiple-cursors.el
 	     )
 
+;;;; output and publishing
 ;; Printing including foreign characters
 (use-package ps-print
 	     :defer t
-	     :config
-	     (require 'ps-mule)
-	     (eval-when-compile (require 'ps-mule))
-	     (setq ps-paper-type 'letter
-		   ps-font-size 10))
+	     :config (require 'ps-mule)
+	     (eval-when-compile
+	       (require 'ps-mule))
+	     (setq ps-paper-type 'letter ps-font-size 10))
 
+;;;; misc
 ;; also-dependency-for-gnus!
 (use-package bbdb
 	     :init (autoload 'bbdb "bbdb-com" nil t))
 
+;;;; General development
 (use-package compile
 	     :bind (("C-z c" . compile)
 		    ("C-z C-c" . compile))
-	     :config (setq compilation-ask-about-save nil
-			   compilation-read-command nil
-			   compilation-scroll-output t
-			   compile-command "make"))
+	     :config (setq compilation-ask-about-save nil compilation-read-command nil
+			   compilation-scroll-output t compile-command "make"))
 (use-package elisp-format
-	     :defer t)
+	     :commands (elisp-format-region elisp-format-buffer elisp-format-file
+					    elisp-format-directory elisp-format-dired-mark-files
+					    elisp-format-library))
 
 ;;;; Web and web development related
 (use-package apache-mode
@@ -151,43 +144,30 @@
 ;; look at nix within docker volumes for EDA tools
 
 (use-package with-editor
-	     :commands (
-			with-editor-async-shell-command
-			with-editor-export-editor
-			)
+	     :commands (with-editor-async-shell-command with-editor-export-editor)
 	     :delight
-	     :init
-	     (progn
-	       (define-key (current-global-map) [remap async-shell-command] 'with-editor-async-shell-command)
-	       (define-key (current-global-map) [remap shell-command] 'with-editor-shell-command))
-	     :hook
-	     (
-	      (shell-mode . with-editor-export-editor)
-	      (term-exec . with-editor-export-editor)
-	      (eshell-mode . with-editor-export-editor)
-	      )
-	     )
+	     :init (progn (define-key (current-global-map)
+			    [remap async-shell-command] 'with-editor-async-shell-command)
+			  (define-key (current-global-map)
+			    [remap shell-command] 'with-editor-shell-command))
+	     :hook ((shell-mode . with-editor-export-editor)
+		    (term-exec . with-editor-export-editor)
+		    (eshell-mode . with-editor-export-editor)))
 
 (use-package whitespace)
 
 (use-package markdown-mode
 	     :commands (gfm-mode markdown-mode)
-	     :mode (
-		    ("\\.md\\'" . gfm-mode)
+	     :mode (("\\.md\\'" . gfm-mode)
 		    ("\\.markdown\\'" . markdown-mode))
 	     :config (setq markdown-command "multimarkdown"))
 
 (use-package dockerfile-mode
 	     :functions (s-replace)
 	     :mode ("Dockerfile\\'")
-	     :hook
-	     (
-	      (dockerfile-mode . subword-mode)
-	      (dockerfile-mode . (lambda()
-				   (setq indent-tabs-mode nil
-					 tab-width 4)))
-	      )
-	     )
+	     :hook ((dockerfile-mode . subword-mode)
+		    (dockerfile-mode . (lambda()
+					 (setq indent-tabs-mode nil tab-width 4)))))
 
 (use-package docker-compose-mode)
 
@@ -198,21 +178,18 @@
 (use-package flycheck
 	     :commands (global-flycheck-mode flycheck-add-mode)
 	     :defines (flycheck-disabled-checkers)
-	     :config
-	     (append flycheck-disabled-checkers '(javascript-jshint))
+	     :config (append flycheck-disabled-checkers '(javascript-jshint))
 	     (flycheck-add-mode 'javascript-eslint 'web-mode)
 	     :init (global-flycheck-mode))
 
 (use-package flycheck-color-mode-line
-	     :hook (flycheck-mode . flycheck-color-mode-line-mode)
-	     )
+	     :hook (flycheck-mode . flycheck-color-mode-line-mode))
 
 ;; (use-package flycheck-pos-tip)
 
 (use-package flycheck-checkbashisms
 	     :commands (flycheck-checkbashisms-setup)
-	     :hook (flycheck-mode . flycheck-checkbashisms-setup)
-	     )
+	     :hook (flycheck-mode . flycheck-checkbashisms-setup))
 
 (use-package autorevert
 	     :commands (auto-revert-mode)
@@ -221,13 +198,12 @@
 (use-package magit
 	     :commands (magit-define-popup-switch)
 	     :bind ("C-c g" . magit-status)
-	     :config (magit-define-popup-switch 'magit-push-popup ?u
-		       "Set upstream" "--set-upstream"))
+	     :config (magit-define-popup-switch 'magit-push-popup ?u "Set upstream"
+		       "--set-upstream"))
 
 (use-package magit-gitflow
 	     :commands (turn-on-magit-gitflow)
-	     :hook (magit-mode . turn-on-magit-gitflow)
-	     )
+	     :hook (magit-mode . turn-on-magit-gitflow))
 
 
 
@@ -245,8 +221,7 @@
 
 (use-package ace-window
 	     :bind (("C-z o" . ace-window))
-	     :config (setq aw-scope 'frame
-			   aw-dispatch-always t))
+	     :config (setq aw-scope 'frame aw-dispatch-always t))
 
 ;; these work because of (describe-variable 'package--builtins)
 (use-package calendar
@@ -266,11 +241,9 @@
 
 (use-package neotree
 	     :defer t
-	     :commands (
-			neotree-toggle
+	     :commands (neotree-toggle
 			;; errge/neotree-project-dir
-			neo-global--window-exists-p
-			)
+			neo-global--window-exists-p)
 	     :bind (("<f8>" . errge/neotree-project-dir))
 	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find)
 	     :config
@@ -281,11 +254,9 @@
 	       (let ((project-dir (projectile-project-root))
 		     (file-name (buffer-file-name)))
 		 (neotree-toggle)
-		 (if project-dir
-		     (if (neo-global--window-exists-p)
-			 (progn
-			   (neotree-dir project-dir)
-			   (neotree-find file-name)))
+		 (if project-dir (if (neo-global--window-exists-p)
+				     (progn (neotree-dir project-dir)
+					    (neotree-find file-name)))
 		   (message "Could not find git project root.")))))
 
 (use-package default-text-scale
@@ -295,60 +266,54 @@
 ;; Silver Searcher
 ;; (use-package ag)
 (use-package highlight-indentation
-  :delight)
+	     :delight)
 
 (use-package importmagic
-  :commands
-  importmagic-fix-imports
-  importmagic-fix-symbol
-  importmagic-fix-symbol-at-point
-  importmagic-update-index
-  importmagic-mode
-  :defines
-  import-magic-mode-map
-  :bind
-  ;; (:map
-  ;;  import-magic-mode-map
-  ;;  ("C-c C-f" . nil)
-  ;;  ("C-c i i" . 'importmagic-fix-symbol-at-point)
-  ;;  ("C-c i l" . 'importmagic-fix-imports)
-  ;;  ("C-c i u" . 'importmagic-update-index)
-  ;;  ("C-c i s" . 'importmagic-fix-symbol)
-  ;;  )
-  :hook (python-mode . importmagic-mode)
-  :config
-  (define-key importmagic-mode-map (kbd "C-c C-l") nil)
-  (define-key importmagic-mode-map (kbd "C-c i i") 'importmagic-fix-symbol-at-point)
-  (define-key importmagic-mode-map (kbd "C-c i l") 'importmagic-fix-imports)
-  (define-key importmagic-mode-map (kbd "C-c i m") 'importmagic-mode)
-  :delight
-  )
+	     :commands importmagic-fix-imports
+	     importmagic-fix-symbol importmagic-fix-symbol-at-point importmagic-update-index
+	     importmagic-mode
+	     :defines import-magic-mode-map
+	     :bind
+	     ;; (:map
+	     ;;  import-magic-mode-map
+	     ;;  ("C-c C-f" . nil)
+	     ;;  ("C-c i i" . 'importmagic-fix-symbol-at-point)
+	     ;;  ("C-c i l" . 'importmagic-fix-imports)
+	     ;;  ("C-c i u" . 'importmagic-update-index)
+	     ;;  ("C-c i s" . 'importmagic-fix-symbol)
+	     ;;  )
+	     :hook
+	     (python-mode . importmagic-mode)
+	     :config (define-key importmagic-mode-map (kbd "C-c C-l") nil)
+	     (define-key importmagic-mode-map (kbd "C-c i i") 'importmagic-fix-symbol-at-point)
+	     (define-key importmagic-mode-map (kbd "C-c i l") 'importmagic-fix-imports)
+	     (define-key importmagic-mode-map (kbd "C-c i m") 'importmagic-mode)
+	     :delight)
 (use-package company
-  :defer t
-  :delight)
+	     :defer t
+	     :delight)
 (use-package yasnippet
-  :defer t
-  :delight)
+	     :defer t
+	     :delight)
 (use-package yasnippet-snippets
-  :defer t
-  :delight)
+	     :defer t
+	     :delight)
 (use-package elpy
-  :commands (elpy-enable highlight-indentation-mode)
-  :delight
-  ;; (elpy-mode highlight-indentation-mode)
-  :defer t)
+	     :commands (elpy-enable highlight-indentation-mode)
+	     :delight
+	     ;; (elpy-mode highlight-indentation-mode)
+	     :defer t)
 (use-package python
-  :defer t
-  :delight
-  :mode ("\\.py" . python-mode)
-  :config (elpy-enable))
+	     :defer t
+	     :delight
+	     :mode ("\\.py" . python-mode)
+	     :config (elpy-enable))
 
 (use-package diff-hl
 	     :defer t
 	     :commands (global-diff-hl-mode)
 	     :functions (diff-hl-margin-mode)
-	     :config
-	     (global-diff-hl-mode 1)
+	     :config (global-diff-hl-mode 1)
 	     (require 'diff-hl-margin)
 	     (diff-hl-margin-mode))
 
@@ -360,7 +325,6 @@
 	     :commands (projectile-mode)
 	     :delight
 	     ;; '(:eval (concat " " (projectile-project-name)))
-
 	     :functions (projectile-project-root))
 
 (use-package helm-ag
@@ -373,14 +337,10 @@
 	     :defer t
 	     ;; :diminish projectile-mode
 	     :commands (helm-projectile-on)
-	     :init
-	     (helm-projectile-on)
-	     :config
-	     (setq projectile-completion-system 'helm
-		   uniquify-buffer-name-style 'reverse)
+	     :init (helm-projectile-on)
+	     :config (setq projectile-completion-system 'helm uniquify-buffer-name-style 'reverse)
 	     (require 'uniquify)
-	     (projectile-mode)
-	     )
+	     (projectile-mode))
 
 
 (use-package midnight)
@@ -430,8 +390,7 @@
 	     ;; :defer 0.1
 	     :commands (sml/setup)
 	     :defines (sml/theme)
-	     :init
-	     (setq sml/theme 'powerline)
+	     :init (setq sml/theme 'powerline)
 	     (sml/setup)
 	     ;; :config
 	     ;; (color-theme-clarity)
@@ -444,8 +403,7 @@
 	     :commands (color-theme-initialize color-theme-clarity)
 	     :functions(color-theme-clarity)
 	     :defines (color-theme-is-global color-themes)
-     	     :init
-	     (setq color-theme-is-global t)
+	     :init (setq color-theme-is-global t)
 	     (color-theme-initialize)
 	     (color-theme-clarity)
 	     ;; :config
@@ -471,46 +429,37 @@
 
 (use-package which-key
 	     ;; :defer 0.1
-	     :defines
-	     (which-key-idle-secondary-delay which-key-idle-delay)
+	     :defines (which-key-idle-secondary-delay which-key-idle-delay)
 	     :commands (which-key-mode)
 	     :delight which-key-mode
-	     :init
-	     (which-key-mode)
+	     :init (which-key-mode)
 	     ;; :config (progn
 	     ;; 	       (setq which-key-idle-secondary-delay 0.1
 	     ;; 		     which-key-idle-delay 0.3)
 	     ;; 	       (which-key-mode 1))
-	     :config
-	     (setq which-key-idle-secondary-delay 0.1
-		   which-key-idle-delay 0.3)
-	     )
+	     :config (setq which-key-idle-secondary-delay 0.1 which-key-idle-delay 0.3))
 
 (use-package ws-butler
 	     :commands (ws-butler-global-mode)
 	     :defines (ws-butler-keep-whitespace-before-point)
 	     :delight ws-butler-mode
-	     :init
-	     (ws-butler-global-mode)
-	     :config
-	     (setq ws-butler-keep-whitespace-before-point nil)
-	     )
+	     :init (ws-butler-global-mode)
+	     :config (setq ws-butler-keep-whitespace-before-point nil))
 
 (use-package dtrt-indent
 	     :commands (dtrt-indent-mode)
-	     :init
-	     (dtrt-indent-mode 1))
+	     :init (dtrt-indent-mode 1))
 
 ;; try emmet-mode for html snippets
 ;; try writegood-mode and artbollocks for editing text.
 ;; start server, so we can connect anytime with emacsclient
 (unless noninteractive
-  (setq server-socket-dir (format "/tmp/emacs-%d-%s-%d"
-                                  (user-uid)
-                                  (format-time-string "%Y%m%d-%H%M%S")
-                                  (emacs-pid)))
+  (setq server-socket-dir (format "/tmp/emacs-%d-%s-%d" (user-uid)
+				  (format-time-string "%Y%m%d-%H%M%S")
+				  (emacs-pid)))
   (server-start)
-  (add-hook 'kill-emacs-hook #'(lambda () (delete-directory server-socket-dir t))))
+  (add-hook 'kill-emacs-hook #'(lambda ()
+				 (delete-directory server-socket-dir t))))
 
 (provide 'init)
 ;;; init.el ends here
