@@ -98,12 +98,20 @@
 ;; Second: deferred packages, eval-after-loads and autoloads
 ;; beautiful hungarian letters in ps-print
 
+;; M-up M-down on region
 (use-package move-text
-	     :commands
-	     (move-text-default-bindings)
-	     :init
-	     (move-text-default-bindings)
+	     :commands (move-text-default-bindings)
+	     :init (move-text-default-bindings))
+
+(use-package expand-region
+	     :bind (("C-z e" . er/expand-region)
+		    ("C-z C-e" . er/expand-region)))
+
+(use-package multiple-cursors
+	     ;; look at https://github.com/Schnouki/dotfiles/blob/master/emacs/init-60-multiple-cursors.el
 	     )
+
+;; Printing including foreign characters
 (use-package ps-print
 	     :defer t
 	     :config
@@ -112,21 +120,9 @@
 	     (setq ps-paper-type 'letter
 		   ps-font-size 10))
 
-(use-package apache-mode)
-(use-package elisp-format)
 ;; also-dependency-for-gnus!
 (use-package bbdb
 	     :init (autoload 'bbdb "bbdb-com" nil t))
-
-(use-package web-mode
-	     :mode ("\\.html\\'"))
-
-(use-package multiple-cursors)
-
-(use-package expand-region
-	     :bind (("C-z e" . er/expand-region)
-		    ("C-z C-e" . er/expand-region)))
-
 
 (use-package compile
 	     :bind (("C-z c" . compile)
@@ -135,9 +131,22 @@
 			   compilation-read-command nil
 			   compilation-scroll-output t
 			   compile-command "make"))
+(use-package elisp-format
+	     :defer t)
 
+;;;; Web and web development related
+(use-package apache-mode
+	     :defer t)
+;; xml syntax to javascript
 (use-package rjsx-mode
 	     :mode ("\\.js\\'" "\\.jsx\\'"))
+(use-package web-mode
+	     :mode ("\\.html\\'"))
+
+
+
+
+
 
 ;; look at nix within docker volumes for EDA tools
 
