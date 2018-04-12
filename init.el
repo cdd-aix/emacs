@@ -46,28 +46,28 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; real .emacs starts here
 
-;; use-package for the case when init.el is byte-compiled
+;;;; Do not remove, use-package uses these
+(use-package bind-key)
 (use-package delight)
 (use-package diminish)
-(use-package bind-key)
+;; Required for things like flycheck to find in path.
+(use-package exec-path-from-shell)
+;; Required projectile and flycheck
+(use-package pkg-info
+	     :functions (pkg-info)
+	     :defer t)
 ;; so we can (require 'use-package) even in compiled emacs to e.g. read docs
 (use-package use-package
 	     :commands use-package-autoload-keymap
 	     ;; :defines use-package-handler/:bind
 	     )
-;; Required projectile and flycheck
-(use-package pkg-info
-	     :functions (pkg-info)
-	     :defer t)
-;; Required for things like flycheck to find in path.
-(use-package exec-path-from-shell)
+
+;;;; keybinding overrides and setqish things
+;; No ctrl-Z to minimize
 (bind-key "C-z" nil)
 
-;; First: everything that is only setq
 (setq custom-file "~/p/emacs/cf-own-custom.el")
 (load "~/p/emacs/cf-own-custom")
-(use-package cddsort
-	     :load-path "~/p/emacs/lisp")
 
 ;; Workaround for i3 focus issue on emacs exit if an emacs package
 ;; called x-focus-frame before.  The i3 guys refused fixing their shit
@@ -88,13 +88,14 @@
 (electric-pair-mode 1)
 (subword-mode +1)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Second: deferred packages, eval-after-loads and autoloads
-
 ;;;; cursor movement and selection and visualization
 (use-package ace-window
 	     :bind (("C-z o" . ace-window))
 	     :config (setq aw-scope 'frame aw-dispatch-always t))
+
+;; sort-words and sort-symbols for normalizing order in source code
+(use-package cddsort
+	     :load-path "~/p/emacs/lisp")
 
 (use-package default-text-scale
 	     :bind (("C-M-=" . default-text-scale-increase)
@@ -174,6 +175,7 @@
 			neo-global--window-exists-p)
 	     :bind (("<f8>" . errge/neotree-project-dir))
 	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find projectile-project-root)
+	     :defines (projectile-switch-project-action)
 	     :config
 	     ;; from https://www.emacswiki.org/emacs/NeoTree
 	     (when (require 'projectile nil 'noerror)
