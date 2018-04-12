@@ -229,16 +229,16 @@
 
 ;; Improve writing
 (use-package writegood-mode
-	     :commands
-	     writegood-grade-level
-	     writegood-reading-ease
-	     writegood-mode
+	     :commands (writegood-grade-level
+			writegood-reading-ease
+			writegood-mode)
+	     :diminish
 	     :bind
 	     ("C-c C-w C-w" . writegood-mode))
 
 (use-package artbollocks-mode
-	     :commands
-	     artbollocks-mode
+	     :commands (artbollocks-mode)
+	     :diminish
 	     :bind
 	     ("C-c C-w C-a" . artbollocks-mode))
 
