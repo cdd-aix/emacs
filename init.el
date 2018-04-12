@@ -171,33 +171,32 @@
 
 ;;;; project and management
 (use-package neotree
-	     :commands (neotree-toggle
-			neo-global--window-exists-p)
+	     :commands (neotree-toggle neo-global--window-exists-p)
 	     :bind (("<f8>" . errge/neotree-project-dir))
-	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find projectile-project-root)
+	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find
+						  projectile-project-root)
 	     :defines (projectile-switch-project-action)
 	     :config
 	     ;; from https://www.emacswiki.org/emacs/NeoTree
-	     (when (require 'projectile nil 'noerror)
+	     (when
+		 (require 'projectile nil 'noerror)
 	       (setq projectile-switch-project-action 'neotree-projectile-action))
-	     :init
-	     (defun errge/neotree-project-dir ()
-	       "Open NeoTree using the git root."
-	       (interactive)
-	       (let ((project-dir (projectile-project-root))
-		     (file-name (buffer-file-name)))
-		 (neotree-toggle)
-		 (if project-dir (if (neo-global--window-exists-p)
-				     (progn (neotree-dir project-dir)
-					    (neotree-find file-name)))
-		   (message "Could not find git project root.")))))
+	     :init (defun errge/neotree-project-dir ()
+		     "Open NeoTree using the git root."
+		     (interactive)
+		     (let ((project-dir (projectile-project-root))
+			   (file-name (buffer-file-name)))
+		       (neotree-toggle)
+		       (if project-dir (if (neo-global--window-exists-p)
+					   (progn (neotree-dir project-dir)
+						  (neotree-find file-name)))
+			 (message "Could not find git project root.")))))
 
 (use-package projectile
 	     :commands (projectile-mode)
 	     :delight)
 
 (use-package helm-projectile
-	     ;; :diminish projectile-mode
 	     :commands (helm-projectile-on)
 	     :init (helm-projectile-on)
 	     :config (setq projectile-completion-system 'helm uniquify-buffer-name-style 'reverse)
@@ -265,6 +264,8 @@
 	     :mode ("\\.yaml\\'"))
 
 ;;;; Markup languages
+(use-package adoc-mode
+	     :mode ("\\.adoc\\'"))
 (use-package jekyll-modes
 	     :commands (jekyll-markdown-mode jekyll-html-mode))
 (use-package markdown-mode
@@ -304,8 +305,8 @@
 	     (require 'diff-hl-margin)
 	     (diff-hl-margin-mode)
 	     :hook (magit-post-refresh-hook . diff-hl-magit-post-refresh)
-	     :init
-	     (with-eval-after-load 'vc-git  (require 'diff-hl)))
+	     :init (with-eval-after-load 'vc-git
+		     (require 'diff-hl)))
 
 (use-package ediff
 	     :defer t
@@ -315,7 +316,7 @@
 	     :commands (magit-define-popup-switch)
 	     :bind ("C-c g" . magit-status)
 	     :config (magit-define-popup-switch 'magit-push-popup ?u "Set upstream"
-						"--set-upstream"))
+		       "--set-upstream"))
 
 (use-package magit-gitflow
 	     :commands (turn-on-magit-gitflow)
@@ -331,22 +332,16 @@
 	     :commands importmagic-fix-imports
 	     importmagic-fix-symbol importmagic-fix-symbol-at-point importmagic-update-index
 	     importmagic-mode
-	     :defines import-magic-mode-map
-	     :bind
-	     ;; (:map
-	     ;;  import-magic-mode-map
-	     ;;  ("C-c C-f" . nil)
-	     ;;  ("C-c i i" . 'importmagic-fix-symbol-at-point)
-	     ;;  ("C-c i l" . 'importmagic-fix-imports)
-	     ;;  ("C-c i u" . 'importmagic-update-index)
-	     ;;  ("C-c i s" . 'importmagic-fix-symbol)
-	     ;;  )
-	     :hook
-	     (python-mode . importmagic-mode)
-	     :config (define-key importmagic-mode-map (kbd "C-c C-l") nil)
-	     (define-key importmagic-mode-map (kbd "C-c i i") 'importmagic-fix-symbol-at-point)
-	     (define-key importmagic-mode-map (kbd "C-c i l") 'importmagic-fix-imports)
-	     (define-key importmagic-mode-map (kbd "C-c i m") 'importmagic-mode)
+	     :defines importmagic-mode-map
+	     :bind (:map importmagic-mode-map
+			 ("C-c C-f" . nil)
+			 ("C-c C-l" . nil)
+			 ("C-c i i" . 'importmagic-fix-symbol-at-point)
+			 ("C-c i l" . 'importmagic-fix-imports)
+			 ("C-c i u" . 'importmagic-update-index)
+			 ("C-c i s" . 'importmagic-fix-symbol))
+	     :bind-keymap ("C-c i" . importmagic-mode-map)
+	     :hook (python-mode . importmagic-mode)
 	     :delight)
 ;; elpy uses company
 (use-package company
@@ -397,15 +392,12 @@
 
 ;;;; Slow theme crud
 (use-package smart-mode-line-powerline-theme
-	     :after smart-mode-line
-	     )
+	     :after smart-mode-line)
 (use-package smart-mode-line
 	     :commands (sml/setup sml/apply-theme)
 	     :defines (sml/theme)
-	     :init
-	     (sml/setup)
-	     (sml/apply-theme 'powerline)
-	     )
+	     :init (sml/setup)
+	     (sml/apply-theme 'powerline))
 
 ;; (use-package color-theme
 ;; 	     :commands (color-theme-initialize color-theme-clarity)
@@ -417,8 +409,7 @@
 ;; 	     )
 
 (use-package color-theme-modern
-	     :init
-	     (require 'clarity-theme) ;; color-theme-el should have a (when (load-file-name) ....)
+	     :init (require 'clarity-theme) ;; color-theme-el should have a (when (load-file-name) ....)
 	     (load-theme 'clarity t t)
 	     (enable-theme 'clarity))
 
