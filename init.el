@@ -232,13 +232,13 @@
 	     :commands (writegood-grade-level
 			writegood-reading-ease
 			writegood-mode)
-	     :diminish
+	     :delight
 	     :bind
 	     ("C-c C-w C-w" . writegood-mode))
 
 (use-package artbollocks-mode
 	     :commands (artbollocks-mode)
-	     :diminish
+	     :delight
 	     :bind
 	     ("C-c C-w C-a" . artbollocks-mode))
 
@@ -296,10 +296,16 @@
 (use-package jekyll-modes
 	     :commands (jekyll-markdown-mode jekyll-html-mode))
 (use-package markdown-mode
+	     :delight
+	     (markdown-mode)
+	     (gfm-mode)
 	     :commands (gfm-mode markdown-mode)
 	     :mode (("\\.md\\'" . gfm-mode)
 		    ("\\.markdown\\'" . markdown-mode))
-	     :config (setq markdown-command "multimarkdown"))
+	     :config
+	     (setq markdown-command "multimarkdown")
+	     (setq markdown-gfm-uppercase-checkbox t)
+	     )
 
 ;; (use-package sgml-mode)
 
