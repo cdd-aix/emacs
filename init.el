@@ -7,6 +7,7 @@
 (defvar package--init-file-ensured)
 (setq package-user-dir (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
       package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
+			 ("melpa-stable" . "https://stable.melpa.org/packages/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")
 			 ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 
@@ -99,6 +100,10 @@
 	     :bind (("C-M-=" . default-text-scale-increase)
 		    ("C-M--" . default-text-scale-decrease)))
 
+(use-package dtrt-indent
+	     :commands (dtrt-indent-mode)
+	     :init (dtrt-indent-mode 1))
+
 (use-package expand-region
 	     :bind (("C-z e" . er/expand-region)
 		    ("C-z C-e" . er/expand-region)))
@@ -122,6 +127,13 @@
 		    ("M-X" . smex-major-mode-commands)
 		    ("C-c C-c M-x" . execute-extended-command)))
 
+(use-package which-key
+	     :defines (which-key-idle-secondary-delay which-key-idle-delay)
+	     :commands (which-key-mode)
+	     :delight which-key-mode
+	     :init (which-key-mode)
+	     :config (setq which-key-idle-secondary-delay 0.1 which-key-idle-delay 0.3))
+
 ;; whitespace visualization
 (use-package whitespace)
 
@@ -137,6 +149,13 @@
 		    (term-exec . with-editor-export-editor)
 		    (eshell-mode . with-editor-export-editor)))
 
+(use-package ws-butler
+	     :commands (ws-butler-global-mode)
+	     :defines (ws-butler-keep-whitespace-before-point)
+	     :delight ws-butler-mode
+	     :init (ws-butler-global-mode)
+	     :config (setq ws-butler-keep-whitespace-before-point nil))
+
 ;; Find better keybindings
 ;; (use-package windmove
 ;;   :config (defun errge/other-window-back ()
@@ -149,7 +168,28 @@
 ;;           ("<f1>" . errge/other-window-back)
 ;;           ("<f2>" . other-window)))
 
-;;;; project management
+;;;; project and management
+(use-package neotree
+	     :commands (neotree-toggle
+			neo-global--window-exists-p)
+	     :bind (("<f8>" . errge/neotree-project-dir))
+	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find projectile-project-root)
+	     :config
+	     ;; from https://www.emacswiki.org/emacs/NeoTree
+	     (when (require 'projectile nil 'noerror)
+	       (setq projectile-switch-project-action 'neotree-projectile-action))
+	     :init
+	     (defun errge/neotree-project-dir ()
+	       "Open NeoTree using the git root."
+	       (interactive)
+	       (let ((project-dir (projectile-project-root))
+		     (file-name (buffer-file-name)))
+		 (neotree-toggle)
+		 (if project-dir (if (neo-global--window-exists-p)
+				     (progn (neotree-dir project-dir)
+					    (neotree-find file-name)))
+		   (message "Could not find git project root.")))))
+
 (use-package projectile
 	     :commands (projectile-mode)
 	     :delight
@@ -185,6 +225,12 @@
 ;; also-dependency-for-gnus!
 (use-package bbdb
 	     :init (autoload 'bbdb "bbdb-com" nil t))
+(use-package calendar
+	     :defer t
+	     :config (setq calendar-week-start-day 6))
+
+;; run actions every midnight
+(use-package midnight)
 
 ;;;; General development
 (use-package compile
@@ -210,11 +256,19 @@
 ;;;; Web and web development related
 (use-package apache-mode
 	     :defer t)
+(use-package nginx-mode
+	     :defer t)
+
+(use-package json-mode
+	     :mode ("\\.json\\'"))
 ;; xml syntax to javascript
 (use-package rjsx-mode
 	     :mode ("\\.js\\'" "\\.jsx\\'"))
 (use-package web-mode
 	     :mode ("\\.html\\'"))
+(use-package yaml-mode
+	     :mode ("\\.yaml\\'"))
+
 
 ;; look at nix within docker volumes for EDA tools
 
@@ -280,30 +334,7 @@
 	     :config (setq vc-follow-symlinks t))
 
 ;; these work because of (describe-variable 'package--builtins)
-(use-package calendar
-	     :defer t
-	     :config (setq calendar-week-start-day 6))
 
-(use-package neotree
-	     :commands (neotree-toggle
-			neo-global--window-exists-p)
-	     :bind (("<f8>" . errge/neotree-project-dir))
-	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find projectile-project-root)
-	     :config
-	     ;; from https://www.emacswiki.org/emacs/NeoTree
-	     (when (require 'projectile nil 'noerror)
-	       (setq projectile-switch-project-action 'neotree-projectile-action))
-	     :init
-	     (defun errge/neotree-project-dir ()
-	       "Open NeoTree using the git root."
-	       (interactive)
-	       (let ((project-dir (projectile-project-root))
-		     (file-name (buffer-file-name)))
-		 (neotree-toggle)
-		 (if project-dir (if (neo-global--window-exists-p)
-				     (progn (neotree-dir project-dir)
-					    (neotree-find file-name)))
-		   (message "Could not find git project root.")))))
 
 ;; Silver Searcher
 ;; (use-package ag)
@@ -349,63 +380,49 @@
 (use-package python
 	     :delight
 	     :mode ("\\.py" . python-mode)
+	     :interpreter ("python")
 	     :config (elpy-enable))
 
 
 
+;; (use-package ansible
+;; 	     :defer t)
 
-(use-package midnight)
+;; (use-package ansible-doc)
 
-(use-package ansible
-	     :defer t)
+;; (use-package ansible-vault)
 
-(use-package ansible-doc)
-
-(use-package ansible-vault)
-
-(use-package coffee-mode)
+;; (use-package coffee-mode)
 
 
 
-;; Required for jinja2-mode
-(use-package xml-rpc)
+;; ;; Required for jinja2-mode
+;; (use-package xml-rpc)
 
-(use-package jinja2-mode)
+;; (use-package jinja2-mode)
 
-(use-package jira)
+;; (use-package jira)
 
-(use-package json-mode)
-
-(use-package json-reformat)
-
-(use-package nginx-mode)
-
-(use-package yaml-mode)
+;; (use-package json-reformat)
 
 (use-package groovy-mode
+	     :pin melpa-stable
 	     :mode ("\\.groovy\\'" "\\.groovy.override\\'"))
 
-(use-package vhdl-mode)
+;; (use-package vhdl-mode)
 
-(use-package verilog-mode)
+;; (use-package verilog-mode)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Third: the sad ones, nothing to defer on and they are slow, so we defer on time...
-
+;;;; Slow theme crud
 (use-package smart-mode-line-powerline-theme
-	     ;; :defer t
+	     :after smart-mode-line
 	     )
 (use-package smart-mode-line
-	     ;; :defer 0.1
-	     :commands (sml/setup)
+	     :commands (sml/setup sml/apply-theme)
 	     :defines (sml/theme)
-	     :init (setq sml/theme 'powerline)
+	     :init
 	     (sml/setup)
-	     ;; :config
-	     ;; (color-theme-clarity)
-	     ;; (sml/setup)
-	     ;; (color-theme-initialize)
-	     ;; (color-theme-clarity)
+	     (sml/apply-theme 'powerline)
 	     )
 
 (use-package color-theme
@@ -415,9 +432,6 @@
 	     :init (setq color-theme-is-global t)
 	     (color-theme-initialize)
 	     (color-theme-clarity)
-	     ;; :config
-	     ;; (color-theme-initialize)
-	     ;; (color-theme-clarity)
 	     )
 ;; (use-package smart-mode-line
 ;; 	     :defer t
@@ -435,29 +449,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fourth: require, defuns and bind-keys that are evaluated right
 ;; here, right now, might be slow, test these first for slowness!
-
-(use-package which-key
-	     ;; :defer 0.1
-	     :defines (which-key-idle-secondary-delay which-key-idle-delay)
-	     :commands (which-key-mode)
-	     :delight which-key-mode
-	     :init (which-key-mode)
-	     ;; :config (progn
-	     ;; 	       (setq which-key-idle-secondary-delay 0.1
-	     ;; 		     which-key-idle-delay 0.3)
-	     ;; 	       (which-key-mode 1))
-	     :config (setq which-key-idle-secondary-delay 0.1 which-key-idle-delay 0.3))
-
-(use-package ws-butler
-	     :commands (ws-butler-global-mode)
-	     :defines (ws-butler-keep-whitespace-before-point)
-	     :delight ws-butler-mode
-	     :init (ws-butler-global-mode)
-	     :config (setq ws-butler-keep-whitespace-before-point nil))
-
-(use-package dtrt-indent
-	     :commands (dtrt-indent-mode)
-	     :init (dtrt-indent-mode 1))
 
 ;; try emmet-mode for html snippets
 ;; try writegood-mode and artbollocks for editing text.
