@@ -110,6 +110,7 @@
 		    ("C-z C-e" . er/expand-region)))
 
 (use-package highlight-indentation
+	     :commands (highlight-indentation-mode)
 	     :delight)
 
 ;; M-up M-down on region
@@ -348,14 +349,15 @@
 	     :defer t
 	     :delight)
 ;; elpy uses yasnippet
-(use-package yasnippet
-	     :defer t
-	     :delight)
 (use-package yasnippet-snippets
-	     :defer t
+	     :commands (yasnippet-snippets-initialize)
+	     :delight)
+(use-package yasnippet
+	     :commands (yas-minor-mode)
+	     :config (yasnippet-snippets-initialize)
 	     :delight)
 (use-package elpy
-	     :commands (elpy-enable highlight-indentation-mode)
+	     :commands (elpy-enable)
 	     :delight)
 
 (use-package python
