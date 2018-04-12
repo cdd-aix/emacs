@@ -121,7 +121,6 @@
 	     ;; look at https://github.com/Schnouki/dotfiles/blob/master/emacs/init-60-multiple-cursors.el
 	     )
 
-
 ;; Smart meta-X
 (use-package smex
 	     :bind (("M-x" . smex)
@@ -137,6 +136,18 @@
 
 ;; whitespace visualization
 (use-package whitespace)
+
+;; Find better keybindings
+;; (use-package windmove
+;;   :config (defun errge/other-window-back ()
+;;             (interactive)
+;;             (other-window -1))
+;;   :bind* (("<S-left>" . windmove-left)
+;;           ("<S-right>" . windmove-right)
+;;           ("<S-up>" . windmove-up)
+;;           ("<S-down>" . windmove-down)
+;;           ("<f1>" . errge/other-window-back)
+;;           ("<f2>" . other-window)))
 
 ;; use current emacs for $EDITOR
 (use-package with-editor
@@ -157,17 +168,6 @@
 	     :init (ws-butler-global-mode)
 	     :config (setq ws-butler-keep-whitespace-before-point nil))
 
-;; Find better keybindings
-;; (use-package windmove
-;;   :config (defun errge/other-window-back ()
-;;             (interactive)
-;;             (other-window -1))
-;;   :bind* (("<S-left>" . windmove-left)
-;;           ("<S-right>" . windmove-right)
-;;           ("<S-up>" . windmove-up)
-;;           ("<S-down>" . windmove-down)
-;;           ("<f1>" . errge/other-window-back)
-;;           ("<f2>" . other-window)))
 
 ;;;; project and management
 (use-package neotree
