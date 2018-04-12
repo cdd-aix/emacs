@@ -115,6 +115,7 @@
 	     ;; look at https://github.com/Schnouki/dotfiles/blob/master/emacs/init-60-multiple-cursors.el
 	     )
 
+
 ;; Smart meta-X
 (use-package smex
 	     :bind (("M-x" . smex)
@@ -148,8 +149,30 @@
 ;;           ("<f1>" . errge/other-window-back)
 ;;           ("<f2>" . other-window)))
 
+;;;; project management
+(use-package projectile
+	     :commands (projectile-mode)
+	     :delight
+	     )
+
+;; (use-package helm-ag
+;; 	     :defer t)
+
+;; (use-package helm
+;; 	     :defer t)
+
+(use-package helm-projectile
+	     ;; :diminish projectile-mode
+	     :commands (helm-projectile-on)
+	     :init (helm-projectile-on)
+	     :config (setq projectile-completion-system 'helm uniquify-buffer-name-style 'reverse)
+	     (require 'uniquify)
+	     (projectile-mode))
+
 
 ;;;; output and publishing
+;; For managing jekyll blogs... don't forget to include a .hyde.el in them.
+(use-package hyde)
 ;; Printing including foreign characters
 (use-package ps-print
 	     :defer t
@@ -196,6 +219,8 @@
 ;; look at nix within docker volumes for EDA tools
 
 ;;;; Markup languages
+(use-package jekyll-modes
+	     :commands (jekyll-markdown-mode jekyll-html-mode))
 (use-package markdown-mode
 	     :commands (gfm-mode markdown-mode)
 	     :mode (("\\.md\\'" . gfm-mode)
@@ -260,14 +285,15 @@
 	     :config (setq calendar-week-start-day 6))
 
 (use-package neotree
-	     :defer t
 	     :commands (neotree-toggle
-			;; errge/neotree-project-dir
 			neo-global--window-exists-p)
 	     :bind (("<f8>" . errge/neotree-project-dir))
-	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find)
+	     :functions (neo-buffer--unlock-width neo-buffer--lock-width neotree-dir neotree-find projectile-project-root)
 	     :config
 	     ;; from https://www.emacswiki.org/emacs/NeoTree
+	     (when (require 'projectile nil 'noerror)
+	       (setq projectile-switch-project-action 'neotree-projectile-action))
+	     :init
 	     (defun errge/neotree-project-dir ()
 	       "Open NeoTree using the git root."
 	       (interactive)
@@ -327,28 +353,6 @@
 
 
 
-(use-package projectile
-	     :defer t
-	     :commands (projectile-mode)
-	     :delight
-	     ;; '(:eval (concat " " (projectile-project-name)))
-	     :functions (projectile-project-root))
-
-(use-package helm-ag
-	     :defer t)
-
-(use-package helm
-	     :defer t)
-
-(use-package helm-projectile
-	     :defer t
-	     ;; :diminish projectile-mode
-	     :commands (helm-projectile-on)
-	     :init (helm-projectile-on)
-	     :config (setq projectile-completion-system 'helm uniquify-buffer-name-style 'reverse)
-	     (require 'uniquify)
-	     (projectile-mode))
-
 
 (use-package midnight)
 
@@ -361,9 +365,7 @@
 
 (use-package coffee-mode)
 
-(use-package hyde)
 
-(use-package jekyll-modes)
 
 ;; Required for jinja2-mode
 (use-package xml-rpc)
