@@ -67,7 +67,7 @@
 (bind-key "C-z" nil)
 
 (setq custom-file "~/p/emacs/cf-own-custom.el")
-(load "~/p/emacs/cf-own-custom")
+(load custom-file t t)
 
 ;; Workaround for i3 focus issue on emacs exit if an emacs package
 ;; called x-focus-frame before.  The i3 guys refused fixing their shit
@@ -194,14 +194,7 @@
 
 (use-package projectile
 	     :commands (projectile-mode)
-	     :delight
-	     )
-
-;; (use-package helm-ag
-;; 	     :defer t)
-
-;; (use-package helm
-;; 	     :defer t)
+	     :delight)
 
 (use-package helm-projectile
 	     ;; :diminish projectile-mode
@@ -217,7 +210,7 @@
 (use-package hyde)
 ;; Printing including foreign characters
 (use-package ps-print
-	     :defer t
+	     ;; :defer t
 	     :config (require 'ps-mule)
 	     (eval-when-compile
 	       (require 'ps-mule))
