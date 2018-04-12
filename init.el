@@ -406,7 +406,6 @@
 ;; (use-package json-reformat)
 
 (use-package groovy-mode
-	     :pin melpa-stable
 	     :mode ("\\.groovy\\'" "\\.groovy.override\\'"))
 
 ;; (use-package vhdl-mode)
@@ -425,26 +424,20 @@
 	     (sml/apply-theme 'powerline)
 	     )
 
-(use-package color-theme
-	     :commands (color-theme-initialize color-theme-clarity)
-	     :functions(color-theme-clarity)
-	     :defines (color-theme-is-global color-themes)
-	     :init (setq color-theme-is-global t)
-	     (color-theme-initialize)
-	     (color-theme-clarity)
-	     )
-;; (use-package smart-mode-line
-;; 	     :defer t
-;; 	     ;; :after color-theme
-;; 	     ;;	     :defer 1
-;; 	     :commands (sml/setup)
-;; 	     ;; :functions (sml/setup)
-;; 	     :defines (sml/theme)
-;; 	     :init
-;; 	     (setq sml/theme 'powerline)
-;; 	     :config
-;; 	     (sml/setup)
+;; (use-package color-theme
+;; 	     :commands (color-theme-initialize color-theme-clarity)
+;; 	     :functions(color-theme-clarity)
+;; 	     :defines (color-theme-is-global color-themes)
+;; 	     :init (setq color-theme-is-global t)
+;; 	     (color-theme-initialize)
+;; 	     (color-theme-clarity)
 ;; 	     )
+
+(use-package color-theme-modern
+	     :init
+	     (require 'clarity-theme) ;; color-theme-el should have a (when (load-file-name) ....)
+	     (load-theme 'clarity t t)
+	     (enable-theme 'clarity))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fourth: require, defuns and bind-keys that are evaluated right
