@@ -269,9 +269,6 @@
 (use-package yaml-mode
 	     :mode ("\\.yaml\\'"))
 
-
-;; look at nix within docker volumes for EDA tools
-
 ;;;; Markup languages
 (use-package jekyll-modes
 	     :commands (jekyll-markdown-mode jekyll-html-mode))
@@ -333,12 +330,6 @@
 	     :defer t
 	     :config (setq vc-follow-symlinks t))
 
-;; these work because of (describe-variable 'package--builtins)
-
-
-;; Silver Searcher
-;; (use-package ag)
-
 ;;;; Python
 ;; elpy removed importmagic so...
 (use-package importmagic
@@ -384,7 +375,7 @@
 	     :config (elpy-enable))
 
 
-
+;;;; Other languages for reference
 ;; (use-package ansible
 ;; 	     :defer t)
 
@@ -394,19 +385,16 @@
 
 ;; (use-package coffee-mode)
 
+(use-package groovy-mode
+	     :mode ("\\.groovy\\'" "\\.groovy.override\\'"))
 
-
-;; ;; Required for jinja2-mode
-;; (use-package xml-rpc)
+;; (use-package indium)
+;;;; https://indium.readthedocs.io/en/latest/setup.html
 
 ;; (use-package jinja2-mode)
 
-;; (use-package jira)
-
-;; (use-package json-reformat)
-
-(use-package groovy-mode
-	     :mode ("\\.groovy\\'" "\\.groovy.override\\'"))
+;; (use-pacakge tide)
+;;;; https://github.com/ananthakumaran/tide
 
 ;; (use-package vhdl-mode)
 
