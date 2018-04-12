@@ -256,6 +256,10 @@
 
 (use-package emmet-mode
 	     :commands (emmet-mode)
+	     :bind
+	     ;; Default bindings clash with webmode indent.
+	     ("M-s-<left>" . emmet-prev-edit-point)
+	     ("M-s-<right>" . emmet-next-edit-point)
 	     :hook
 	     (sgml-mode . emmet-mode)
 	     (web-mode . emmet-mode)
