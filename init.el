@@ -255,21 +255,31 @@
 
 (use-package dockerfile-mode
 	     :functions (s-replace)
+	     :delight
 	     :mode ("Dockerfile.*\\'")
 	     :hook ((dockerfile-mode . subword-mode)
 		    (dockerfile-mode . (lambda()
 					 (setq indent-tabs-mode nil tab-width 4)))))
 
 (use-package docker-compose-mode
+	     :delight
 	     :mode (".*docker-compose.*\\.yml\\'"))
 
 ;;;; Web and web development related
 (use-package apache-mode
-	     :defer t)
+	     :mode
+	     ("\\.htaccess\\'" . apache-mode)
+	     ("srm\\.conf\\'" . apache-mode)
+	     ("access\\.conf\\'" . apache-mode)
+	     ;; ("sites-\\(available\\|enabled\\)/" . apache-mode)
+	     ("httpd\.conf\\'" . apache-mode))
 (use-package nginx-mode
-	     :defer t)
+	     :mode
+	     ("/nginx/.*\\.conf\\'" . nginx-mode)
+	     ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode))
 
 (use-package emmet-mode
+	     :delight
 	     :commands (emmet-mode)
 	     :bind
 	     ;; Default bindings clash with webmode indent.
