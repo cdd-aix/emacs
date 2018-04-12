@@ -254,6 +254,13 @@
 (use-package nginx-mode
 	     :defer t)
 
+(use-package emmet-mode
+	     :commands (emmet-mode)
+	     :hook
+	     (sgml-mode . emmet-mode)
+	     (web-mode . emmet-mode)
+	     (css-mode . emmet-mode)
+	     )
 (use-package json-mode
 	     :mode ("\\.json\\'"))
 ;; xml syntax to javascript
