@@ -227,6 +227,21 @@
 ;; run actions every midnight
 (use-package midnight)
 
+;; Improve writing
+(use-package writegood-mode
+	     :commands
+	     writegood-grade-level
+	     writegood-reading-ease
+	     writegood-mode
+	     :bind
+	     ("C-c C-w C-w" . writegood-mode))
+
+(use-package artbollocks-mode
+	     :commands
+	     artbollocks-mode
+	     :bind
+	     ("C-c C-w C-a" . artbollocks-mode))
+
 ;;;; General development
 (use-package compile
 	     :bind (("C-z c" . compile)
@@ -412,15 +427,6 @@
 	     :init (sml/setup)
 	     (sml/apply-theme 'powerline))
 
-;; (use-package color-theme
-;; 	     :commands (color-theme-initialize color-theme-clarity)
-;; 	     :functions(color-theme-clarity)
-;; 	     :defines (color-theme-is-global color-themes)
-;; 	     :init (setq color-theme-is-global t)
-;; 	     (color-theme-initialize)
-;; 	     (color-theme-clarity)
-;; 	     )
-
 (use-package color-theme-modern
 	     :init (require 'clarity-theme) ;; color-theme-el should have a (when (load-file-name) ....)
 	     (load-theme 'clarity t t)
@@ -430,8 +436,6 @@
 ;; Fourth: require, defuns and bind-keys that are evaluated right
 ;; here, right now, might be slow, test these first for slowness!
 
-;; try emmet-mode for html snippets
-;; try writegood-mode and artbollocks for editing text.
 ;; start server, so we can connect anytime with emacsclient
 (unless noninteractive
   (setq server-socket-dir (format "/tmp/emacs-%d-%s-%d" (user-uid)
