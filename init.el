@@ -206,8 +206,9 @@
 
 
 ;;;; output and publishing
-;; For managing jekyll blogs... don't forget to include a .hyde.el in them.
-(use-package hyde)
+;; ;; For managing jekyll blogs... don't forget to include a .hyde.el in them.
+;; ;; Consider revisiting and integrating with magit.
+;; (use-package hyde)
 ;; Printing including foreign characters
 (use-package ps-print
 	     ;; :defer t
