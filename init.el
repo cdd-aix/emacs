@@ -88,6 +88,8 @@
 (electric-pair-mode 1)
 (subword-mode +1)
 
+(defvar cdd/writing-map (make-sparse-keymap) "For writing aids.")
+
 ;;;; cursor movement and selection and visualization
 (use-package ace-window
 	     :bind (("C-z o" . ace-window))
@@ -228,20 +230,84 @@
 ;; run actions every midnight
 (use-package midnight)
 
+;; org
+(use-package org
+	     :mode ("\\.org\\'" . org-mode)
+	     :bind (("C-c l" . org-store-link)
+		    ("C-c c" . org-capture)
+		    ("C-c a" . org-agenda)
+		    ("C-c b" . org-iswitchb)
+		    ("C-c C-w" . org-refile)
+		    ("C-c j". org-clock-goto)
+		    ("C-c C-x C-o" . org-clock-out)
+		    ("C-c C-x t" . org-inlinetask-insert-task)
+		    )
+	     :defines (org-capture-templates org-agenda-custom-commands org-clock-persist)
+	     :config
+	     (progn
+	       ;; Mooched from https://github.com/cocreature/dotfiles/blob/master/emacs/.emacs.d/emacs.org
+	       ;; Which mooched from https://emacs.cafe/emacs/orgmode/gtd/2017/06/30/orgmode-gtd.html
+	       (setq org-directory "~/org")
+	       (setq org-agenda-files
+		     (mapcar (lambda (path) (concat org-directory path))
+			     '("/org.org"
+			       "/gtd/gtd.org"
+			       "/gtd/inbox.org"
+			       "/gtd/ticker.org")))
+	       (setq org-log-done 'time)
+	       (setq org-src-fontify-natively t)
+	       (setq org-use-speed-commands t)
+	       (setq org-capture-templates
+		     '(("t" "Todo [inbox]" entry
+			(file+headline "~/org/gtd/inbox.org" "Tasks")
+			"* TODO %i%?")
+		       ("T" "Tickler" entry
+			(file+headline "~/org/gtd/tickler.org" "Tickler")
+			"* %i%? \n %^t")))
+	       (setq org-refile-targets
+		     '(("~/org/gtd/gtd.org" :maxlevel . 3)
+		       ("~/org/gtd/someday.org" :level . 1)
+		       ("~/org/gtd/tickler.org" :maxlevel . 2)))
+	       (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+	       (setq org-agenda-custom-commands
+		     '(("@" "Contexts"
+			((tags-todo "@email"
+				    ((org-agenda-overriding-header "Emails")))
+			 (tags-todo "@phone"
+				    ((org-agenda-overriding-header "Phone")))))))
+	       (setq org-clock-persist t)
+	       (org-clock-persistence-insinuate)
+	       (setq org-time-clocksum-format '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))
+	       (require 'org-inlinetask)))
+
+;; (use-package org-inlinetask
+;; 	     :bind (:map org-mode-map
+;; 	     :after (org)
+;; 	     :commands (org-inlinetask-insert-task))
+
+(use-package org-bullets
+	     :commands (org-bullets-mode)
+	     :hook
+	     (org-mode . (lambda() (org-bullets-mode 1))))
+
+
 ;; Improve writing
 (use-package writegood-mode
 	     :commands (writegood-grade-level
 			writegood-reading-ease
 			writegood-mode)
 	     :delight
-	     :bind
-	     ("C-c C-w C-w" . writegood-mode))
+	     :bind (:map cdd/writing-map
+			 ("C-c C-w C-w" . writegood-mode))
+	     :bind-keymap
+	     ("C-c C-w" . cdd/writing-map)
+	     )
 
 (use-package artbollocks-mode
 	     :commands (artbollocks-mode)
 	     :delight
-	     :bind
-	     ("C-c C-w C-a" . artbollocks-mode))
+	     :bind (:map cdd/writing-map
+			 ("C-c C-w C-a" . artbollocks-mode)))
 
 ;;;; General development
 (use-package compile
