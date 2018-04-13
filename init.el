@@ -128,7 +128,7 @@
 (use-package smex
 	     :bind (("M-x" . smex)
 		    ("M-X" . smex-major-mode-commands)
-		    ("C-c C-c M-x" . execute-extended-command)))
+		    ("C-M-X" . execute-extended-command)))
 
 (use-package which-key
 	     :defines (which-key-idle-secondary-delay which-key-idle-delay)
@@ -365,7 +365,7 @@
 (use-package web-mode
 	     :mode ("\\.html\\'"))
 (use-package yaml-mode
-	     :mode ("\\.yaml\\'"))
+	     :mode ("\\.yaml\\'" "\\.yml\\'"))
 
 ;;;; Markup languages
 (use-package adoc-mode
