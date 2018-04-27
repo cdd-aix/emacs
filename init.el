@@ -263,7 +263,10 @@
 			"* TODO %i%?")
 		       ("T" "Tickler" entry
 			(file+headline "~/org/gtd/tickler.org" "Tickler")
-			"* %i%? \n %^t")))
+			"* %i%? \n %^t")
+		       ("J" "Journal" entry
+			(file+headline "~/org/journal.org" "Journal")
+			)))
 	       (setq org-refile-targets
 		     '(("~/org/gtd/gtd.org" :maxlevel . 3)
 		       ("~/org/gtd/someday.org" :level . 1)
@@ -467,12 +470,15 @@
 	     :delight)
 (use-package elpy
 	     :commands (elpy-enable)
+	     :defines (elpy-rpc-backend)
+	     :config (setq elpy-rpc-backend "jedi")
 	     :delight)
 
 (use-package python
 	     :delight
+	     :functions (python-mode)
 	     :mode ("\\.py" . python-mode)
-	     :interpreter ("python")
+	     :interpreter ("python" . python-mode)
 	     :config (elpy-enable))
 
 
