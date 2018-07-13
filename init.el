@@ -405,6 +405,10 @@
 	     :commands (flycheck-checkbashisms-setup)
 	     :hook (flycheck-mode . flycheck-checkbashisms-setup))
 
+(use-package flycheck-yamllint
+	     :commands (flycheck-yamllint-setup)
+	     :hook (flycheck-mode . flycheck-yamllint-setup))
+
 ;;;; Source Control
 ;; magit uses auto-revert
 (use-package autorevert
@@ -483,12 +487,12 @@
 
 
 ;;;; Other languages for reference
-;; (use-package ansible
-;; 	     :defer t)
+(use-package ansible
+	     :defer t)
 
-;; (use-package ansible-doc)
+(use-package ansible-doc)
 
-;; (use-package ansible-vault)
+(use-package ansible-vault)
 
 ;; (use-package coffee-mode)
 
