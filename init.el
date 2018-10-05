@@ -195,16 +195,19 @@
 						  (neotree-find file-name)))
 			 (message "Could not find git project root.")))))
 
+(use-package helm-projectile
+	     :config (setq projectile-completion-system 'helm uniquify-buffer-name-style 'reverse)
+	     (require 'uniquify))
+
 (use-package projectile
 	     :commands (projectile-mode)
-	     :delight)
-
-(use-package helm-projectile
-	     :commands (helm-projectile-on)
-	     :init (helm-projectile-on)
-	     :config (setq projectile-completion-system 'helm uniquify-buffer-name-style 'reverse)
-	     (require 'uniquify)
-	     (projectile-mode))
+	     :init (projectile-mode)
+	     :bind
+	     ("s-p" . projectile-command-map)
+	     ("C-c p" . projectile-command-map)
+	     :delight
+	     :config
+	     (setq projectile-completion-system 'helm))
 
 
 ;;;; output and publishing
