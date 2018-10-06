@@ -207,7 +207,8 @@
 	     ("C-c p" . projectile-command-map)
 	     :delight
 	     :config
-	     (setq projectile-completion-system 'helm))
+	     (setq projectile-completion-system 'helm)
+	     (setq projectile-indexing-method 'turbo-alien))
 
 
 ;;;; output and publishing
@@ -496,6 +497,8 @@
 (use-package ansible-doc)
 
 (use-package ansible-vault)
+
+(use-package powershell)
 
 ;; (use-package coffee-mode)
 
