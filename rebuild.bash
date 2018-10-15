@@ -11,6 +11,6 @@ main() {
     ebatch -f batch-byte-compile "$zerodir/init.el"
     userdir=$(ebatch --eval '(princ package-user-dir)' 2>/dev/null)
     ebatch -f batch-byte-recompile-directory "$userdir"
-    ebatch -f batch-byte-recompile init.el
+    ebatch -f batch-byte-compile init.el
 }
 main "$@"
