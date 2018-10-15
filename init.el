@@ -50,6 +50,8 @@
 (use-package bind-key)
 (use-package delight)
 (use-package diminish)
+;;;; For command line updating of elpa##
+(use-package epm)
 ;; Required for things like flycheck to find in path.
 (use-package exec-path-from-shell)
 ;; Required projectile and flycheck
