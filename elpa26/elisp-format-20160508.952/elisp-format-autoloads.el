@@ -1,12 +1,10 @@
 ;;; elisp-format-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "elisp-format" "elisp-format.el" (0 0 0 0))
+;;;### (autoloads nil "elisp-format" "elisp-format.el" (23429 28715
+;;;;;;  988151 127000))
 ;;; Generated autoloads from elisp-format.el
 
 (autoload 'elisp-format-region "elisp-format" "\
@@ -55,14 +53,11 @@ Format LIBRARY.
 
 \(fn LIBRARY)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "elisp-format" '("elisp-format-")))
-
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; elisp-format-autoloads.el ends here

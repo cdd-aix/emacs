@@ -1,13 +1,10 @@
 ;;; js2-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "js2-imenu-extras" "js2-imenu-extras.el" (0
-;;;;;;  0 0 0))
+;;;### (autoloads nil "js2-imenu-extras" "js2-imenu-extras.el" (23429
+;;;;;;  28647 280166 99000))
 ;;; Generated autoloads from js2-imenu-extras.el
 
 (autoload 'js2-imenu-extras-setup "js2-imenu-extras" "\
@@ -20,11 +17,10 @@ Toggle Imenu support for frameworks and structural patterns.
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "js2-imenu-extras" '("js2-imenu-")))
-
 ;;;***
 
-;;;### (autoloads nil "js2-mode" "js2-mode.el" (0 0 0 0))
+;;;### (autoloads nil "js2-mode" "js2-mode.el" (23429 28647 260166
+;;;;;;  103000))
 ;;; Generated autoloads from js2-mode.el
 
 (autoload 'js2-highlight-unused-variables-mode "js2-mode" "\
@@ -57,19 +53,10 @@ variables (`sgml-basic-offset' et al) locally, like so:
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "js2-mode" '("js2-")))
-
 ;;;***
 
-;;;### (autoloads nil "js2-old-indent" "js2-old-indent.el" (0 0 0
-;;;;;;  0))
-;;; Generated autoloads from js2-old-indent.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "js2-old-indent" '("js2-")))
-
-;;;***
-
-;;;### (autoloads nil nil ("js2-mode-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("js2-mode-pkg.el" "js2-old-indent.el")
+;;;;;;  (23429 28647 288166 97000))
 
 ;;;***
 
@@ -77,6 +64,5 @@ variables (`sgml-basic-offset' et al) locally, like so:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; js2-mode-autoloads.el ends here

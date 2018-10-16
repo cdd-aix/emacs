@@ -1,19 +1,9 @@
 ;;; ghub-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "buck" "buck.el" (0 0 0 0))
-;;; Generated autoloads from buck.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "buck" '("buck-default-host")))
-
-;;;***
-
-;;;### (autoloads nil "ghub" "ghub.el" (0 0 0 0))
+;;;### (autoloads nil "ghub" "ghub.el" (23479 56933 702559 737000))
 ;;; Generated autoloads from ghub.el
 
 (autoload 'ghub-create-token "ghub" "\
@@ -45,39 +35,10 @@ and call `auth-source-forget+'.
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ghub" '("auth-source-netrc-parse-next-interesting@save-match-data" "ghub-")))
-
 ;;;***
 
-;;;### (autoloads nil "ghub-graphql" "ghub-graphql.el" (0 0 0 0))
-;;; Generated autoloads from ghub-graphql.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ghub-graphql" '("ghub-")))
-
-;;;***
-
-;;;### (autoloads nil "glab" "glab.el" (0 0 0 0))
-;;; Generated autoloads from glab.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "glab" '("glab-default-host")))
-
-;;;***
-
-;;;### (autoloads nil "gogs" "gogs.el" (0 0 0 0))
-;;; Generated autoloads from gogs.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gogs" '("gogs-default-host")))
-
-;;;***
-
-;;;### (autoloads nil "gtea" "gtea.el" (0 0 0 0))
-;;; Generated autoloads from gtea.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "gtea" '("gtea-default-host")))
-
-;;;***
-
-;;;### (autoloads nil nil ("ghub-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("buck.el" "ghub-graphql.el" "ghub-pkg.el"
+;;;;;;  "glab.el" "gogs.el" "gtea.el") (23479 56933 766559 833000))
 
 ;;;***
 
@@ -85,6 +46,5 @@ and call `auth-source-forget+'.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; ghub-autoloads.el ends here

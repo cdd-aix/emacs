@@ -1,13 +1,10 @@
 ;;; groovy-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "groovy-electric" "groovy-electric.el" (0 0
-;;;;;;  0 0))
+;;;### (autoloads nil "groovy-electric" "groovy-electric.el" (23429
+;;;;;;  28690 696157 115000))
 ;;; Generated autoloads from groovy-electric.el
 
 (autoload 'groovy-electric-mode "groovy-electric" "\
@@ -23,11 +20,10 @@ have Font Lock enabled. ${ } is expanded when in a GString
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "groovy-electric" '("groovy-electric-")))
-
 ;;;***
 
-;;;### (autoloads nil "groovy-mode" "groovy-mode.el" (0 0 0 0))
+;;;### (autoloads nil "groovy-mode" "groovy-mode.el" (23429 28690
+;;;;;;  672157 121000))
 ;;; Generated autoloads from groovy-mode.el
 
 (add-to-list 'auto-mode-alist '("\\.g\\(?:ant\\|roovy\\|radle\\)\\'" . groovy-mode))
@@ -47,11 +43,10 @@ Key bindings:
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "groovy-mode" '("groovy-")))
-
 ;;;***
 
-;;;### (autoloads nil "inf-groovy" "inf-groovy.el" (0 0 0 0))
+;;;### (autoloads nil "inf-groovy" "inf-groovy.el" (23429 28690 704157
+;;;;;;  113000))
 ;;; Generated autoloads from inf-groovy.el
 
 (autoload 'inf-groovy-keys "inf-groovy" "\
@@ -110,11 +105,10 @@ process buffer for a list of commands.
 
 (eval-after-load 'groovy-mode (lambda nil (add-hook 'groovy-mode-hook 'inf-groovy-keys)))
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "inf-groovy" '("inf" "groovy" "switch-to-groovy" "remove-in-string")))
-
 ;;;***
 
-;;;### (autoloads nil nil ("groovy-mode-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("groovy-mode-pkg.el") (23429 28690 712157
+;;;;;;  111000))
 
 ;;;***
 
@@ -122,6 +116,5 @@ process buffer for a list of commands.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; groovy-mode-autoloads.el ends here

@@ -1,13 +1,10 @@
 ;;; writegood-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "writegood-mode" "writegood-mode.el" (0 0 0
-;;;;;;  0))
+;;;### (autoloads nil "writegood-mode" "writegood-mode.el" (23429
+;;;;;;  28593 396174 780000))
 ;;; Generated autoloads from writegood-mode.el
 
 (autoload 'writegood-reading-ease "writegood-mode" "\
@@ -27,14 +24,11 @@ Colorize issues with the writing in the buffer.
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "writegood-mode" '("writegood-")))
-
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; writegood-mode-autoloads.el ends here
