@@ -1,12 +1,10 @@
 ;;; emmet-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "emmet-mode" "emmet-mode.el" (0 0 0 0))
+;;;### (autoloads nil "emmet-mode" "emmet-mode.el" (23429 28712 16152
+;;;;;;  102000))
 ;;; Generated autoloads from emmet-mode.el
 
 (autoload 'emmet-expand-line "emmet-mode" "\
@@ -70,14 +68,11 @@ Wrap region with markup.
 
 \(fn COUNT)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "emmet-mode" '("emmet-")))
-
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; emmet-mode-autoloads.el ends here

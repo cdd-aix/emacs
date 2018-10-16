@@ -1,13 +1,10 @@
 ;;; flycheck-checkbashisms-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "flycheck-checkbashisms" "flycheck-checkbashisms.el"
-;;;;;;  (0 0 0 0))
+;;;;;;  (23429 28698 676155 283000))
 ;;; Generated autoloads from flycheck-checkbashisms.el
 
 (autoload 'flycheck-checkbashisms-setup "flycheck-checkbashisms" "\
@@ -22,6 +19,5 @@ Add `sh-checkbashisms' to the end of `flycheck-checkers'.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; flycheck-checkbashisms-autoloads.el ends here

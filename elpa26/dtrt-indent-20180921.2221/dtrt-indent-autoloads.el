@@ -1,12 +1,10 @@
 ;;; dtrt-indent-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "dtrt-indent" "dtrt-indent.el" (0 0 0 0))
+;;;### (autoloads nil "dtrt-indent" "dtrt-indent.el" (23479 56940
+;;;;;;  914570 508000))
 ;;; Generated autoloads from dtrt-indent.el
 
 (autoload 'dtrt-indent-mode "dtrt-indent" "\
@@ -50,19 +48,10 @@ use either \\[customize] or the function `dtrt-indent-mode'.")
 
 (custom-autoload 'dtrt-indent-mode "dtrt-indent" nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dtrt-indent" '("dtrt-indent-")))
-
 ;;;***
 
-;;;### (autoloads nil "dtrt-indent-diag" "dtrt-indent-diag.el" (0
-;;;;;;  0 0 0))
-;;; Generated autoloads from dtrt-indent-diag.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dtrt-indent-diag" '("dtrt-indent-" "save-buffer-state")))
-
-;;;***
-
-;;;### (autoloads nil nil ("dtrt-indent-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("dtrt-indent-diag.el" "dtrt-indent-pkg.el")
+;;;;;;  (23479 56940 934570 538000))
 
 ;;;***
 
@@ -70,6 +59,5 @@ use either \\[customize] or the function `dtrt-indent-mode'.")
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; dtrt-indent-autoloads.el ends here

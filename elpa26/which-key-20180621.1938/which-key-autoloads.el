@@ -1,12 +1,10 @@
 ;;; which-key-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "which-key" "which-key.el" (0 0 0 0))
+;;;### (autoloads nil "which-key" "which-key.el" (23429 28595 124174
+;;;;;;  548000))
 ;;; Generated autoloads from which-key.el
 
 (defvar which-key-mode nil "\
@@ -130,7 +128,7 @@ Show top-level bindings in the map of the current major mode.
 
 This function will also detect evil bindings made using
 `evil-define-key' in this map. These bindings will depend on the
-current evil state. 
+current evil state.
 
 \(fn)" t nil)
 
@@ -164,14 +162,11 @@ is selected interactively by mode in `minor-mode-map-alist'.
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "which-key" '("which-key-")))
-
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; which-key-autoloads.el ends here

@@ -1,12 +1,9 @@
 ;;; bbdb-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "bbdb" "bbdb.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb" "bbdb.el" (23479 56945 638577 496000))
 ;;; Generated autoloads from bbdb.el
 
 (defsubst bbdb-records nil "\
@@ -122,11 +119,10 @@ for example only for outgoing messages.
 
 \(fn &rest MUAS)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb" '("bbdb-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-anniv" "bbdb-anniv.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-anniv" "bbdb-anniv.el" (23479 56945 726577
+;;;;;;  625000))
 ;;; Generated autoloads from bbdb-anniv.el
 
 (autoload 'bbdb-anniv-diary-entries "bbdb-anniv" "\
@@ -138,11 +134,10 @@ To enable this feature, put the following into your .emacs:
 
 \(fn)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-anniv" '("bbdb-anniv-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-com" "bbdb-com.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-com" "bbdb-com.el" (23479 56945 698577
+;;;;;;  584000))
 ;;; Generated autoloads from bbdb-com.el
 
 (autoload 'bbdb-do-all-records "bbdb-com" "\
@@ -544,11 +539,10 @@ Interactively, use BBDB prefix \\<bbdb-mode-map>\\[bbdb-do-all-records], see `bb
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-com" '("bbdb-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-gnus" "bbdb-gnus.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-gnus" "bbdb-gnus.el" (23479 56945 598577
+;;;;;;  437000))
 ;;; Generated autoloads from bbdb-gnus.el
 
 (autoload 'bbdb-insinuate-gnus "bbdb-gnus" "\
@@ -559,7 +553,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-gnus-aux" "bbdb-gnus-aux.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-gnus-aux" "bbdb-gnus-aux.el" (23479 56945
+;;;;;;  654577 519000))
 ;;; Generated autoloads from bbdb-gnus-aux.el
 
 (autoload 'bbdb/gnus-score-invalidate-alist "bbdb-gnus-aux" "\
@@ -615,11 +610,10 @@ Note that `( is the backquote, NOT the quote '(.
 
 \(fn)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-gnus-aux" '("bbdb/gnus-s")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-ispell" "bbdb-ispell.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-ispell" "bbdb-ispell.el" (23479 56945
+;;;;;;  690577 572000))
 ;;; Generated autoloads from bbdb-ispell.el
 
 (autoload 'bbdb-ispell-export "bbdb-ispell" "\
@@ -627,11 +621,10 @@ Export BBDB records to ispell personal dictionaries.
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-ispell" '("bbdb-ispell-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-message" "bbdb-message.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-message" "bbdb-message.el" (23479 56945
+;;;;;;  718577 613000))
 ;;; Generated autoloads from bbdb-message.el
 
 (autoload 'bbdb-insinuate-message "bbdb-message" "\
@@ -648,7 +641,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-mhe" "bbdb-mhe.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-mhe" "bbdb-mhe.el" (23479 56945 602577
+;;;;;;  443000))
 ;;; Generated autoloads from bbdb-mhe.el
 
 (autoload 'bbdb/mh-header "bbdb-mhe" "\
@@ -665,7 +659,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-migrate" "bbdb-migrate.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-migrate" "bbdb-migrate.el" (23479 56945
+;;;;;;  666577 537000))
 ;;; Generated autoloads from bbdb-migrate.el
 
 (autoload 'bbdb-migrate "bbdb-migrate" "\
@@ -685,11 +680,10 @@ for outdated BBDB variables that are set via your personal `custom-file'.
 
 \(fn &optional NAME-SPACE MESSAGE)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-migrate" '("bbdb-migrate-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-mu4e" "bbdb-mu4e.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-mu4e" "bbdb-mu4e.el" (23479 56945 630577
+;;;;;;  484000))
 ;;; Generated autoloads from bbdb-mu4e.el
 
 (autoload 'bbdb-insinuate-mu4e "bbdb-mu4e" "\
@@ -700,7 +694,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-mua" "bbdb-mua.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-mua" "bbdb-mua.el" (23479 56945 786577
+;;;;;;  715000))
 ;;; Generated autoloads from bbdb-mua.el
 
 (autoload 'bbdb-message-header "bbdb-mua" "\
@@ -889,11 +884,10 @@ For use as an element of `bbdb-notice-record-hook'.
 
 \(fn RECORD)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-mua" '("bbdb-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-pgp" "bbdb-pgp.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-pgp" "bbdb-pgp.el" (23479 56945 682577
+;;;;;;  560000))
 ;;; Generated autoloads from bbdb-pgp.el
 
 (autoload 'bbdb-read-xfield-pgp-mail "bbdb-pgp" "\
@@ -923,11 +917,10 @@ to call the command `bbdb-pgp' manually, then call `mml-preview'.
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-pgp" '("bbdb-pgp-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-rmail" "bbdb-rmail.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-rmail" "bbdb-rmail.el" (23479 56945 742577
+;;;;;;  649000))
 ;;; Generated autoloads from bbdb-rmail.el
 
 (autoload 'bbdb-insinuate-rmail "bbdb-rmail" "\
@@ -938,7 +931,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-sc" "bbdb-sc.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-sc" "bbdb-sc.el" (23479 56945 754577
+;;;;;;  666000))
 ;;; Generated autoloads from bbdb-sc.el
 
 (autoload 'bbdb-sc-update-from "bbdb-sc" "\
@@ -956,18 +950,10 @@ BBDB into Supercite.
 
 \(fn)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-sc" '("bbdb-sc-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-site" "bbdb-site.el" (0 0 0 0))
-;;; Generated autoloads from bbdb-site.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-site" '("bbdb-")))
-
-;;;***
-
-;;;### (autoloads nil "bbdb-snarf" "bbdb-snarf.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-snarf" "bbdb-snarf.el" (23479 56945 778577
+;;;;;;  702000))
 ;;; Generated autoloads from bbdb-snarf.el
 
 (autoload 'bbdb-snarf-paragraph "bbdb-snarf" "\
@@ -995,11 +981,10 @@ See `bbdb-snarf-rule-alist' for details.
 
 \(fn STRING &optional RULE)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-snarf" '("bbdb-snarf-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-tex" "bbdb-tex.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-tex" "bbdb-tex.el" (23479 56945 614577
+;;;;;;  460000))
 ;;; Generated autoloads from bbdb-tex.el
 
 (autoload 'bbdb-tex "bbdb-tex" "\
@@ -1009,11 +994,10 @@ RULE should be an element of `bbdb-tex-alist'.
 
 \(fn RECORDS FILE RULE)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-tex" '("bbdb-tex-")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-vm" "bbdb-vm.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-vm" "bbdb-vm.el" (23479 56945 814577
+;;;;;;  755000))
 ;;; Generated autoloads from bbdb-vm.el
 
 (autoload 'bbdb/vm-header "bbdb-vm" "\
@@ -1029,7 +1013,8 @@ Do not call this in your init file.  Use `bbdb-initialize'.
 
 ;;;***
 
-;;;### (autoloads nil "bbdb-vm-aux" "bbdb-vm-aux.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-vm-aux" "bbdb-vm-aux.el" (23479 56945
+;;;;;;  770577 690000))
 ;;; Generated autoloads from bbdb-vm-aux.el
 
 (autoload 'vm-summary-function-B "bbdb-vm-aux" "\
@@ -1110,11 +1095,10 @@ from different senders.
 
 \(fn RECORD)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bbdb-vm-aux" '("bbdb/vm-a")))
-
 ;;;***
 
-;;;### (autoloads nil "bbdb-wl" "bbdb-wl.el" (0 0 0 0))
+;;;### (autoloads nil "bbdb-wl" "bbdb-wl.el" (23479 56945 734577
+;;;;;;  637000))
 ;;; Generated autoloads from bbdb-wl.el
 
 (autoload 'bbdb/wl-header "bbdb-wl" "\
@@ -1129,7 +1113,8 @@ Hook BBDB into Wanderlust.
 
 ;;;***
 
-;;;### (autoloads nil nil ("bbdb-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("bbdb-pkg.el" "bbdb-site.el") (23479 56945
+;;;;;;  802577 738000))
 
 ;;;***
 
@@ -1137,6 +1122,5 @@ Hook BBDB into Wanderlust.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; bbdb-autoloads.el ends here

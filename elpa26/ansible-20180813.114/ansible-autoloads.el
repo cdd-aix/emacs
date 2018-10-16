@@ -1,12 +1,10 @@
 ;;; ansible-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "ansible" "ansible.el" (0 0 0 0))
+;;;### (autoloads nil "ansible" "ansible.el" (23429 28754 256141
+;;;;;;  80000))
 ;;; Generated autoloads from ansible.el
 
 (defvar ansible::key-map (make-sparse-keymap) "\
@@ -22,11 +20,10 @@ Initialize Ansible auto-complete.
 
 \(fn)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ansible" '("ansible::")))
-
 ;;;***
 
-;;;### (autoloads nil nil ("ansible-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("ansible-pkg.el") (23429 28754 240141
+;;;;;;  85000))
 
 ;;;***
 
@@ -34,6 +31,5 @@ Initialize Ansible auto-complete.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; ansible-autoloads.el ends here

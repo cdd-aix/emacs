@@ -1,13 +1,10 @@
 ;;; use-package-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "use-package-bind-key" "use-package-bind-key.el"
-;;;;;;  (0 0 0 0))
+;;;;;;  (23429 28598 216174 123000))
 ;;; Generated autoloads from use-package-bind-key.el
 
 (autoload 'use-package-autoload-keymap "use-package-bind-key" "\
@@ -56,12 +53,10 @@ deferred until the prefix key sequence is pressed.
 
 \(fn NAME KEYWORD ARG REST STATE)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-bind-key" '("use-package-handler/:bind*")))
-
 ;;;***
 
-;;;### (autoloads nil "use-package-core" "use-package-core.el" (0
-;;;;;;  0 0 0))
+;;;### (autoloads nil "use-package-core" "use-package-core.el" (23429
+;;;;;;  28598 148174 131000))
 ;;; Generated autoloads from use-package-core.el
 
 (autoload 'use-package "use-package-core" "\
@@ -123,12 +118,10 @@ this file.  Usage:
 
 (function-put 'use-package 'lisp-indent-function '1)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-core" '("use-package-")))
-
 ;;;***
 
 ;;;### (autoloads nil "use-package-delight" "use-package-delight.el"
-;;;;;;  (0 0 0 0))
+;;;;;;  (23429 28598 132174 134000))
 ;;; Generated autoloads from use-package-delight.el
 
 (autoload 'use-package-normalize/:delight "use-package-delight" "\
@@ -141,12 +134,10 @@ Normalize arguments to delight.
 
 \(fn NAME KEYWORD ARGS REST STATE)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-delight" '("use-package-normalize-delight")))
-
 ;;;***
 
 ;;;### (autoloads nil "use-package-diminish" "use-package-diminish.el"
-;;;;;;  (0 0 0 0))
+;;;;;;  (23429 28598 192174 125000))
 ;;; Generated autoloads from use-package-diminish.el
 
 (autoload 'use-package-normalize/:diminish "use-package-diminish" "\
@@ -159,12 +150,10 @@ Normalize arguments to delight.
 
 \(fn NAME KEYWORD ARG REST STATE)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-diminish" '("use-package-normalize-diminish")))
-
 ;;;***
 
 ;;;### (autoloads nil "use-package-ensure" "use-package-ensure.el"
-;;;;;;  (0 0 0 0))
+;;;;;;  (23429 28598 156174 130000))
 ;;; Generated autoloads from use-package-ensure.el
 
 (autoload 'use-package-normalize/:ensure "use-package-ensure" "\
@@ -177,12 +166,10 @@ Normalize arguments to delight.
 
 \(fn NAME KEYWORD ENSURE REST STATE)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-ensure" '("use-package-")))
-
 ;;;***
 
-;;;### (autoloads nil "use-package-jump" "use-package-jump.el" (0
-;;;;;;  0 0 0))
+;;;### (autoloads nil "use-package-jump" "use-package-jump.el" (23429
+;;;;;;  28598 164174 130000))
 ;;; Generated autoloads from use-package-jump.el
 
 (autoload 'use-package-jump-to-package-form "use-package-jump" "\
@@ -194,12 +181,10 @@ instead.
 
 \(fn PACKAGE)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-jump" '("use-package-find-require")))
-
 ;;;***
 
-;;;### (autoloads nil "use-package-lint" "use-package-lint.el" (0
-;;;;;;  0 0 0))
+;;;### (autoloads nil "use-package-lint" "use-package-lint.el" (23429
+;;;;;;  28598 184174 127000))
 ;;; Generated autoloads from use-package-lint.el
 
 (autoload 'use-package-lint "use-package-lint" "\
@@ -209,12 +194,10 @@ with the specified `:load-path' the module cannot be found.
 
 \(fn)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "use-package-lint" '("use-package-lint-declaration")))
-
 ;;;***
 
 ;;;### (autoloads nil nil ("use-package-pkg.el" "use-package.el")
-;;;;;;  (0 0 0 0))
+;;;;;;  (23429 28598 172174 129000))
 
 ;;;***
 
@@ -222,6 +205,5 @@ with the specified `:load-path' the module cannot be found.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; use-package-autoloads.el ends here

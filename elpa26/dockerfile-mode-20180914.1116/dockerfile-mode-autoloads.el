@@ -1,13 +1,10 @@
 ;;; dockerfile-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "dockerfile-mode" "dockerfile-mode.el" (0 0
-;;;;;;  0 0))
+;;;### (autoloads nil "dockerfile-mode" "dockerfile-mode.el" (23479
+;;;;;;  56941 606571 535000))
 ;;; Generated autoloads from dockerfile-mode.el
 
 (autoload 'dockerfile-build-buffer "dockerfile-mode" "\
@@ -29,14 +26,11 @@ A major mode to edit Dockerfiles.
 
 (add-to-list 'auto-mode-alist '("Dockerfile\\(?:\\..*\\)?\\'" . dockerfile-mode))
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "dockerfile-mode" '("dockerfile-")))
-
 ;;;***
 
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; dockerfile-mode-autoloads.el ends here

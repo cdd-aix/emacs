@@ -1,12 +1,9 @@
 ;;; helm-core-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
-(add-to-list 'load-path (directory-file-name
-                         (or (file-name-directory #$) (car load-path))))
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "helm" "helm.el" (0 0 0 0))
+;;;### (autoloads nil "helm" "helm.el" (23429 28683 760158 662000))
 ;;; Generated autoloads from helm.el
 
 (autoload 'helm-define-multi-key "helm" "\
@@ -222,33 +219,10 @@ Call `helm' only with ANY-SOURCES and ANY-BUFFER as args.
 
 \(fn ANY-SOURCES ANY-BUFFER)" nil nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "helm" '("helm-" "with-helm-")))
-
 ;;;***
 
-;;;### (autoloads nil "helm-lib" "helm-lib.el" (0 0 0 0))
-;;; Generated autoloads from helm-lib.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "helm-lib" '("helm-" "with-helm-")))
-
-;;;***
-
-;;;### (autoloads nil "helm-multi-match" "helm-multi-match.el" (0
-;;;;;;  0 0 0))
-;;; Generated autoloads from helm-multi-match.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "helm-multi-match" '("helm-m")))
-
-;;;***
-
-;;;### (autoloads nil "helm-source" "helm-source.el" (0 0 0 0))
-;;; Generated autoloads from helm-source.el
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "helm-source" '("helm-")))
-
-;;;***
-
-;;;### (autoloads nil nil ("helm-core-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("helm-core-pkg.el" "helm-lib.el" "helm-multi-match.el"
+;;;;;;  "helm-source.el") (23429 28683 804158 653000))
 
 ;;;***
 
@@ -256,6 +230,5 @@ Call `helm' only with ANY-SOURCES and ANY-BUFFER as args.
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; helm-core-autoloads.el ends here
