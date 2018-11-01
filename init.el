@@ -5,7 +5,8 @@
 
 (defvar package-archives)
 (defvar package--init-file-ensured)
-(setq package-user-dir (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
+(setq package-user-dir  "~/p/emacs/elpa"
+;;      (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
       package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")
 			 ("gnu" . "http://elpa.gnu.org/packages/")
