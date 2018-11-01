@@ -211,7 +211,8 @@
 	     :delight
 	     :config
 	     (setq projectile-completion-system 'helm)
-	     (setq projectile-indexing-method 'turbo-alien))
+;;	     (setq projectile-indexing-method 'turbo-alien)
+	     )
 
 
 ;;;; output and publishing
