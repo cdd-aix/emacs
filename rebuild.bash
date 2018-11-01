@@ -7,11 +7,9 @@ ebatch() {
     emacs -Q --batch -l "$zerodir/init.el" "$@"
 }
 main() {
-    local userdir=~/p/emacs/elpa
-    rm -f init.elc
-    # ebatch -f batch-byte-compile "$zerodir/init.el"
-    # userdir=$(ebatch --eval '(princ package-user-dir)' 2>/dev/null)
-    ebatch --eval "(byte-recompile-directory \"$userdir\" 0 t)" --eval "(byte-compile-file \"$zerodir/init.el\")"
-#    ebatch -f batch-byte-compile init.el
+    local results
+    rm -f "$zerodir/init.elc"
+    results=$(time ebatch --eval "(byte-recompile-directory package-user-dir 0 t)" -f batch-byte-compile "$zerodir/init.el" 2>compile.log)
+    ls -ld "$zerodir/init.elc"
 }
 main "$@"
