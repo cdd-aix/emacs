@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "powershell" "powershell.el" (23515 14452 128964
-;;;;;;  8000))
+;;;### (autoloads nil "powershell" "powershell.el" (23590 46641 608382
+;;;;;;  354000))
 ;;; Generated autoloads from powershell.el
 
 (add-to-list 'auto-mode-alist '("\\.ps[dm]?1\\'" . powershell-mode))
