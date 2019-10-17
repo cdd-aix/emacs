@@ -504,7 +504,7 @@
 
 (use-package powershell)
 
-;; (use-package coffee-mode)
+(use-package coffee-mode)
 
 (use-package groovy-mode
 	     :mode ("\\.groovy\\'" "\\.groovy.override\\'"))
