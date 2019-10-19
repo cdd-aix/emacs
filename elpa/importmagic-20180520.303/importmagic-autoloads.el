@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "importmagic" "importmagic.el" (23515 14441
-;;;;;;  488965 308000))
+;;;### (autoloads nil "importmagic" "importmagic.el" (23979 40453
+;;;;;;  665675 9000))
 ;;; Generated autoloads from importmagic.el
 
 (autoload 'importmagic-mode "importmagic" "\
@@ -14,8 +14,8 @@ A mode that lets you autoimport unresolved Python symbols.
 
 ;;;***
 
-;;;### (autoloads nil nil ("importmagic-pkg.el") (23515 14441 488965
-;;;;;;  308000))
+;;;### (autoloads nil nil ("importmagic-pkg.el") (23979 40453 665675
+;;;;;;  9000))
 
 ;;;***
 

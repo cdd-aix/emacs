@@ -5,11 +5,13 @@
 
 (defvar package-archives)
 (defvar package--init-file-ensured)
+;; (defvar gnutls-algorithm-priority)
+;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (setq package-user-dir  (expand-file-name "~/p/emacs/elpa")
 ;;      (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
-      package-archives '(("melpa" . "http://melpa.milkbox.net/packages/")
+      package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")
-			 ("gnu" . "http://elpa.gnu.org/packages/")
+			 ("gnu" . "https://elpa.gnu.org/packages/")
 			 ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 
 ;; Many ideas mooched from https://github.com/nilcons/emacs-use-package-fast
@@ -27,7 +29,7 @@
 (mapc #'(lambda (add)
 	  (add-to-list 'load-path add))
       (eval-when-compile
-        ;; (require 'package)
+        (require 'package)
         (package-initialize)
         ;; Install use-package if not installed yet.
         (unless (package-installed-p 'use-package)
@@ -64,6 +66,8 @@
 	     :commands use-package-autoload-keymap
 	     ;; :defines use-package-handler/:bind
 	     )
+;; Handle expired gnu elpa keyring
+;; (use-package gnu-elpa-keyring-update)
 
 ;;;; keybinding overrides and setqish things
 ;; No ctrl-Z to minimize
