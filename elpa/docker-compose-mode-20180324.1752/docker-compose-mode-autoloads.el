@@ -4,7 +4,7 @@
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "docker-compose-mode" "docker-compose-mode.el"
-;;;;;;  (23515 14414 392968 403000))
+;;;;;;  (23979 40435 813675 119000))
 ;;; Generated autoloads from docker-compose-mode.el
 
 (autoload 'docker-compose-mode "docker-compose-mode" "\
