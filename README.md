@@ -2,6 +2,12 @@
 
 Chris Dukes' emacs configuration
 
+## Install
+mkdir -p ~/p
+git clone https://github.com/cdd-aix/emacs.git ~/p/emacs
+cd ~/p/emacs
+make install
+
 ## Highlights
 * Loads fast borrowing from a 2017 thought experiment
 * Encourages a reasonable python IDE

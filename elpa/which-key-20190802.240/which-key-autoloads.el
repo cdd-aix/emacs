@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "which-key" "which-key.el" (23976 41519 638869
-;;;;;;  436000))
+;;;### (autoloads nil "which-key" "which-key.el" (23979 40425 453675
+;;;;;;  182000))
 ;;; Generated autoloads from which-key.el
 
 (defvar which-key-mode nil "\
@@ -128,7 +128,7 @@ Show top-level bindings in the map of the current major mode.
 
 This function will also detect evil bindings made using
 `evil-define-key' in this map. These bindings will depend on the
-current evil state.
+current evil state. 
 
 \(fn)" t nil)
 
