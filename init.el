@@ -31,15 +31,6 @@
       (eval-when-compile
         (require 'package)
         (package-initialize)
-	;; Handle expired gnu-elpa key
-	;; https://elpa.gnu.org/packages/gnu-elpa-keyring-update.html
-	;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html
-	;; (unless (package-installed-p 'gnu-elpa-keyring-update)
-	;;   (setq package-check-signature nil)
-	;;   (package-refresh-contents)
-	;;   (package-install 'gnu-elpa-keyring-update)
-	;;   (require 'gnu-elpa-keyring-update)
-	;;   (setq package-check-signature 'allow-unsigned))
         ;; Install use-package if not installed yet.
         (unless (package-installed-p 'use-package)
 	  (package-refresh-contents)
