@@ -4,7 +4,7 @@
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "flycheck-color-mode-line" "flycheck-color-mode-line.el"
-;;;;;;  (23515 14430 584966 591000))
+;;;;;;  (23979 40447 429675 48000))
 ;;; Generated autoloads from flycheck-color-mode-line.el
 
 (autoload 'flycheck-color-mode-line-mode "flycheck-color-mode-line" "\

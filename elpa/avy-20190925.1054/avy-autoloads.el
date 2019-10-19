@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "avy" "avy.el" (23976 41551 618869 240000))
+;;;### (autoloads nil "avy" "avy.el" (23979 40422 281675 201000))
 ;;; Generated autoloads from avy.el
 
 (autoload 'avy-goto-char "avy" "\

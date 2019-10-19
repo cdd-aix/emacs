@@ -4,7 +4,7 @@
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "default-text-scale" "default-text-scale.el"
-;;;;;;  (23870 62224 841150 767000))
+;;;;;;  (23979 40422 869675 198000))
 ;;; Generated autoloads from default-text-scale.el
 
 (autoload 'default-text-scale-increase "default-text-scale" "\
