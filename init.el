@@ -442,10 +442,7 @@
 	     :config (setq ediff-window-setup-function 'ediff-setup-windows-plain))
 
 (use-package magit
-	     :commands (magit-define-popup-switch)
-	     :bind ("C-c g" . magit-status)
-	     :config (magit-define-popup-switch 'magit-push-popup ?u "Set upstream"
-		       "--set-upstream"))
+	     :bind ("C-c g" . magit-status))
 
 (use-package forge
 	     :after magit)
