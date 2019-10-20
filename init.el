@@ -385,6 +385,7 @@
 ;;;; Markup languages
 (use-package adoc-mode
 	     :mode ("\\.adoc\\'"))
+(use-package poly-markdown)
 (use-package jekyll-modes
 	     :commands (jekyll-markdown-mode jekyll-html-mode))
 (use-package markdown-mode
