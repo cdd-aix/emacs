@@ -17,7 +17,7 @@
 ;; Many ideas mooched from https://github.com/nilcons/emacs-use-package-fast
 ;; Disable package initialize after us.  We either initialize it
 ;; anyway in case of interpreted .emacs, or we don't want slow
-;; initizlization in case of byte-compiled .emacs.elc.
+;; initialization in case of byte-compiled .emacs.elc.
 (setq package-enable-at-startup nil)
 ;; Ask package.el to not add (package-initialize) to .emacs.
 (setq package--init-file-ensured t)
@@ -446,6 +446,9 @@
 	     :bind ("C-c g" . magit-status)
 	     :config (magit-define-popup-switch 'magit-push-popup ?u "Set upstream"
 		       "--set-upstream"))
+
+(use-package forge
+	     :after magit)
 
 (use-package magit-gitflow
 	     :commands (turn-on-magit-gitflow)
