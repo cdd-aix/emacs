@@ -15,8 +15,9 @@ elpa/.done elpa.log: init.el elpa/archives/gnu/archive-contents.signed
 # Ugly keyring bootstrap on ubuntu 18.04
 # https://elpa.gnu.org/packages/gnu-elpa-keyring-update.html
 	rm -vf init.elc
-	$(EMACS_BATCH ) --eval '(princ package-user-dir)' 2>&1 | tee elpa.log
+	$(EMACS_BATCH) --eval '(princ package-user-dir)' 2>&1 | tee elpa.log
 	if $(GREP_BATCH_ERROR) elpa.log; then exit 1; fi
+	$(EMACS_BATCH) --eval '(byte-recompile-directory package-user-dir 0 t)'
 	touch $@
 elpa/archives/gnu/archive-contents.signed: bootstrapkeyring.el bootstrapkeyring.sh
 	./bootstrapkeyring.sh "$@"
