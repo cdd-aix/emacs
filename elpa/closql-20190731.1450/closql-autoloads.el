@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil nil ("closql.el") (23980 52828 984878 165000))
+;;;### (autoloads nil nil ("closql.el") (23981 531 648942 150000))
 
 ;;;***
 

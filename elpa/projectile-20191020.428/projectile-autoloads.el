@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "projectile" "projectile.el" (23979 40427 189675
-;;;;;;  171000))
+;;;### (autoloads nil "projectile" "projectile.el" (23981 503 316942
+;;;;;;  13000))
 ;;; Generated autoloads from projectile.el
 
 (autoload 'projectile-version "projectile" "\
@@ -535,6 +535,11 @@ Remove PROJECT from the list of known projects.
 Remove the current project from the list of known projects.
 
 \(fn)" t nil)
+
+(autoload 'projectile-add-known-project "projectile" "\
+Add PROJECT-ROOT to the list of known projects.
+
+\(fn PROJECT-ROOT)" t nil)
 
 (autoload 'projectile-ibuffer "projectile" "\
 Open an IBuffer window showing all buffers in the current project.
