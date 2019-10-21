@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "groovy-electric" "groovy-electric.el" (23979
-;;;;;;  40462 389674 956000))
+;;;### (autoloads nil "groovy-electric" "groovy-electric.el" (23981
+;;;;;;  566 684942 319000))
 ;;; Generated autoloads from groovy-electric.el
 
 (autoload 'groovy-electric-mode "groovy-electric" "\
@@ -22,8 +22,8 @@ have Font Lock enabled. ${ } is expanded when in a GString
 
 ;;;***
 
-;;;### (autoloads nil "groovy-mode" "groovy-mode.el" (23979 40462
-;;;;;;  389674 956000))
+;;;### (autoloads nil "groovy-mode" "groovy-mode.el" (23981 566 684942
+;;;;;;  319000))
 ;;; Generated autoloads from groovy-mode.el
 
 (add-to-list 'auto-mode-alist '("\\.g\\(?:ant\\|roovy\\|radle\\)\\'" . groovy-mode))
@@ -45,8 +45,8 @@ Key bindings:
 
 ;;;***
 
-;;;### (autoloads nil "inf-groovy" "inf-groovy.el" (23979 40462 389674
-;;;;;;  956000))
+;;;### (autoloads nil "inf-groovy" "inf-groovy.el" (23981 566 684942
+;;;;;;  319000))
 ;;; Generated autoloads from inf-groovy.el
 
 (autoload 'inf-groovy-keys "inf-groovy" "\
@@ -107,8 +107,8 @@ process buffer for a list of commands.
 
 ;;;***
 
-;;;### (autoloads nil nil ("groovy-mode-pkg.el") (23979 40462 389674
-;;;;;;  956000))
+;;;### (autoloads nil nil ("groovy-mode-pkg.el") (23981 566 684942
+;;;;;;  319000))
 
 ;;;***
 

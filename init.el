@@ -8,7 +8,7 @@
 ;; (defvar gnutls-algorithm-priority)
 ;; (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (setq package-user-dir  (expand-file-name "~/p/emacs/elpa")
-;;      (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
+      ;;      (concat "~/p/emacs/elpa" (number-to-string emacs-major-version))
       package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")
 			 ("gnu" . "https://elpa.gnu.org/packages/")
@@ -36,7 +36,8 @@
 	  (package-refresh-contents)
 	  (package-install 'use-package))
         ;; (require 'use-package)
-	(defvar use-package-always-ensure)
+	;; (defvar use-package-always-ensure)
+	(require 'use-package-ensure)
 	(setq use-package-always-ensure t)
 	(let ((package-user-dir-real (file-truename package-user-dir)))
           ;; The reverse is necessary, because outside we mapc
@@ -59,15 +60,13 @@
 (use-package exec-path-from-shell)
 ;; Required projectile and flycheck
 (use-package pkg-info
-	     :functions (pkg-info)
-	     :defer t)
+             :functions (pkg-info)
+             :defer t)
 ;; so we can (require 'use-package) even in compiled emacs to e.g. read docs
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
 (use-package use-package
-	     :commands use-package-autoload-keymap
-	     ;; :defines use-package-handler/:bind
-	     )
-;; Handle expired gnu elpa keyring
-;; (use-package gnu-elpa-keyring-update)
+            :commands use-package-autoload-keymap)
 
 ;;;; keybinding overrides and setqish things
 ;; No ctrl-Z to minimize
@@ -384,10 +383,9 @@
 
 ;;;; Markup languages
 (use-package adoc-mode
-	     :mode ("\\.adoc\\'"))
-(use-package poly-markdown)
+  :mode ("\\.adoc\\'"))
 (use-package jekyll-modes
-	     :commands (jekyll-markdown-mode jekyll-html-mode))
+  :commands (jekyll-markdown-mode jekyll-html-mode))
 (use-package markdown-mode
 	     :delight
 	     (markdown-mode)
@@ -399,6 +397,7 @@
 	     (setq markdown-command "multimarkdown")
 	     (setq markdown-gfm-uppercase-checkbox t)
 	     )
+(use-package poly-markdown)
 
 ;; (use-package sgml-mode)
 

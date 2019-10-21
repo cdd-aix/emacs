@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "ghub" "ghub.el" (23980 52825 192878 147000))
+;;;### (autoloads nil "ghub" "ghub.el" (23981 527 392942 129000))
 ;;; Generated autoloads from ghub.el
 
 (autoload 'ghub-create-token "ghub" "\
@@ -38,8 +38,8 @@ and call `auth-source-forget+'.
 ;;;***
 
 ;;;### (autoloads nil nil ("buck.el" "ghub-graphql.el" "ghub-pkg.el"
-;;;;;;  "glab.el" "gogs.el" "gsexp.el" "gtea.el") (23980 52825 192878
-;;;;;;  147000))
+;;;;;;  "glab.el" "gogs.el" "gsexp.el" "gtea.el") (23981 527 392942
+;;;;;;  129000))
 
 ;;;***
 

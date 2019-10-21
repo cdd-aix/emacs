@@ -4,7 +4,7 @@
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil nil ("emacsql-sqlite-pkg.el" "emacsql-sqlite.el")
-;;;;;;  (23980 52828 772878 164000))
+;;;;;;  (23981 531 324942 148000))
 
 ;;;***
 

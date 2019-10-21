@@ -3,8 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "emacsql" "emacsql.el" (23980 52825 740878
-;;;;;;  149000))
+;;;### (autoloads nil "emacsql" "emacsql.el" (23981 527 996942 132000))
 ;;; Generated autoloads from emacsql.el
 
 (autoload 'emacsql-show-last-sql "emacsql" "\
@@ -16,7 +15,7 @@ A prefix argument causes the SQL to be printed into the current buffer.
 ;;;***
 
 ;;;### (autoloads nil nil ("emacsql-compiler.el" "emacsql-pkg.el")
-;;;;;;  (23980 52825 740878 149000))
+;;;;;;  (23981 527 996942 132000))
 
 ;;;***
 

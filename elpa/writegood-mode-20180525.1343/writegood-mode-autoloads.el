@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "writegood-mode" "writegood-mode.el" (23979
-;;;;;;  40433 681675 132000))
+;;;### (autoloads nil "writegood-mode" "writegood-mode.el" (23981
+;;;;;;  509 536942 43000))
 ;;; Generated autoloads from writegood-mode.el
 
 (autoload 'writegood-reading-ease "writegood-mode" "\
