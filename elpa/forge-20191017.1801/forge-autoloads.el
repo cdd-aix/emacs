@@ -3,15 +3,15 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "forge" "forge.el" (23980 54382 808885 675000))
+;;;### (autoloads nil "forge" "forge.el" (23981 532 148942 152000))
 ;;; Generated autoloads from forge.el
 
 (with-eval-after-load 'magit-mode (define-key magit-mode-map "'" 'forge-dispatch))
 
 ;;;***
 
-;;;### (autoloads nil "forge-commands" "forge-commands.el" (23980
-;;;;;;  54382 808885 675000))
+;;;### (autoloads nil "forge-commands" "forge-commands.el" (23981
+;;;;;;  532 148942 152000))
 ;;; Generated autoloads from forge-commands.el
  (autoload 'forge-dispatch "forge-commands" nil t)
 
@@ -178,8 +178,8 @@ heavy development.
 
 ;;;***
 
-;;;### (autoloads nil "forge-list" "forge-list.el" (23980 54382 808885
-;;;;;;  675000))
+;;;### (autoloads nil "forge-list" "forge-list.el" (23981 532 148942
+;;;;;;  152000))
 ;;; Generated autoloads from forge-list.el
 
 (autoload 'forge-list-issues "forge-list" "\
@@ -216,7 +216,7 @@ Here \"known\" means that an entry exists in the local database.
 ;;;;;;  "forge-gitea.el" "forge-github.el" "forge-gitlab.el" "forge-gogs.el"
 ;;;;;;  "forge-issue.el" "forge-notify.el" "forge-pkg.el" "forge-post.el"
 ;;;;;;  "forge-pullreq.el" "forge-repo.el" "forge-revnote.el" "forge-semi.el"
-;;;;;;  "forge-topic.el") (23980 54382 808885 675000))
+;;;;;;  "forge-topic.el") (23981 532 152942 152000))
 
 ;;;***
 

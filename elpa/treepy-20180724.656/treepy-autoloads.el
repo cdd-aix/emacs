@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil nil ("treepy.el") (23980 52824 656878 144000))
+;;;### (autoloads nil nil ("treepy.el") (23981 527 80942 128000))
 
 ;;;***
 
