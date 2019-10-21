@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "elisp-format" "elisp-format.el" (23979 40434
-;;;;;;  253675 128000))
+;;;### (autoloads nil "elisp-format" "elisp-format.el" (23981 510
+;;;;;;  120942 46000))
 ;;; Generated autoloads from elisp-format.el
 
 (autoload 'elisp-format-region "elisp-format" "\

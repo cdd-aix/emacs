@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "artbollocks-mode" "artbollocks-mode.el" (23979
-;;;;;;  40433 957675 130000))
+;;;### (autoloads nil "artbollocks-mode" "artbollocks-mode.el" (23981
+;;;;;;  509 808942 44000))
 ;;; Generated autoloads from artbollocks-mode.el
 
 (autoload 'artbollocks-mode "artbollocks-mode" "\

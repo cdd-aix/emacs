@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "ansible-doc" "ansible-doc.el" (23979 40461
-;;;;;;  125674 964000))
+;;;### (autoloads nil "ansible-doc" "ansible-doc.el" (23981 565 512942
+;;;;;;  314000))
 ;;; Generated autoloads from ansible-doc.el
 
 (autoload 'ansible-doc "ansible-doc" "\
