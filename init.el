@@ -75,7 +75,7 @@
 (use-package delight :defer t)
 (use-package diminish :defer t)
 
-;;;; movement, selection, visualization
+;;;; Navigation and appearance aids
 
 (use-package ace-window
   :bind
@@ -84,8 +84,36 @@
   (aw-scope 'frame) ;; https://github.com/abo-abo/ace-window#aw-scope
   (aw-dispatch-always t)) ;; https://github.com/abo-abo/ace-window#aw-dispatch-always
 
+(use-package default-text-scale
+  :bind (("C-M-=" . default-text-scale-increase)
+	 ("C-M--" . default-text-scale-decrease)))
 
 (use-package highlight-indentation
   :delight)
+
+(use-package color-theme-modern
+  :init
+  (require 'clarity-theme)
+  (load-theme 'clarity t t)
+  (enable-theme 'clarity))
+
+(use-package smart-mode-line
+  :commands (sml/setup sml/appy-theme)
+  :init (sml/setup))
+
+(use-package whitespace)
+;;;; Omitted as haven't used much
+;; neotree
+;; multiple-cursors
+;; bbdb
+;; calendar
+;; org
+;; org-bullets
+;; writegood-mode
+;; artbollocks-mode
+;; apache-mode
+;; emmet-mode
+;; smart-mode-line-powerline-theme
+
 (provide 'init)
 ;;; init.el ends here
