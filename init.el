@@ -81,15 +81,8 @@
   :bind
   (("C-z o" . ace-window))
   :custom
-  (aw-scope 'frame) ;; https://github.com/abo-abo/ace-window#aw-scope
-  (aw-dispatch-always t)) ;; https://github.com/abo-abo/ace-window#aw-dispatch-always
-
-(use-package default-text-scale
-  :bind (("C-M-=" . default-text-scale-increase)
-	 ("C-M--" . default-text-scale-decrease)))
-
-(use-package highlight-indentation
-  :delight)
+  (aw-scope 'frame "https://github.com/abo-abo/ace-window#aw-scope")
+  (aw-dispatch-always t "https://github.com/abo-abo/ace-window#aw-dispatch-always"))
 
 (use-package color-theme-modern
   :init
@@ -97,11 +90,44 @@
   (load-theme 'clarity t t)
   (enable-theme 'clarity))
 
+(use-package default-text-scale
+  :bind (("C-M-=" . default-text-scale-increase)
+	 ("C-M--" . default-text-scale-decrease)))
+
+(use-package expand-region
+  :bind (("C-z e" . er/expand-region)
+	 ("C-z C-e" . er/expand-region)))
+
+(use-package highlight-indentation
+  :delight)
+
 (use-package smart-mode-line
   :commands (sml/setup sml/appy-theme)
   :init (sml/setup))
 
 (use-package whitespace)
+
+;;;; Auto-sanity
+(use-package dtrt-indent)
+
+(use-package midnight
+  :functions (midnight-delay-set)
+  :init (midnight-delay-set 'midnight-delay "4:30am"))
+
+(use-package smex
+  :bind (("M-x" . smex)
+	 ("M-X" . smex-major-mode-commands)
+	 ("C-M-X" . execute-extended-command)))
+
+(use-package which-key
+  :commands (which-key-mode)
+  :init (which-key-mode))
+
+(use-package ws-butler
+  :commands (ws-butler-global-mode)
+  :custom (ws-butler-keep-whitespace-before-point nil)
+  :delight
+  :init (ws-butler-global-mode))
 ;;;; Omitted as haven't used much
 ;; neotree
 ;; multiple-cursors
