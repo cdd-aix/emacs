@@ -11,4 +11,9 @@ install: init.elc
 realclean:
 	rm -rvf ~/.emacs.d/elpa init.elc
 
-.PHONY: init-compile install
+test: init.elc
+	emacs -Q -l init.elc init.el
+
+cleantest: realclean test
+
+.PHONY: init-compile install test
