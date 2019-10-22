@@ -101,6 +101,10 @@
 (use-package highlight-indentation
   :delight)
 
+(use-package move-text
+  :commands (move-text-default-bindings) ;; Enable M-up M-down to move line or region
+  :init (move-text-default-bindings))
+
 (use-package smart-mode-line
   :commands (sml/setup sml/appy-theme)
   :init (sml/setup))
@@ -111,8 +115,10 @@
 (use-package dtrt-indent)
 
 (use-package midnight
-  :functions (midnight-delay-set)
-  :init (midnight-delay-set 'midnight-delay "4:30am"))
+  :commands (midnight-delay-set)
+  :config (midnight-delay-set 'midnight-delay "4:30am")
+  :defer 30
+  )
 
 (use-package smex
   :bind (("M-x" . smex)
@@ -128,6 +134,18 @@
   :custom (ws-butler-keep-whitespace-before-point nil)
   :delight
   :init (ws-butler-global-mode))
+
+;;;; Project management
+(use-package helm-projectile
+  :bind (("s-p" . projectile-command-map)
+	 ("C-c p" . projectile-command-map))
+  :commands (helm-projectile-on)
+  :config (require 'uniquify)
+  :custom ((uniquify-buffer-name-style 'reverse))
+  :delight
+  :init
+  (helm-projectile-on))
+
 ;;;; Omitted as haven't used much
 ;; neotree
 ;; multiple-cursors
@@ -140,6 +158,8 @@
 ;; apache-mode
 ;; emmet-mode
 ;; smart-mode-line-powerline-theme
+;; with-editor (Expect to use with magit)
+;; helm-projectile (Maintainer doesn't use helm so try projectile only)
 
 (provide 'init)
 ;;; init.el ends here
