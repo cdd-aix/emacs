@@ -10,17 +10,20 @@
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			   ("gnu" . "https://elpa.gnu.org/packages/")))
   (unless (package-installed-p 'use-package)
+    (message "Installing use-package")
     (package-refresh-contents)
     (package-install 'use-package))
   (require 'use-package)
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
   (unless (package-installed-p 'gnu-elpa-keyring-update)
+    (message "Installing gnu-elpa-keyring-update")
     (setq package-check-signature nil)
     (package-refresh-contents)
-    (package-install 'gnu-elpa-keyring-update))
-  (setq package-check-signature default-package-check-signature)
-  (package-refresh-contents))
+    (package-install 'gnu-elpa-keyring-update)
+    (setq package-check-signature default-package-check-signature)
+    (package-refresh-contents))
+  )
 
 ;; ;;;; niceities for use-package
 ;; (use-package diminish)
@@ -98,6 +101,9 @@
   :bind (("C-z e" . er/expand-region)
 	 ("C-z C-e" . er/expand-region)))
 
+(use-package flycheck-color-mode-line
+  :hook (flycheck-mode . flycheck-color-mode-line-mode))
+
 (use-package highlight-indentation
   :delight)
 
@@ -146,6 +152,40 @@
   :init
   (helm-projectile-on))
 
+;;;; General development
+(use-package compile
+  :bind (("C-z c" . compile)
+	 ("C-z C-c" . compile))) ;; https://www.emacswiki.org/emacs/CompileCommand save, read, scroll, default command
+
+(use-package flycheck
+  :commands (global-flycheck-mode)
+  :config (append flycheck-disabled-checkers '(javascript-jshint))
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  :init (global-flycheck-mode))
+(use-package flycheck-checkbashisms
+  :hook (flycheck-mode . flycheck-checkbashisms-setup))
+(use-package flycheck-yamllint
+  :hook (flycheck-mode . flycheck-yamllint-setup))
+
+;;;; Language Specific
+
+(use-package docker-compose-mode
+  :delight
+  :mode (".*docker-compose.*\\.yml\\'")  )
+(use-package dockerfile-mode
+  :delight
+  :mode ("Dockerfile.*\\'"))
+(use-package elisp-format)
+(use-package json-mode
+  :delight
+  :mode ("\\.json\\'"))
+(use-package poly-markdown)
+(use-package rjsx-mode
+  :delight
+  :mode ("\\.js\\'" "\\.jsx\\'"))
+(use-package web-mode
+  :mode ("\\.html\\'" "\\.htm\\'"))
+
 ;;;; Omitted as haven't used much
 ;; neotree
 ;; multiple-cursors
@@ -156,10 +196,13 @@
 ;; writegood-mode
 ;; artbollocks-mode
 ;; apache-mode
-;; emmet-mode
+;; emmet-mode (Consider when writing html)
 ;; smart-mode-line-powerline-theme
 ;; with-editor (Expect to use with magit)
-;; helm-projectile (Maintainer doesn't use helm so try projectile only)
+;; projectile (Grabbed with helm-projectile)
+;; ps-print
+;; jekyll-modes (Broken in 2019 by polymode changes and no upstream maintainer)
+;; yaml-mode (poly-markdown wires it for us)
 
 (provide 'init)
 ;;; init.el ends here
