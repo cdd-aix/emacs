@@ -7,19 +7,18 @@
 (eval-when-compile
   (package-initialize)
   (defvar default-package-check-signature package-check-signature)
-  (setq package-check-signature nil
-	package-archives '(("melpa" . "https://melpa.org/packages/")
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			   ("gnu" . "https://elpa.gnu.org/packages/")))
   (unless (package-installed-p 'use-package)
     (package-refresh-contents)
     (package-install 'use-package))
   (require 'use-package)
   (unless (package-installed-p 'gnu-elpa-keyring-update)
+    (setq package-check-signature nil)
+    (package-refresh-contents)
     (package-install 'gnu-elpa-keyring-update))
   (setq package-check-signature default-package-check-signature)
-  (package-initialize)
-  (package-refresh-contents)
-  )
+  (package-refresh-contents))
 (use-package gnu-elpa-keyring-update)
 (provide 'init)
 ;;; init.el ends here
