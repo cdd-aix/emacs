@@ -21,6 +21,10 @@
     (package-install 'gnu-elpa-keyring-update))
   (setq package-check-signature default-package-check-signature)
   (package-refresh-contents))
+
+;; ;;;; niceities for use-package
+;; (use-package diminish)
+;; (use-package delight)
 ;; And this is the bytecompile magic from nilcons
 ;; Add the macro generated list of package.el loadpaths to load-path.
 (mapc #'(lambda (add) (add-to-list 'load-path add))
@@ -35,7 +39,53 @@
                                            (list path)
                                          nil))
                                    load-path))))))
-(use-package gnu-elpa-keyring-update)
-(use-package diminish)
+
+;;;; keyboard and customization
+;; disable annoying ctrl-z to minimize
+(use-package bind-key
+  :bind ("C-z" . nil))
+;; Keep customizations out of ~/.emacs.d/init.el
+(setq custom-file (concat user-emacs-directory "custom.el"))
+;; It's okay if it's missing
+(load custom-file t t)
+
+;; per buffer overidable defaults
+(set-default 'truncate-lines nil)
+(set-default 'show-trailing-whitespace t)
+(set-face-background 'trailing-whitespace "pink")
+
+;; Global preferences
+(setq inhibit-startup-screen t)
+(setq initial-scratch-message ";; ready\n\n")
+(setq unibyte-display-via-language-environment t)
+(setq column-number-mode t)
+(setq echo-keystrokes 0.1)
+(setq kill-whole-line t)
+(setq make-backup-files nil)
+(setq auto-save-timeout 10)
+(setq backup-directory-alist `(("." . ,(concat user-emacs-directory "backups"))))
+(setq mouse-yank-at-point t)
+(setq switch-to-buffer-preserve-window-point t)
+(setq select-enable-clipboard t)
+(setq select-enable-primary t)
+(electric-pair-mode 1)
+(subword-mode +1)
+
+;;;; mode minimization
+(use-package delight :defer t)
+(use-package diminish :defer t)
+
+;;;; movement, selection, visualization
+
+(use-package ace-window
+  :bind
+  (("C-z o" . ace-window))
+  :custom
+  (aw-scope 'frame) ;; https://github.com/abo-abo/ace-window#aw-scope
+  (aw-dispatch-always t)) ;; https://github.com/abo-abo/ace-window#aw-dispatch-always
+
+
+(use-package highlight-indentation
+  :delight)
 (provide 'init)
 ;;; init.el ends here
