@@ -8,8 +8,8 @@ git clone https://github.com/cdd-aix/emacs.git ~/p/emacs
 cd ~/p/emacs
 make install
 
+## Recompile init.el
+make init-compile
+
 ## Highlights
-* Loads fast borrowing from a 2017 thought experiment
-* Encourages a reasonable python IDE
-* Encourages the gitflow methodology
-* Attempts to encourage a GTD approach to tasks.
+* Attempts to use 2019 use-package and compiled emacs init best practices
