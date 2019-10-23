@@ -104,9 +104,6 @@
 (use-package flycheck-color-mode-line
   :hook (flycheck-mode . flycheck-color-mode-line-mode))
 
-(use-package highlight-indentation
-  :delight)
-
 (use-package move-text
   :commands (move-text-default-bindings) ;; Enable M-up M-down to move line or region
   :init (move-text-default-bindings))
@@ -157,32 +154,78 @@
   :bind (("C-z c" . compile)
 	 ("C-z C-c" . compile))) ;; https://www.emacswiki.org/emacs/CompileCommand save, read, scroll, default command
 
+(use-package diff-hl
+  :after (vc-git)
+  :commands (global-diff-hl-mode)
+  :delight
+  :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh))
+  :init (global-diff-hl-mode)
+  (require 'diff-hl-margin)
+  (diff-hl-margin-mode)
+  (require 'diff-hl-dired)
+  (diff-hl-dired-mode)
+  )
+
+(use-package forge
+  :after (magit))
+
+(use-package magit
+  :delight (magit magit-mode auto-revert-mode)
+  :bind ("C-c g" . magit-status)
+  :custom
+  (vc-follow-symlinks t))
+
+(use-package magit-gitflow
+  :hook (magit-mode . turn-on-magit-gitflow))
+
+
+
 (use-package flycheck
-  :commands (global-flycheck-mode)
+  :commands (global-flycheck-mode flycheck-add-mode)
   :config (append flycheck-disabled-checkers '(javascript-jshint))
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   :init (global-flycheck-mode))
+
 (use-package flycheck-checkbashisms
   :hook (flycheck-mode . flycheck-checkbashisms-setup))
+
 (use-package flycheck-yamllint
   :hook (flycheck-mode . flycheck-yamllint-setup))
 
 ;;;; Language Specific
 
+(use-package coffee-mode)
+
 (use-package docker-compose-mode
   :delight
   :mode (".*docker-compose.*\\.yml\\'")  )
+
 (use-package dockerfile-mode
   :delight
   :mode ("Dockerfile.*\\'"))
+
 (use-package elisp-format)
+
+(use-package elpy
+  :delight
+  :hook (python-mode . elpy-enable))
+
+(use-package groovy-mode)
+
 (use-package json-mode
-  :delight
-  :mode ("\\.json\\'"))
+  :delight)
+
+(use-package nginx-mode
+  :mode (("/nginx/.*\\.conf\\'" . nginx-mode)
+	 ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode)))
+
 (use-package poly-markdown)
+
+(use-package powershell)
+
 (use-package rjsx-mode
-  :delight
-  :mode ("\\.js\\'" "\\.jsx\\'"))
+  :delight)
+
 (use-package web-mode
   :mode ("\\.html\\'" "\\.htm\\'"))
 
@@ -198,11 +241,16 @@
 ;; apache-mode
 ;; emmet-mode (Consider when writing html)
 ;; smart-mode-line-powerline-theme
-;; with-editor (Expect to use with magit)
+;; with-editor (magit provides... will need config in magit)
 ;; projectile (Grabbed with helm-projectile)
 ;; ps-print
 ;; jekyll-modes (Broken in 2019 by polymode changes and no upstream maintainer)
 ;; yaml-mode (poly-markdown wires it for us)
+;; highlight-indentation (Provided by elpy)
+;; python (Provided by elpy)
+;; ediff (System package I think... not sure if we need)
+;; importmagic will take some work... get elpy C-c C-r i working
+
 
 (provide 'init)
 ;;; init.el ends here
