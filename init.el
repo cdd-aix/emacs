@@ -25,9 +25,6 @@
     (package-refresh-contents))
   )
 
-;; ;;;; niceities for use-package
-;; (use-package diminish)
-;; (use-package delight)
 ;; And this is the bytecompile magic from nilcons
 ;; Add the macro generated list of package.el loadpaths to load-path.
 (mapc #'(lambda (add) (add-to-list 'load-path add))
