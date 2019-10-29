@@ -114,6 +114,8 @@
 ;;;; Auto-sanity
 (use-package dtrt-indent)
 
+(use-package epm)
+
 (use-package midnight
   :commands (midnight-delay-set)
   :config (midnight-delay-set 'midnight-delay "4:30am")
