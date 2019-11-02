@@ -44,6 +44,8 @@
 ;; disable annoying ctrl-z to minimize
 (use-package bind-key
   :bind ("C-z" . nil))
+;; Kludge to enable magit help
+(use-package use-package)
 ;; Keep customizations out of ~/.emacs.d/init.el
 (setq custom-file (concat user-emacs-directory "custom.el"))
 ;; It's okay if it's missing
