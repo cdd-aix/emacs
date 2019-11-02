@@ -114,6 +114,8 @@
 ;;;; Auto-sanity
 (use-package dtrt-indent)
 
+(use-package epm)
+
 (use-package midnight
   :commands (midnight-delay-set)
   :config (midnight-delay-set 'midnight-delay "4:30am")
@@ -153,15 +155,14 @@
 
 (use-package diff-hl
   :after (vc-git)
-  :commands (global-diff-hl-mode)
-  :delight
-  :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh))
-  :init (global-diff-hl-mode)
+  :commands (global-diff-hl-mode diff-hl-margin-mode)
+  :config
   (require 'diff-hl-margin)
   (diff-hl-margin-mode)
-  (require 'diff-hl-dired)
-  (diff-hl-dired-mode)
-  )
+  :delight
+  :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh)
+	 (dired-mode-hook . diff-hl-dired-mode))
+  :init (global-diff-hl-mode))
 
 (use-package forge
   :after (magit))
@@ -174,8 +175,6 @@
 
 (use-package magit-gitflow
   :hook (magit-mode . turn-on-magit-gitflow))
-
-
 
 (use-package flycheck
   :commands (global-flycheck-mode flycheck-add-mode)
