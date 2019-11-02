@@ -44,6 +44,8 @@
 ;; disable annoying ctrl-z to minimize
 (use-package bind-key
   :bind ("C-z" . nil))
+;; Kludge to enable magit help
+(use-package use-package)
 ;; Keep customizations out of ~/.emacs.d/init.el
 (setq custom-file (concat user-emacs-directory "custom.el"))
 ;; It's okay if it's missing
@@ -114,6 +116,8 @@
 ;;;; Auto-sanity
 (use-package dtrt-indent)
 
+(use-package epm)
+
 (use-package midnight
   :commands (midnight-delay-set)
   :config (midnight-delay-set 'midnight-delay "4:30am")
@@ -139,12 +143,14 @@
 (use-package helm-projectile
   :bind (("s-p" . projectile-command-map)
 	 ("C-c p" . projectile-command-map))
-  :commands (helm-projectile-on)
-  :config (require 'uniquify)
+  :commands (helm-projectile-on projectile-mode)
+  :config
+  (require 'uniquify)
   :custom ((uniquify-buffer-name-style 'reverse))
   :delight
   :init
-  (helm-projectile-on))
+  (helm-projectile-on)
+  (projectile-mode +1))
 
 ;;;; General development
 (use-package compile
@@ -153,15 +159,14 @@
 
 (use-package diff-hl
   :after (vc-git)
-  :commands (global-diff-hl-mode)
-  :delight
-  :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh))
-  :init (global-diff-hl-mode)
+  :commands (global-diff-hl-mode diff-hl-margin-mode)
+  :config
   (require 'diff-hl-margin)
   (diff-hl-margin-mode)
-  (require 'diff-hl-dired)
-  (diff-hl-dired-mode)
-  )
+  :delight
+  :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh)
+	 (dired-mode-hook . diff-hl-dired-mode))
+  :init (global-diff-hl-mode))
 
 (use-package forge
   :after (magit))
@@ -174,8 +179,6 @@
 
 (use-package magit-gitflow
   :hook (magit-mode . turn-on-magit-gitflow))
-
-
 
 (use-package flycheck
   :commands (global-flycheck-mode flycheck-add-mode)
