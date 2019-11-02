@@ -141,12 +141,14 @@
 (use-package helm-projectile
   :bind (("s-p" . projectile-command-map)
 	 ("C-c p" . projectile-command-map))
-  :commands (helm-projectile-on)
-  :config (require 'uniquify)
+  :commands (helm-projectile-on projectile-mode)
+  :config
+  (require 'uniquify)
   :custom ((uniquify-buffer-name-style 'reverse))
   :delight
   :init
-  (helm-projectile-on))
+  (helm-projectile-on)
+  (projectile-mode +1))
 
 ;;;; General development
 (use-package compile
