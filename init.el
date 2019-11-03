@@ -147,7 +147,7 @@
   :config
   (require 'uniquify)
   :custom ((uniquify-buffer-name-style 'reverse))
-  :delight
+  :delight (projectile)
   :init
   (helm-projectile-on)
   (projectile-mode +1))
