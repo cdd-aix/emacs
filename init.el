@@ -196,6 +196,10 @@
 
 (use-package coffee-mode)
 
+(use-package company-jedi
+  :delight
+  :hook (python-mode . (lambda () (add-to-list 'company-backends 'company-jedi))))
+
 (use-package docker-compose-mode
   :delight
   :mode (".*docker-compose.*\\.yml\\'")  )
@@ -209,6 +213,11 @@
 (use-package elpy
   :delight
   :hook (python-mode . elpy-enable))
+
+(use-package importmagic
+  :bind (("C-c i l" . importmagic-fix-imports))
+  :config (setq importmagic-python-interpreter "python")
+  :hook (python-mode . importmagic-mode))
 
 (use-package groovy-mode)
 
