@@ -74,12 +74,16 @@
 (subword-mode +1)
 
 ;;;; mode minimization
-(use-package delight :defer t)
+(use-package delight
+  :defer t
+  :delight
+  (subword-mode))
 (use-package diminish :defer t)
 
 ;;;; Navigation and appearance aids
 
 (use-package ace-window
+  :delight
   :bind
   (("C-z o" . ace-window))
   :custom
@@ -109,6 +113,7 @@
 
 (use-package smart-mode-line
   :commands (sml/setup sml/appy-theme)
+  :custom (sml/shorten-modes t)
   :init (sml/setup))
 
 (use-package whitespace)
@@ -131,6 +136,7 @@
 
 (use-package which-key
   :commands (which-key-mode)
+  :delight
   :init (which-key-mode))
 
 (use-package ws-butler
@@ -147,11 +153,11 @@
   :config
   (require 'uniquify)
   :custom ((uniquify-buffer-name-style 'reverse))
-  :delight (projectile)
+  :delight (projectile-mode )
   :init
   (helm-projectile-on)
-  (projectile-mode +1))
-
+  (projectile-mode +1)
+)
 ;;;; General development
 (use-package compile
   :bind (("C-z c" . compile)
@@ -163,7 +169,6 @@
   :config
   (require 'diff-hl-margin)
   (diff-hl-margin-mode)
-  :delight
   :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh)
 	 (dired-mode-hook . diff-hl-dired-mode))
   :init (global-diff-hl-mode))
@@ -172,12 +177,16 @@
   :after (magit))
 
 (use-package magit
-  :delight (magit magit-mode auto-revert-mode)
+  :delight
+  (auto-revert-mode)
+  (magit-mode)
+  (magit-wip-mode)
   :bind ("C-c g" . magit-status)
   :custom
   (vc-follow-symlinks t))
 
 (use-package magit-gitflow
+  :delight
   :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package flycheck
