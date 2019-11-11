@@ -207,6 +207,11 @@
 
 (use-package yasnippet-snippets)
 (use-package yasnippet
+  :bind (:map yas-minor-mode-map
+	      ("C-'" . yas-expand))
+  :config
+  (define-key yas-minor-mode-map [(tab)] nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
   :init
   (yas-global-mode 1))
 
