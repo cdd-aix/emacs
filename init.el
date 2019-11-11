@@ -75,11 +75,10 @@
 
 ;;;; mode minimization
 (use-package delight
-  :defer t
   :delight
+  (hide-ifdef-mode)
   (subword-mode)
-  (highlight-indentation-mode)
-  (hide-ifdef-mode))
+  )
 (use-package diminish :defer t)
 
 ;;;; Navigation and appearance aids
@@ -155,11 +154,14 @@
   :config
   (require 'uniquify)
   :custom ((uniquify-buffer-name-style 'reverse))
-  :delight (projectile-mode )
+  :delight
   :init
   (helm-projectile-on)
   (projectile-mode +1)
-)
+  )
+;; Kludge cannot handle in (use-package delight)
+(use-package projectile
+  :delight)
 ;;;; General development
 (use-package compile
   :bind (("C-z c" . compile)
@@ -223,8 +225,10 @@
 
 (use-package elpy
   :delight
-  (elpy-mode)
   :hook (python-mode . elpy-enable))
+;; kludge to delight highlight-indentation
+(use-package highlight-indentation
+  :delight)
 
 (use-package importmagic
   :delight
