@@ -205,6 +205,11 @@
 (use-package flycheck-yamllint
   :hook (flycheck-mode . flycheck-yamllint-setup))
 
+(use-package yasnippet-snippets)
+(use-package yasnippet
+  :init
+  (yas-global-mode 1))
+
 ;;;; Language Specific
 
 (use-package coffee-mode)
