@@ -15,7 +15,8 @@ realclean:
 	rm -rvf $(HOME)/.emacs.d/elpa init.elc
 
 test: init.elc
-	emacs -Q -l init.elc init.el
+	@echo Check init.el, foo.py, foo.yaml, and foo.md buffers
+	emacs -Q -l init.elc init.el foo.py foo.yaml foo.md
 
 cleantest: realclean test
 
