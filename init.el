@@ -77,7 +77,9 @@
 (use-package delight
   :defer t
   :delight
-  (subword-mode))
+  (subword-mode)
+  (highlight-indentation-mode)
+  (hide-ifdef-mode))
 (use-package diminish :defer t)
 
 ;;;; Navigation and appearance aids
@@ -221,9 +223,11 @@
 
 (use-package elpy
   :delight
+  (elpy-mode)
   :hook (python-mode . elpy-enable))
 
 (use-package importmagic
+  :delight
   :bind (("C-c i l" . importmagic-fix-imports))
   :config (setq importmagic-python-interpreter "python")
   :hook (python-mode . importmagic-mode))
