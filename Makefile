@@ -1,4 +1,11 @@
 HOME ?= ~
+DESTDIR ?= $(PWD)/build
+package: HOME = $(DESTDIR)
+package: init.el
+	rm -rvf $(DESTDIR)
+	make -B init.elc install
+	cd $(HOME); zip -9vr ../emacsd.zip .emacs.d
+
 init.elc: init.el
 	rm -vf "$@"
 	emacs -Q -l $< --batch -f batch-byte-compile $<
