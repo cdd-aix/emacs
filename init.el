@@ -212,6 +212,8 @@
   :config
   (define-key yas-minor-mode-map [(tab)] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
+  :functions yas-global-mode
+  :delight
   :init
   (yas-global-mode 1))
 
@@ -229,7 +231,10 @@
 
 (use-package dockerfile-mode
   :delight
-  :mode ("Dockerfile.*\\'"))
+  :mode ("Dockerfile.*\\'")
+  :hook ((dockerfile-mode . subword-mode)
+	 (dockerfile-mode . (lambda()
+			      (setq indent-tabs-mode nil tab-width 4)))))
 
 (use-package elisp-format)
 
