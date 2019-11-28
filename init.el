@@ -213,7 +213,7 @@
   (define-key yas-minor-mode-map [(tab)] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   :functions yas-global-mode
-  :delight
+  :delight yas-minor-mode
   :init
   (yas-global-mode 1))
 
