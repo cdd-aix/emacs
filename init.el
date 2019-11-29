@@ -205,6 +205,10 @@
   ;; :delight
   :hook (magit-mode . turn-on-magit-gitflow))
 
+(use-package magit-lfs)
+
+(use-package magit-todos)
+
 (use-package flycheck
   :commands (global-flycheck-mode flycheck-add-mode flycheck-mode)
   :config (append flycheck-disabled-checkers '(javascript-jshint))
