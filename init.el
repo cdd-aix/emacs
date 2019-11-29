@@ -123,6 +123,7 @@
   :commands (minions-mode)
   :init
   (setq minions-mode-line-lighter "[+]")
+  (setq-default minions-direct '(flycheck-mode))
   (minions-mode))
 
 (use-package whitespace)
