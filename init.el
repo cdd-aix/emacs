@@ -75,21 +75,21 @@
 
 ;;;; mode minimization
 (use-package delight
-  :delight
-  (hide-ifdef-mode)
-  (subword-mode)
+  ;; :delight
+  ;; (hide-ifdef-mode)
+  ;; (subword-mode)
   )
 (use-package diminish :defer t)
 
 ;;;; Navigation and appearance aids
 
 (use-package ace-window
-  :delight
+  ;; :delight
   :bind
   (("C-z o" . ace-window))
-  :custom
-  (aw-scope 'frame "https://github.com/abo-abo/ace-window#aw-scope")
-  (aw-dispatch-always t "https://github.com/abo-abo/ace-window#aw-dispatch-always"))
+  :config
+  (setq-default aw-scope 'frame)
+  (setq-default aw-dispatch-always t))
 
 (use-package color-theme-modern
   :init
@@ -114,8 +114,16 @@
 
 (use-package smart-mode-line
   :commands (sml/setup sml/appy-theme)
-  :custom (sml/shorten-modes t)
+  :config
+  (setq-default sml/shorten-modes t)
   :init (sml/setup))
+;; From https://github.com/DiegoVicen/my-emacs
+
+(use-package minions
+  :commands (minions-mode)
+  :init
+  (setq minions-mode-line-lighter "[+]")
+  (minions-mode))
 
 (use-package whitespace)
 
@@ -137,13 +145,14 @@
 
 (use-package which-key
   :commands (which-key-mode)
-  :delight
+  ;; :delight
   :init (which-key-mode))
 
 (use-package ws-butler
   :commands (ws-butler-global-mode)
-  :custom (ws-butler-keep-whitespace-before-point nil)
-  :delight
+  :config
+  (setq-default ws-butler-keep-whitespace-before-point nil)
+  ;; :delight
   :init (ws-butler-global-mode))
 
 ;;;; Project management
@@ -153,15 +162,17 @@
   :commands (helm-projectile-on projectile-mode)
   :config
   (require 'uniquify)
-  :custom ((uniquify-buffer-name-style 'reverse))
-  :delight
+  :config
+  (setq-default uniquify-buffer-name-style 'reverse)
+  ;; :delight
   :init
   (helm-projectile-on)
   (projectile-mode +1)
   )
 ;; Kludge cannot handle in (use-package delight)
 (use-package projectile
-  :delight)
+  ;; :delight
+  )
 ;;;; General development
 (use-package compile
   :bind (("C-z c" . compile)
@@ -181,20 +192,20 @@
   :after (magit))
 
 (use-package magit
-  :delight
-  (auto-revert-mode)
-  (magit-mode)
-  (magit-wip-mode)
+  ;; :delight
+  ;; (auto-revert-mode)
+  ;; (magit-mode)
+  ;; (magit-wip-mode)
   :bind ("C-c g" . magit-status)
-  :custom
-  (vc-follow-symlinks t))
+  :config
+  (setq-default vc-follow-symlinks t))
 
 (use-package magit-gitflow
-  :delight
+  ;; :delight
   :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package flycheck
-  :commands (global-flycheck-mode flycheck-add-mode)
+  :commands (global-flycheck-mode flycheck-add-mode flycheck-mode)
   :config (append flycheck-disabled-checkers '(javascript-jshint))
   (flycheck-add-mode 'javascript-eslint 'web-mode)
   :init (global-flycheck-mode))
@@ -213,7 +224,7 @@
   (define-key yas-minor-mode-map [(tab)] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   :functions yas-global-mode
-  :delight yas-minor-mode
+  ;; :delight yas-minor-mode
   :init
   (yas-global-mode 1))
 
@@ -222,15 +233,15 @@
 (use-package coffee-mode)
 
 (use-package company-jedi
-  :delight
+  ;; :delight
   :hook (python-mode . (lambda () (add-to-list 'company-backends 'company-jedi))))
 
 (use-package docker-compose-mode
-  :delight
+  ;; :delight
   :mode (".*docker-compose.*\\.yml\\'")  )
 
 (use-package dockerfile-mode
-  :delight
+  ;; :delight
   :mode ("Dockerfile.*\\'")
   :hook ((dockerfile-mode . subword-mode)
 	 (dockerfile-mode . (lambda()
@@ -239,14 +250,15 @@
 (use-package elisp-format)
 
 (use-package elpy
-  :delight
+  ;; :delight
   :hook (python-mode . elpy-enable))
 ;; kludge to delight highlight-indentation
 (use-package highlight-indentation
-  :delight)
+  ;; :delight
+  )
 
 (use-package importmagic
-  :delight
+  ;; :delight
   :bind (("C-c i l" . importmagic-fix-imports))
   :config (setq importmagic-python-interpreter "python")
   :hook (python-mode . importmagic-mode))
@@ -254,7 +266,8 @@
 (use-package groovy-mode)
 
 (use-package json-mode
-  :delight)
+  ;; :delight
+  )
 
 (use-package nginx-mode
   :mode (("/nginx/.*\\.conf\\'" . nginx-mode)
@@ -265,7 +278,8 @@
 (use-package powershell)
 
 (use-package rjsx-mode
-  :delight)
+  ;; :delight
+  )
 
 (use-package web-mode
   :mode ("\\.html\\'" "\\.htm\\'"))
