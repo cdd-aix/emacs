@@ -1,10 +1,4 @@
 HOME ?= ~
-DESTDIR ?= $(PWD)/build
-package: HOME = $(DESTDIR)
-package: init.el
-	rm -rvf $(DESTDIR)
-	make -B init.elc install
-	cd $(HOME); zip -9vr ../emacsd.zip .emacs.d
 
 init.elc: init.el
 	rm -vf "$@"
@@ -18,8 +12,16 @@ install: init.elc init.el | $(HOME)/.emacs.d
 $(HOME)/.emacs.d:
 	mkdir -p $@
 
+DESTDIR ?= $(PWD)/build
+package: HOME = $(DESTDIR)
+package: init.el
+	rm -rvf $(DESTDIR)
+	make -B init.elc install
+	cd $(HOME); zip -9vr ../emacsd.zip .emacs.d
+
 realclean:
 	rm -rvf $(HOME)/.emacs.d/elpa init.elc
+	rm -rvf $(DESTDIR)
 
 test: init.elc
 	@echo Check init.el, foo.py, foo.yaml, and foo.md buffers
