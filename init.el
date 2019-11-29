@@ -4,6 +4,7 @@
 ;;; Initial concept https://github.com/nilcons/emacs-use-package-fast
 ;;; Revised in 2019 following https://github.com/jwiegley/use-package#getting-started
 ;;; Code:
+;; TODO: Test TODOS
 (eval-when-compile
   (package-initialize)
   (defvar default-package-check-signature package-check-signature)
@@ -74,17 +75,12 @@
 (subword-mode +1)
 
 ;;;; mode minimization
-(use-package delight
-  ;; :delight
-  ;; (hide-ifdef-mode)
-  ;; (subword-mode)
-  )
+(use-package delight)
 (use-package diminish :defer t)
 
 ;;;; Navigation and appearance aids
 
 (use-package ace-window
-  ;; :delight
   :bind
   (("C-z o" . ace-window))
   :config
@@ -146,14 +142,12 @@
 
 (use-package which-key
   :commands (which-key-mode)
-  ;; :delight
   :init (which-key-mode))
 
 (use-package ws-butler
   :commands (ws-butler-global-mode)
   :config
   (setq-default ws-butler-keep-whitespace-before-point nil)
-  ;; :delight
   :init (ws-butler-global-mode))
 
 ;;;; Project management
@@ -165,15 +159,12 @@
   (require 'uniquify)
   :config
   (setq-default uniquify-buffer-name-style 'reverse)
-  ;; :delight
   :init
   (helm-projectile-on)
   (projectile-mode +1)
   )
 ;; Kludge cannot handle in (use-package delight)
-(use-package projectile
-  ;; :delight
-  )
+(use-package projectile)
 ;;;; General development
 (use-package compile
   :bind (("C-z c" . compile)
@@ -193,30 +184,30 @@
   :after (magit))
 
 (use-package magit
-  ;; :delight
-  ;; (auto-revert-mode)
-  ;; (magit-mode)
-  ;; (magit-wip-mode)
   :bind ("C-c g" . magit-status)
   :config
   (setq-default vc-follow-symlinks t))
 
 (use-package magit-gitflow
-  ;; :delight
   :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package magit-lfs)
 
-(use-package magit-todos)
+(use-package magit-todos
+  :hook (magit-mode . magit-todos-mode))
 
 (use-package flycheck
   :commands (global-flycheck-mode flycheck-add-mode flycheck-mode)
   :config (append flycheck-disabled-checkers '(javascript-jshint))
   (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (setq-default flycheck-indication-mode 'left-fringe)
   :init (global-flycheck-mode))
 
 (use-package flycheck-checkbashisms
   :hook (flycheck-mode . flycheck-checkbashisms-setup))
+
+(use-package flycheck-pos-tip
+  :hook (flycheck-mode . flycheck-pos-tip-mode))
 
 (use-package flycheck-yamllint
   :hook (flycheck-mode . flycheck-yamllint-setup))
