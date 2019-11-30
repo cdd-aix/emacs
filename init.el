@@ -1,45 +1,43 @@
 ;;; package -- summary
+;; -*- elisp-format-split-subexp-keyword-except-list: (quote ("provide" "require" "loop" "throw" "featurep" "use-package")); -*-
 ;;; init.el intended for bytecompilation
 ;;; Commentary:
 ;;; Initial concept https://github.com/nilcons/emacs-use-package-fast
 ;;; Revised in 2019 following https://github.com/jwiegley/use-package#getting-started
 ;;; Code:
 ;; TODO: Test TODOS
-(eval-when-compile
-  (package-initialize)
-  (defvar default-package-check-signature package-check-signature)
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			   ("gnu" . "https://elpa.gnu.org/packages/")))
-  (unless (package-installed-p 'use-package)
-    (message "Installing use-package")
-    (package-refresh-contents)
-    (package-install 'use-package))
-  (require 'use-package)
-  (require 'use-package-ensure)
-  (setq use-package-always-ensure t)
-  (unless (package-installed-p 'gnu-elpa-keyring-update)
-    (message "Installing gnu-elpa-keyring-update")
-    (setq package-check-signature nil)
-    (package-refresh-contents)
-    (package-install 'gnu-elpa-keyring-update)
-    (setq package-check-signature default-package-check-signature)
-    (package-refresh-contents))
-  )
+(eval-when-compile (package-initialize)
+		   (defvar default-package-check-signature package-check-signature)
+		   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+					    ("gnu" . "https://elpa.gnu.org/packages/")))
+		   (unless (package-installed-p 'use-package)
+		     (message "Installing use-package")
+		     (package-refresh-contents)
+		     (package-install 'use-package))
+		   (require 'use-package)
+		   (require 'use-package-ensure)
+		   (setq use-package-always-ensure t)
+		   (unless (package-installed-p 'gnu-elpa-keyring-update)
+		     (message "Installing gnu-elpa-keyring-update")
+		     (setq package-check-signature nil)
+		     (package-refresh-contents)
+		     (package-install 'gnu-elpa-keyring-update)
+		     (setq package-check-signature default-package-check-signature)
+		     (package-refresh-contents)))
 
 ;; And this is the bytecompile magic from nilcons
 ;; Add the macro generated list of package.el loadpaths to load-path.
-(mapc #'(lambda (add) (add-to-list 'load-path add))
-      (eval-when-compile
-        (let ((package-user-dir-real (file-truename package-user-dir)))
-          ;; The reverse is necessary, because outside we mapc
-          ;; add-to-list element-by-element, which reverses.
-          (nreverse (apply #'nconc
-                           ;; Only keep package.el provided loadpaths.
-                           (mapcar #'(lambda (path)
-                                       (if (string-prefix-p package-user-dir-real path)
-                                           (list path)
-                                         nil))
-                                   load-path))))))
+(mapc #'(lambda (add)
+	  (add-to-list 'load-path add))
+      (eval-when-compile (let ((package-user-dir-real (file-truename package-user-dir)))
+			   ;; The reverse is necessary, because outside we mapc
+			   ;; add-to-list element-by-element, which reverses.
+			   (nreverse (apply #'nconc
+					    ;; Only keep package.el provided loadpaths.
+					    (mapcar #'(lambda (path)
+							(if (string-prefix-p package-user-dir-real
+									     path)
+							    (list path) nil)) load-path))))))
 
 ;;;; keyboard and customization
 ;; disable annoying ctrl-z to minimize
@@ -75,22 +73,18 @@
 (subword-mode +1)
 
 ;;;; mode minimization
-(use-package delight
-  )
-(use-package diminish :defer t)
+(use-package delight)
+(use-package diminish)
 
 ;;;; Navigation and appearance aids
 
 (use-package ace-window
-  :bind
-  (("C-z o" . ace-window))
-  :config
-  (setq-default aw-scope 'frame)
+  :bind (("C-z o" . ace-window))
+  :config (setq-default aw-scope 'frame)
   (setq-default aw-dispatch-always t))
 
 (use-package color-theme-modern
-  :init
-  (require 'clarity-theme)
+  :init (require 'clarity-theme)
   (load-theme 'clarity t t)
   (enable-theme 'clarity))
 
@@ -111,15 +105,13 @@
 
 (use-package smart-mode-line
   :commands (sml/setup sml/appy-theme)
-  :config
-  (setq-default sml/shorten-modes t)
+  :config (setq-default sml/shorten-modes t)
   :init (sml/setup))
 ;; From https://github.com/DiegoVicen/my-emacs
 
 (use-package minions
   :commands (minions-mode)
-  :init
-  (setq minions-mode-line-lighter "[+]")
+  :init (setq minions-mode-line-lighter "[+]")
   (setq-default minions-direct '(flycheck-mode))
   (minions-mode))
 
@@ -133,8 +125,7 @@
 (use-package midnight
   :commands (midnight-delay-set)
   :config (midnight-delay-set 'midnight-delay "4:30am")
-  :defer 30
-  )
+  :defer 30)
 
 (use-package smex
   :bind (("M-x" . smex)
@@ -147,8 +138,7 @@
 
 (use-package ws-butler
   :commands (ws-butler-global-mode)
-  :config
-  (setq-default ws-butler-keep-whitespace-before-point nil)
+  :config (setq-default ws-butler-keep-whitespace-before-point nil)
   :init (ws-butler-global-mode))
 
 ;;;; Project management
@@ -156,14 +146,10 @@
   :bind (("s-p" . projectile-command-map)
 	 ("C-c p" . projectile-command-map))
   :commands (helm-projectile-on projectile-mode)
-  :config
-  (require 'uniquify)
-  :config
-  (setq-default uniquify-buffer-name-style 'reverse)
-  :init
-  (helm-projectile-on)
-  (projectile-mode +1)
-  )
+  :config (require 'uniquify)
+  :config (setq-default uniquify-buffer-name-style 'reverse)
+  :init (helm-projectile-on)
+  (projectile-mode +1))
 ;; Kludge cannot handle in (use-package delight)
 (use-package projectile)
 ;;;; General development
@@ -174,8 +160,7 @@
 (use-package diff-hl
   :after (vc-git)
   :commands (global-diff-hl-mode diff-hl-margin-mode)
-  :config
-  (require 'diff-hl-margin)
+  :config (require 'diff-hl-margin)
   (diff-hl-margin-mode)
   :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh)
 	 (dired-mode-hook . diff-hl-dired-mode))
@@ -186,8 +171,7 @@
 
 (use-package magit
   :bind ("C-c g" . magit-status)
-  :config
-  (setq-default vc-follow-symlinks t))
+  :config (setq-default vc-follow-symlinks t))
 
 (use-package magit-gitflow
   :hook (magit-mode . turn-on-magit-gitflow))
@@ -214,22 +198,21 @@
 (use-package yasnippet
   :bind (:map yas-minor-mode-map
 	      ("C-'" . yas-expand))
-  :config
-  (define-key yas-minor-mode-map [(tab)] nil)
+  :config (define-key yas-minor-mode-map [(tab)] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   :functions yas-global-mode
-  :init
-  (yas-global-mode 1))
+  :init (yas-global-mode 1))
 
 ;;;; Language Specific
 
 (use-package coffee-mode)
 
 (use-package company-jedi
-  :hook (python-mode . (lambda () (add-to-list 'company-backends 'company-jedi))))
+  :hook (python-mode . (lambda ()
+			 (add-to-list 'company-backends 'company-jedi))))
 
 (use-package docker-compose-mode
-  :mode (".*docker-compose.*\\.yml\\'")  )
+  :mode (".*docker-compose.*\\.yml\\'"))
 
 (use-package dockerfile-mode
   :mode ("Dockerfile.*\\'")
