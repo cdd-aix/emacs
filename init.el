@@ -75,16 +75,12 @@
 
 ;;;; mode minimization
 (use-package delight
-  ;; :delight
-  ;; (hide-ifdef-mode)
-  ;; (subword-mode)
   )
 (use-package diminish :defer t)
 
 ;;;; Navigation and appearance aids
 
 (use-package ace-window
-  ;; :delight
   :bind
   (("C-z o" . ace-window))
   :config
@@ -146,14 +142,12 @@
 
 (use-package which-key
   :commands (which-key-mode)
-  ;; :delight
   :init (which-key-mode))
 
 (use-package ws-butler
   :commands (ws-butler-global-mode)
   :config
   (setq-default ws-butler-keep-whitespace-before-point nil)
-  ;; :delight
   :init (ws-butler-global-mode))
 
 ;;;; Project management
@@ -165,14 +159,12 @@
   (require 'uniquify)
   :config
   (setq-default uniquify-buffer-name-style 'reverse)
-  ;; :delight
   :init
   (helm-projectile-on)
   (projectile-mode +1)
   )
 ;; Kludge cannot handle in (use-package delight)
 (use-package projectile
-  ;; :delight
   )
 ;;;; General development
 (use-package compile
@@ -193,21 +185,14 @@
   :after (magit))
 
 (use-package magit
-  ;; :delight
-  ;; (auto-revert-mode)
-  ;; (magit-mode)
-  ;; (magit-wip-mode)
   :bind ("C-c g" . magit-status)
   :config
   (setq-default vc-follow-symlinks t))
 
 (use-package magit-gitflow
-  ;; :delight
   :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package magit-lfs)
-
-(use-package magit-todos)
 
 (use-package flycheck
   :commands (global-flycheck-mode flycheck-add-mode flycheck-mode)
@@ -229,7 +214,6 @@
   (define-key yas-minor-mode-map [(tab)] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   :functions yas-global-mode
-  ;; :delight yas-minor-mode
   :init
   (yas-global-mode 1))
 
@@ -238,15 +222,12 @@
 (use-package coffee-mode)
 
 (use-package company-jedi
-  ;; :delight
   :hook (python-mode . (lambda () (add-to-list 'company-backends 'company-jedi))))
 
 (use-package docker-compose-mode
-  ;; :delight
   :mode (".*docker-compose.*\\.yml\\'")  )
 
 (use-package dockerfile-mode
-  ;; :delight
   :mode ("Dockerfile.*\\'")
   :hook ((dockerfile-mode . subword-mode)
 	 (dockerfile-mode . (lambda()
@@ -255,11 +236,9 @@
 (use-package elisp-format)
 
 (use-package elpy
-  ;; :delight
   :hook (python-mode . elpy-enable))
 ;; kludge to delight highlight-indentation
 (use-package highlight-indentation
-  ;; :delight
   )
 
 (use-package importmagic
@@ -271,7 +250,6 @@
 (use-package groovy-mode)
 
 (use-package json-mode
-  ;; :delight
   )
 
 (use-package nginx-mode
@@ -283,7 +261,6 @@
 (use-package powershell)
 
 (use-package rjsx-mode
-  ;; :delight
   )
 
 (use-package web-mode
