@@ -193,9 +193,6 @@
 
 (use-package magit-lfs)
 
-(use-package magit-todos
-  :hook (magit-mode . magit-todos-mode))
-
 (use-package flycheck
   :commands (global-flycheck-mode flycheck-add-mode flycheck-mode)
   :config (append flycheck-disabled-checkers '(javascript-jshint))
@@ -220,7 +217,6 @@
   (define-key yas-minor-mode-map [(tab)] nil)
   (define-key yas-minor-mode-map (kbd "TAB") nil)
   :functions yas-global-mode
-  ;; :delight yas-minor-mode
   :init
   (yas-global-mode 1))
 
@@ -229,15 +225,12 @@
 (use-package coffee-mode)
 
 (use-package company-jedi
-  ;; :delight
   :hook (python-mode . (lambda () (add-to-list 'company-backends 'company-jedi))))
 
 (use-package docker-compose-mode
-  ;; :delight
   :mode (".*docker-compose.*\\.yml\\'")  )
 
 (use-package dockerfile-mode
-  ;; :delight
   :mode ("Dockerfile.*\\'")
   :hook ((dockerfile-mode . subword-mode)
 	 (dockerfile-mode . (lambda()
@@ -246,24 +239,16 @@
 (use-package elisp-format)
 
 (use-package elpy
-  ;; :delight
   :hook (python-mode . elpy-enable))
-;; kludge to delight highlight-indentation
-(use-package highlight-indentation
-  ;; :delight
-  )
 
 (use-package importmagic
-  ;; :delight
   :bind (("C-c i l" . importmagic-fix-imports))
   :config (setq importmagic-python-interpreter "python")
   :hook (python-mode . importmagic-mode))
 
 (use-package groovy-mode)
 
-(use-package json-mode
-  ;; :delight
-  )
+(use-package json-mode)
 
 (use-package nginx-mode
   :mode (("/nginx/.*\\.conf\\'" . nginx-mode)
@@ -273,9 +258,7 @@
 
 (use-package powershell)
 
-(use-package rjsx-mode
-  ;; :delight
-  )
+(use-package rjsx-mode)
 
 (use-package web-mode
   :mode ("\\.html\\'" "\\.htm\\'"))
