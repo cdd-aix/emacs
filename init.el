@@ -99,21 +99,24 @@
 (use-package flycheck-color-mode-line
   :hook (flycheck-mode . flycheck-color-mode-line-mode))
 
+(use-package minions
+  :commands (minions-mode)
+  :init (setq minions-mode-line-lighter "[+]")
+  (setq-default minions-direct '(flycheck-mode))
+  (minions-mode))
+
 (use-package move-text
   :commands (move-text-default-bindings) ;; Enable M-up M-down to move line or region
   :init (move-text-default-bindings))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package smart-mode-line
   :commands (sml/setup sml/appy-theme)
   :config (setq-default sml/shorten-modes t)
   :init (sml/setup))
 ;; From https://github.com/DiegoVicen/my-emacs
-
-(use-package minions
-  :commands (minions-mode)
-  :init (setq minions-mode-line-lighter "[+]")
-  (setq-default minions-direct '(flycheck-mode))
-  (minions-mode))
 
 (use-package whitespace)
 
@@ -207,10 +210,6 @@
 
 (use-package coffee-mode)
 
-(use-package company-jedi
-  :hook (python-mode . (lambda ()
-			 (add-to-list 'company-backends 'company-jedi))))
-
 (use-package docker-compose-mode
   :mode (".*docker-compose.*\\.yml\\'"))
 
@@ -222,8 +221,13 @@
 
 (use-package elisp-format)
 
+;; python
 (use-package elpy
   :hook (python-mode . elpy-enable))
+
+(use-package company-jedi
+  :hook (python-mode . (lambda ()
+			 (add-to-list 'company-backends 'company-jedi))))
 
 (use-package importmagic
   :bind (("C-c i l" . importmagic-fix-imports))
@@ -237,6 +241,9 @@
 (use-package nginx-mode
   :mode (("/nginx/.*\\.conf\\'" . nginx-mode)
 	 ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode)))
+
+(use-package nim-mode
+  :hook ((nim-mode . company-mode)))
 
 (use-package poly-markdown)
 
