@@ -4,6 +4,7 @@
 ;;; Initial concept https://github.com/nilcons/emacs-use-package-fast
 ;;; Revised in 2019 following https://github.com/jwiegley/use-package#getting-started
 ;;; Code:
+;; TODO: Test TODOS
 (eval-when-compile
   (package-initialize)
   (defvar default-package-check-signature package-check-signature)
@@ -164,8 +165,7 @@
   (projectile-mode +1)
   )
 ;; Kludge cannot handle in (use-package delight)
-(use-package projectile
-  )
+(use-package projectile)
 ;;;; General development
 (use-package compile
   :bind (("C-z c" . compile)
@@ -198,10 +198,14 @@
   :commands (global-flycheck-mode flycheck-add-mode flycheck-mode)
   :config (append flycheck-disabled-checkers '(javascript-jshint))
   (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (setq-default flycheck-indication-mode 'left-fringe)
   :init (global-flycheck-mode))
 
 (use-package flycheck-checkbashisms
   :hook (flycheck-mode . flycheck-checkbashisms-setup))
+
+(use-package flycheck-pos-tip
+  :hook (flycheck-mode . flycheck-pos-tip-mode))
 
 (use-package flycheck-yamllint
   :hook (flycheck-mode . flycheck-yamllint-setup))
@@ -237,20 +241,15 @@
 
 (use-package elpy
   :hook (python-mode . elpy-enable))
-;; kludge to delight highlight-indentation
-(use-package highlight-indentation
-  )
 
 (use-package importmagic
-  ;; :delight
   :bind (("C-c i l" . importmagic-fix-imports))
   :config (setq importmagic-python-interpreter "python")
   :hook (python-mode . importmagic-mode))
 
 (use-package groovy-mode)
 
-(use-package json-mode
-  )
+(use-package json-mode)
 
 (use-package nginx-mode
   :mode (("/nginx/.*\\.conf\\'" . nginx-mode)
@@ -260,8 +259,7 @@
 
 (use-package powershell)
 
-(use-package rjsx-mode
-  )
+(use-package rjsx-mode)
 
 (use-package web-mode
   :mode ("\\.html\\'" "\\.htm\\'"))
