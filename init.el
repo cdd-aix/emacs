@@ -230,7 +230,10 @@
 			 (add-to-list 'company-backends 'company-jedi))))
 
 (use-package importmagic
-  :bind (("C-c i l" . importmagic-fix-imports))
+  :bind (("C-c i l" . importmagic-fix-imports)
+	 ("C-c i f" . importmagic-fix-symbol-at-point)
+	 ("C-c i s" . importmagic-fix-symbol)
+	 ("C-c i u" . importmagic-update-index))
   :config (setq importmagic-python-interpreter "python")
   :hook (python-mode . importmagic-mode))
 
@@ -250,6 +253,8 @@
 (use-package powershell)
 
 (use-package rjsx-mode)
+
+(use-package rust-mode)
 
 (use-package web-mode
   :mode ("\\.html\\'" "\\.htm\\'"))
