@@ -182,11 +182,11 @@
 (use-package magit-lfs)
 
 (use-package flycheck
+  :hook (prog-mode . flycheck-mode)
   :commands (global-flycheck-mode flycheck-add-mode flycheck-mode)
-  :config (append flycheck-disabled-checkers '(javascript-jshint))
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  :config (flycheck-add-mode 'javascript-eslint 'web-mode)
   (setq-default flycheck-indication-mode 'left-fringe)
-  :init (global-flycheck-mode))
+  )
 
 (use-package flycheck-checkbashisms
   :hook (flycheck-mode . flycheck-checkbashisms-setup))
@@ -194,8 +194,17 @@
 (use-package flycheck-pos-tip
   :hook (flycheck-mode . flycheck-pos-tip-mode))
 
+(use-package flycheck-rust
+  :hook (flycheck-mode . flycheck-rust-setup))
+
 (use-package flycheck-yamllint
   :hook (flycheck-mode . flycheck-yamllint-setup))
+
+(use-package lsp-mode
+  :commands lsp
+  :config (require `lsp-clients))
+
+(use-package lsp-ui)
 
 (use-package yasnippet-snippets)
 (use-package yasnippet
@@ -208,6 +217,8 @@
 
 ;;;; Language Specific
 
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode))
 (use-package coffee-mode)
 
 (use-package docker-compose-mode
@@ -254,7 +265,10 @@
 
 (use-package rjsx-mode)
 
-(use-package rust-mode)
+(use-package rust-mode
+  :hook (rust-mode . lsp))
+
+(use-package toml-mode)
 
 (use-package web-mode
   :mode ("\\.html\\'" "\\.htm\\'"))
