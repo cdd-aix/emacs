@@ -201,10 +201,26 @@
   :hook (flycheck-mode . flycheck-yamllint-setup))
 
 (use-package lsp-mode
-  :commands lsp
-  :config (require `lsp-clients))
+  :commands (lsp lsp-deferred))
 
-(use-package lsp-ui)
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+
+(use-package helm-lsp
+  :commands helm-lsp-workspace-symbol)
+
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+(use-package treemacs)
+;; https://github.com/Alexander-Miller/treemacs for suggestions on bindings
+
+(use-package treemacs-projectile
+  :after treemacs projectile)
+
+(use-package treemacs-magit
+  :after treemacs magit)
+
+(use-package dap-mode)
 
 (use-package yasnippet-snippets)
 (use-package yasnippet
@@ -266,7 +282,7 @@
 (use-package rjsx-mode)
 
 (use-package rust-mode
-  :hook (rust-mode . lsp))
+  :hook (rust-mode . lsp-deferred))
 
 (use-package toml-mode)
 
