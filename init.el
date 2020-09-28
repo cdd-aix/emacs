@@ -117,6 +117,7 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package smart-mode-line
+  :commands (sml/setup)
   :config
   (setq-default sml/theme 'dark)
   (setq-default sml/shorten-modes t)
@@ -176,6 +177,7 @@
   :config (require 'diff-hl-margin)
   (diff-hl-margin-mode)
   :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh)
+	 (magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
 	 (dired-mode-hook . diff-hl-dired-mode))
   :init (global-diff-hl-mode))
 
