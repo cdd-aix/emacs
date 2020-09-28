@@ -156,10 +156,13 @@
   :bind (("s-p" . projectile-command-map)
 	 ("C-c p" . projectile-command-map))
   :commands (helm-projectile-on projectile-mode)
-  :config (require 'uniquify)
-  :config (setq-default uniquify-buffer-name-style 'reverse)
-  :init (helm-projectile-on)
-  (projectile-mode +1))
+  :config
+  (require 'uniquify)
+  (setq-default uniquify-buffer-name-style 'reverse)
+  (projectile-mode +1)
+  (helm-projectile-on)
+  ;; :init
+  )
 ;; Kludge cannot handle in (use-package delight)
 (use-package projectile)
 ;;;; General development
