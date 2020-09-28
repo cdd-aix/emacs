@@ -84,9 +84,13 @@
   (setq-default aw-dispatch-always t))
 
 (use-package color-theme-modern
-  :init (require 'clarity-theme)
+  :config
   (load-theme 'clarity t t)
-  (enable-theme 'clarity))
+  (enable-theme 'clarity)
+  ;; Kludge to put color-theme-modern on the custom-theme-load-path
+  :init
+  (require 'clarity-theme)
+  )
 
 (use-package default-text-scale
   :bind (("C-M-=" . default-text-scale-increase)
