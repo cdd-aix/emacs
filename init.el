@@ -113,9 +113,12 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package smart-mode-line
-  :commands (sml/setup sml/appy-theme)
-  :config (setq-default sml/shorten-modes t)
-  :init (sml/setup))
+  :config
+  (setq-default sml/theme 'dark)
+  (setq-default sml/shorten-modes t)
+  (setq-default sml/no-confirm-load-theme t)
+  (sml/setup)
+  )
 ;; From https://github.com/DiegoVicen/my-emacs
 
 (use-package whitespace)
