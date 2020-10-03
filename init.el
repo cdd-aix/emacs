@@ -154,18 +154,19 @@
 
 ;;;; Project management
 (use-package helm-projectile
-  :bind (("s-p" . projectile-command-map)
-	 ("C-c p" . projectile-command-map))
-  :commands (helm-projectile-on projectile-mode)
+  :commands (helm-projectile-on)
+  )
+;; Kludge cannot handle in (use-package delight)
+(use-package projectile
+  :commands (projectile-mode)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
   :config
   (require 'uniquify)
   (setq-default uniquify-buffer-name-style 'reverse)
   (projectile-mode +1)
   (helm-projectile-on)
-  ;; :init
   )
-;; Kludge cannot handle in (use-package delight)
-(use-package projectile)
 ;;;; General development
 (use-package compile
   :bind (("C-z c" . compile)
