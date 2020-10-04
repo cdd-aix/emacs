@@ -177,9 +177,9 @@
   :commands (global-diff-hl-mode diff-hl-margin-mode)
   :config (require 'diff-hl-margin)
   (diff-hl-margin-mode)
-  :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh)
-	 (magit-pre-refresh-hook . diff-hl-magit-pre-refresh)
-	 (dired-mode-hook . diff-hl-dired-mode))
+  :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
+	 (magit-pre-refresh . diff-hl-magit-pre-refresh)
+	 (dired-mode . diff-hl-dired-mode))
   :init (global-diff-hl-mode))
 
 (use-package forge
@@ -224,14 +224,29 @@
 
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
-(use-package treemacs)
+(use-package treemacs
+  :hook (projectile-after-switch-project . treemacs-add-and-display-current-project)
+  :bind
+  (:map global-map
+	("M-0"       . treemacs-select-window)
+	("C-x t 1"   . treemacs-delete-other-windows)
+	("C-x t t"   . treemacs)
+	("C-x t B"   . treemacs-bookmark)
+	("C-x t C-t" . treemacs-find-file)
+	("C-x t M-t" . treemacs-find-tag)
+	("C-x t w"   . treemacs-switch-workspace))
+  )
+
+(use-package treemacs-all-the-icons
+  :after treemacs)
 ;; https://github.com/Alexander-Miller/treemacs for suggestions on bindings
 
 (use-package treemacs-projectile
   :after treemacs projectile)
 
 (use-package treemacs-magit
-  :after treemacs magit)
+  :after treemacs magit
+  )
 
 (use-package dap-mode)
 
