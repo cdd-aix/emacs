@@ -213,6 +213,11 @@
 (use-package flycheck-yamllint
   :hook (flycheck-mode . flycheck-yamllint-setup))
 
+(use-package flyspell
+  :config
+  (setq ispell-program-name "aspell"
+	ispell-dictionary "english"))
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred))
 
