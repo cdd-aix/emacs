@@ -6,14 +6,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: sudo ./prepare.sh
-      - run: make package
-      - name: Archive emacsd
-        uses: actions/upload-artifact@v2
+      - run: make package.list
+      - uses: actions/download-artifact@v2
         with:
-          name: emacsd-ubuntu
-          path: emacsd.zip
-      - name: Archive package list
-        uses: actions/upload-artifact@v2
+          name: package-list
+          path: prev-package-list
+      - run: |
+          if [ -d prev-package-list/package.list ]; then
+            diff -urwp prev-package-list/package.list package.list > package.diff
+          else
+            touch package.diff
+          fi
+      - uses: actions/upload-artifact@v2
         with:
-          name: package
-          path: package.lst
+          name: package-list
+          path: |
+            package.list
+            package.diff
