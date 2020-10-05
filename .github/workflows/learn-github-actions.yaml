@@ -11,12 +11,12 @@ jobs:
         with:
           name: package-list
           path: prev-package-list
+      - if: failure()
+        run: |
+          mkdir -p prev-package-list
+          touch prev-package-list/package.list
       - run: |
-          if [ -d prev-package-list/package.list ]; then
-            diff -urwp prev-package-list/package.list package.list > package.diff
-          else
-            touch package.diff
-          fi
+          diff -urwp prev-package-list/package.list package.list > package.diff
       - uses: actions/upload-artifact@v2
         with:
           name: package-list
