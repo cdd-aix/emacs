@@ -9,4 +9,5 @@ jobs:
       - run: make package
       - name: Archive artifact
         uses: actions/upload-artifact@v2
-        path: emacsd.zip
+        with:
+          path: emacsd.zip
