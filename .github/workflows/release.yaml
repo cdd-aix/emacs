@@ -16,7 +16,7 @@ jobs:
           find .emacs.d -type f | sort > filelist
           zip -9v emacsd.zip -@ < filelist
       - id: create-release
-        uses: actions/release-release@v1
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
