@@ -7,21 +7,18 @@ jobs:
   setup-emacs-build-environment:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
-        with:
-          path: prev-package-list
-      - run: ls -lR
+      - run: ls -lR | tee ls.txt; touch package.list package.diff
       # - run: mkdir -p prev-package-list && touch prev-package-list/package.list
       # - run: sudo ./prepare.sh
       # - run: make package.list
       # - if: always()
       #   run: |
       #     diff -urwp prev-package-list/package.list package.list > package.diff
-      # - if: always()
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: package-list
-      #     path: |
-      #       package.list
-      #       package.diff
+      - uses: actions/upload-artifact@v2
+        with:
+          name: package-list
+          path: |
+            ls.txt
+            package.*
