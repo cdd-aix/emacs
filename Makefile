@@ -18,6 +18,7 @@ package: init.el
 	rm -rvf $(DESTDIR)
 	make -B init.elc install
 	cd $(HOME); find .emacs.d -type f | sort | zip -9v ../emacsd.zip -@
+	find $(DESTDIR) -name \*-pkg.el | awk -F/ '{print $(NF-1)}' | sort > package.lst
 
 realclean:
 	rm -rvf $(HOME)/.emacs.d/elpa init.elc
