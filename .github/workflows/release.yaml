@@ -1,0 +1,35 @@
+name: Build and Upload Release Asset
+on:
+  push:
+    tags:
+      - 'v*'
+jobs:
+  build:
+    name: Build and Upload Release Asset
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - id: build
+        run: |
+          set -eux
+          make realclean init.elc install
+          find .emacs.d -type f | sort > filelist
+          zip -9v emacsd.zip -@ < filelist
+      - id: create-release
+        uses: actions/release-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create-release.outputs.upload_url }}
+          asset_path: ./emacsd.zip
+          asset_name: emacsd.zip
+          asset_content_type: application/zip
