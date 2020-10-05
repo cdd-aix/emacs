@@ -5,5 +5,5 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: ./prepare.sh
+      - run: sudo ./prepare.sh
       - run: make package
