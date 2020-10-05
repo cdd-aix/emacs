@@ -7,3 +7,6 @@ jobs:
       - uses: actions/checkout@v2
       - run: sudo ./prepare.sh
       - run: make package
+      - name: Archive artifact
+        uses: actions/upload-artifact@v2
+        path: emacsd.zip
