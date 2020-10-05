@@ -8,20 +8,20 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: mkdir -p prev-package-list && touch prev-package-list/package.list
-      - run: sudo ./prepare.sh
-      - run: make package.list
       - uses: actions/download-artifact@v2
         with:
-          name: package-list
           path: prev-package-list
-      - if: always()
-        run: |
-          diff -urwp prev-package-list/package.list package.list > package.diff
-      - if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: package-list
-          path: |
-            package.list
-            package.diff
+      - run: ls -lR
+      # - run: mkdir -p prev-package-list && touch prev-package-list/package.list
+      # - run: sudo ./prepare.sh
+      # - run: make package.list
+      # - if: always()
+      #   run: |
+      #     diff -urwp prev-package-list/package.list package.list > package.diff
+      # - if: always()
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: package-list
+      #     path: |
+      #       package.list
+      #       package.diff
