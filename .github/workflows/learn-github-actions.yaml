@@ -9,7 +9,7 @@ jobs:
     steps:
       # - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
-      - run: ls -lR | tee ls.txt; touch package.list package.diff
+      - run: ls -lR | tee ls.txt; touch package.list package.diff foo
       # - run: mkdir -p prev-package-list && touch prev-package-list/package.list
       # - run: sudo ./prepare.sh
       # - run: make package.list
