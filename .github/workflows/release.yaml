@@ -13,7 +13,7 @@ jobs:
         run: |
           set -eux
           sudo ./prepare.sh
-          make realclean init.elc install
+          HOME=$PWD make realclean init.elc install
           find .emacs.d -type f | sort > filelist
           zip -9v emacsd.zip -@ < filelist
       - id: create-release
