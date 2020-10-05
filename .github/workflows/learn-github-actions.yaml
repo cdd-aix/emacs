@@ -8,17 +8,16 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: ls -lR
-      - uses: actions/download-artifact@v2
-      - run: ls -lR
-      - run: mv -v package.list package.list.prev || true
+      # We'd like to compare with previous run's package.list... however github actions do not allow this at this time
+      # - run: ls -lR
+      # - uses: actions/download-artifact@v2
+      # - run: ls -lR
+      # - run: mv -v package.list package.list.prev || true
       - run: sudo ./prepare.sh
       - run: make package.list
-      - run: diff -urwpN package.list.prev package.list > package.diff || true
+      # - run: diff -urwpN package.list.prev package.list > package.diff || true
       - uses: actions/upload-artifact@v2
         with:
           name: package-list
           path: |
-            ls.txt
             package.list
-            package.diff
