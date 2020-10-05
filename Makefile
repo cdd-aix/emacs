@@ -17,7 +17,7 @@ package: HOME = $(DESTDIR)
 package: init.el
 	rm -rvf $(DESTDIR)
 	make -B init.elc install
-	cd $(HOME); zip -9vr ../emacsd.zip .emacs.d
+	cd $(HOME); find .emacs.d -type f | sort | zip -9v ../emacsd.zip -@
 
 realclean:
 	rm -rvf $(HOME)/.emacs.d/elpa init.elc
