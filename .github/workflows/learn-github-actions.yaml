@@ -1,23 +1,25 @@
 name: learn-github-actions
-on: [push]
+on:
+  push:
+  schedule:
+    - cron: '5 7 * * *'
 jobs:
   setup-emacs-build-environment:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - run: mkdir -p prev-package-list && touch prev-package-list/package.list
       - run: sudo ./prepare.sh
       - run: make package.list
       - uses: actions/download-artifact@v2
         with:
           name: package-list
           path: prev-package-list
-      - if: failure()
+      - if: always()
         run: |
-          mkdir -p prev-package-list
-          touch prev-package-list/package.list
-      - run: |
           diff -urwp prev-package-list/package.list package.list > package.diff
-      - uses: actions/upload-artifact@v2
+      - if: always()
+        uses: actions/upload-artifact@v2
         with:
           name: package-list
           path: |
