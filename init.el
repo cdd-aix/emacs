@@ -310,7 +310,12 @@
 
 (use-package poly-markdown)
 
-(use-package powershell)
+(use-package powershell
+  :hook (powershell-mode . lsp-deferred))
+
+(use-package puppet-mode
+  :hook (puppet-mode . lsp-deferred)
+  :mode ("\\.pp"))
 
 (use-package rjsx-mode)
 
