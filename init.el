@@ -39,7 +39,9 @@
 									     path)
 							    (list path) nil)) load-path))))))
 
+
 (add-to-list 'load-path "~/.emacs.d/repo-lisp")
+
 ;;;; keyboard and customization
 ;; disable annoying ctrl-z to minimize
 (use-package bind-key
@@ -323,10 +325,13 @@
 (use-package rust-mode
   :hook (rust-mode . lsp-deferred))
 
+(require 'tera-mode)
+
 (use-package toml-mode)
 
 (use-package web-mode
   :mode ("\\.html\\'" "\\.htm\\'"))
+
 
 ;;;; Omitted as haven't used much
 ;; neotree
