@@ -1,19 +1,29 @@
 HOME ?= ~
+DESTDIR ?= $(PWD)/build
+EMACSD = $(DESTDIR)/.emacs.d
+REPOLISP = $(EMACSD)/repo-lisp
 
-init.elc: init.el
-	rm -vf "$@"
-	emacs -Q -l $< --batch -f batch-byte-compile $<
-	if emacs -Q --batch -l $@ --eval '(message "foo")' 2>&1 | grep ^Error; then exit 1; fi
+init.elc: init.el | $(REPOLISP)
+	rm -vf $@ $(EMACSD)/$@ $(EMACSD)/$@ $(EMACSD)/$< || :
+	HOME=$(DESTDIR) emacs -Q -l $< --batch -f batch-byte-compile $<
+	HOME=$(DESTDIR) emacs -Q --batch -l $@ --eval '(message "foo")' 2>&1 > $@.test
+	! grep ^Error $@.test
+	rm -f $@.test
 
-install: init.elc init.el | $(HOME)/.emacs.d
-	cp -v $^ "$(HOME)/.emacs.d/"
-	[ -r $(HOME)/.emacs.d/custom.el ] || cp -v custom.el "$(HOME)/.emacs.d/"
+.DELETE_ON_ERROR:
 
-$(HOME)/.emacs.d:
+$(REPOLISP): $(EMACSD)
+	rsync -av $(@F) $<
+
+$(EMACSD):
 	mkdir -p $@
 
-DESTDIR ?= $(PWD)/build
-package: HOME = $(DESTDIR)
+install: $(addprefix $(EMACSD)/, init.el init.elc) # Missing custom.el.  Need better handling
+	rsync -av $(EMACSD)/ $(HOME)/.emacs.d
+
+$(EMACSD)/%: % | $(EMACSD)
+	cp -pv $< $@
+
 package: init.el
 	rm -rvf $(DESTDIR)
 	make -B init.elc install
