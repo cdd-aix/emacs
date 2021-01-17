@@ -13,9 +13,7 @@ jobs:
         run: |
           set -eux
           sudo ./prepare.sh
-          HOME=$PWD make realclean init.elc install
-          find .emacs.d -type f | sort > filelist
-          zip -9v emacsd.zip -@ < filelist
+          make package
       - id: create-release
         uses: actions/create-release@v1
         env:
@@ -31,6 +29,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
-          asset_path: ./emacsd.zip
-          asset_name: emacsd.zip
+          asset_path: ./build/emacsd.zip
+          asset_name: emacsd-${{ github.ref }}.zip
           asset_content_type: application/zip
