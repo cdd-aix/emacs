@@ -1,0 +1,2 @@
+;;; Generated package description from /home/cddukes/p/emacs/cache/.emacs.d/elpa/flycheck-checkbashisms-20190403.218/flycheck-checkbashisms.el  -*- no-byte-compile: t -*-
+(define-package "flycheck-checkbashisms" "20190403.218" "checkbashisms checker for flycheck" '((emacs "24") (flycheck "0.25")) :commit "2e386775f1a0eb5d80e5d70e98474ee32ecafb24" :authors '(("Cuong Le" . "cuong.manhle.vn@gmail.com")) :maintainer '("Cuong Le" . "cuong.manhle.vn@gmail.com") :keywords '("convenience" "tools" "sh" "unix") :url "https://github.com/cuonglm/flycheck-checkbashisms")
