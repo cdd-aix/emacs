@@ -13,6 +13,9 @@ jobs:
       # - uses: actions/download-artifact@v2
       # - run: ls -lR
       # - run: mv -v package.list package.list.prev || true
+      - id: version
+        uses: battila7/get-version-action@v2
+      - run: echo ${{ steps.version.outputs.version-without-v }}
       - run: sudo ./prepare.sh
       - run: make package.list
       # - run: diff -urwpN package.list.prev package.list > package.diff || true
