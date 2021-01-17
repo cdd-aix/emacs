@@ -27,10 +27,12 @@ $(EMACSD)/%: % | $(EMACSD)
 
 package: clean $(DESTDIR)/emacsd.zip
 
-$(DESTDIR)/emacsd.zip: $(INITEL)
-	cd $(@D); find .emacs.d -type f | sort | zip -9v $(@F) -@
+$(DESTDIR)/emacsd.zip: package.list
+	cd $(@D); find .emacs.d package.list -type f | sort | zip -9v $(@F) -@
 
-package.list: $(INITEL)
+package.list: $(DESTDIR)/package.list
+
+$(DESTDIR)/package.list: $(INITEL)
 	find $(EMACSD) -name \*-pkg.el | awk -F/ '{print $(NF-1)}' | sort > $@
 
 clean:
