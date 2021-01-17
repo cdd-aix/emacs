@@ -39,6 +39,7 @@
 									     path)
 							    (list path) nil)) load-path))))))
 
+(add-to-list 'load-path "~/.emacs.d/repo-lisp")
 ;;;; keyboard and customization
 ;; disable annoying ctrl-z to minimize
 (use-package bind-key
