@@ -3,8 +3,8 @@ DESTDIR ?= $(PWD)/build
 EMACSD = $(DESTDIR)/.emacs.d
 REPOLISP = $(EMACSD)/repo-lisp
 
-init.elc: init.el | $(REPOLISP)
-	rm -vf $@ $(EMACSD)/$@ $(EMACSD)/$@ $(EMACSD)/$< || :
+init.elc: init.el $(EMACSD)/init.el | $(REPOLISP)
+	rm -vf $@ $(EMACSD)/$@ $(EMACSD)/$@ || :
 	HOME=$(DESTDIR) emacs -Q -l $< --batch -f batch-byte-compile $<
 	HOME=$(DESTDIR) emacs -Q --batch -l $@ --eval '(message "foo")' 2>&1 > $@.test
 	! grep ^Error $@.test
@@ -28,7 +28,7 @@ $(EMACSD)/%: % | $(EMACSD)
 package: clean $(DESTDIR)/emacsd.zip
 
 $(DESTDIR)/emacsd.zip: package.list
-	cd $(@D); find .emacs.d package.list -type f | sort | zip -9v $(@F) -@
+	cd $(@D); find .emacs.d package.list -type f | sort | zip -9q $(@F) -@
 
 package.list: $(DESTDIR)/package.list
 
