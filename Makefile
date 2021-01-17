@@ -3,7 +3,8 @@ DESTDIR ?= $(PWD)/build
 EMACSD = $(DESTDIR)/.emacs.d
 REPOLISP = $(EMACSD)/repo-lisp
 
-init.elc: init.el $(EMACSD)/init.el | $(REPOLISP)
+init.elc: init.el cache-elpa | $(REPOLISP)
+	rsync -a --delete-after $(ELPA) $(EMACSD)
 	rm -vf $@ $(EMACSD)/$@ $(EMACSD)/$@ || true
 	HOME=$(DESTDIR) emacs -Q -l $< --batch -f batch-byte-compile $< > $@.log || (cat $@.log; exit 1)
 	HOME=$(DESTDIR) emacs -Q --batch -l $@ --eval '(message "foo")' 2>&1 > $@.test
@@ -13,14 +14,14 @@ init.elc: init.el $(EMACSD)/init.el | $(REPOLISP)
 .DELETE_ON_ERROR:
 
 $(REPOLISP): $(EMACSD)
-	rsync -av $(@F) $<
+	rsync -a $(@F) $<
 
 $(EMACSD):
 	mkdir -p $@
 
 INITEL = $(addprefix $(EMACSD)/, init.elc init.el)
 install: $(INITEL) # Missing custom.el.  Need better handling
-	rsync -av $(EMACSD)/ $(HOME)/.emacs.d
+	rsync -a $(EMACSD)/ $(HOME)/.emacs.d
 
 $(EMACSD)/%: % | $(EMACSD)
 	cp -pv $< $@
@@ -45,5 +46,16 @@ test: $(INITEL)
 	HOME=$(DESTDIR) emacs init.el foo.py foo.yaml foo.md
 
 cleantest: clean test
+
+CACHEDIR ?= $(PWD)/cache
+ELPA = $(CACHEDIR)/.emacs.d/elpa
+cache-elpa: $(ELPA)
+$(ELPA): init.el
+	HOME=$(CACHEDIR) EMACSLOADPATH=$(PWD)/repo-lisp: emacs -Q -l init.el --batch --eval '(message "foo")'
+
+update-cache-elpa: clean-cache-elpa cache-elpa
+
+clean-cache-elpa:
+	rm -rf $(CACHEDIR)
 
 .PHONY: install test cleantest
