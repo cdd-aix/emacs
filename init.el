@@ -1,44 +1,46 @@
 ;;; package -- summary
+;; -*- elisp-format-split-subexp-keyword-except-list: (quote ("provide" "require" "loop" "throw" "featurep" "use-package")); -*-
 ;;; init.el intended for bytecompilation
 ;;; Commentary:
 ;;; Initial concept https://github.com/nilcons/emacs-use-package-fast
 ;;; Revised in 2019 following https://github.com/jwiegley/use-package#getting-started
 ;;; Code:
-(eval-when-compile
-  (package-initialize)
-  (defvar default-package-check-signature package-check-signature)
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			   ("gnu" . "https://elpa.gnu.org/packages/")))
-  (unless (package-installed-p 'use-package)
-    (message "Installing use-package")
-    (package-refresh-contents)
-    (package-install 'use-package))
-  (require 'use-package)
-  (require 'use-package-ensure)
-  (setq use-package-always-ensure t)
-  (unless (package-installed-p 'gnu-elpa-keyring-update)
-    (message "Installing gnu-elpa-keyring-update")
-    (setq package-check-signature nil)
-    (package-refresh-contents)
-    (package-install 'gnu-elpa-keyring-update)
-    (setq package-check-signature default-package-check-signature)
-    (package-refresh-contents))
-  )
+;; TODO: Test TODOS
+(eval-when-compile (package-initialize)
+		   (defvar default-package-check-signature package-check-signature)
+		   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+					    ("gnu" . "https://elpa.gnu.org/packages/")))
+		   (unless (package-installed-p 'use-package)
+		     (message "Installing use-package")
+		     (package-refresh-contents)
+		     (package-install 'use-package))
+		   (require 'use-package)
+		   (require 'use-package-ensure)
+		   (setq use-package-always-ensure t)
+		   (unless (package-installed-p 'gnu-elpa-keyring-update)
+		     (message "Installing gnu-elpa-keyring-update")
+		     (setq package-check-signature nil)
+		     (package-refresh-contents)
+		     (package-install 'gnu-elpa-keyring-update)
+		     (setq package-check-signature default-package-check-signature)
+		     (package-refresh-contents)))
 
 ;; And this is the bytecompile magic from nilcons
 ;; Add the macro generated list of package.el loadpaths to load-path.
-(mapc #'(lambda (add) (add-to-list 'load-path add))
-      (eval-when-compile
-        (let ((package-user-dir-real (file-truename package-user-dir)))
-          ;; The reverse is necessary, because outside we mapc
-          ;; add-to-list element-by-element, which reverses.
-          (nreverse (apply #'nconc
-                           ;; Only keep package.el provided loadpaths.
-                           (mapcar #'(lambda (path)
-                                       (if (string-prefix-p package-user-dir-real path)
-                                           (list path)
-                                         nil))
-                                   load-path))))))
+(mapc #'(lambda (add)
+	  (add-to-list 'load-path add))
+      (eval-when-compile (let ((package-user-dir-real (file-truename package-user-dir)))
+			   ;; The reverse is necessary, because outside we mapc
+			   ;; add-to-list element-by-element, which reverses.
+			   (nreverse (apply #'nconc
+					    ;; Only keep package.el provided loadpaths.
+					    (mapcar #'(lambda (path)
+							(if (string-prefix-p package-user-dir-real
+									     path)
+							    (list path) nil)) load-path))))))
+
+
+(add-to-list 'load-path "~/.emacs.d/repo-lisp")
 
 ;;;; keyboard and customization
 ;; disable annoying ctrl-z to minimize
@@ -74,23 +76,24 @@
 (subword-mode +1)
 
 ;;;; mode minimization
-(use-package delight :defer t)
-(use-package diminish :defer t)
+(use-package delight)
+(use-package diminish)
 
 ;;;; Navigation and appearance aids
 
 (use-package ace-window
-  :bind
-  (("C-z o" . ace-window))
-  :custom
-  (aw-scope 'frame "https://github.com/abo-abo/ace-window#aw-scope")
-  (aw-dispatch-always t "https://github.com/abo-abo/ace-window#aw-dispatch-always"))
+  :bind (("C-z o" . ace-window))
+  :config (setq-default aw-scope 'frame)
+  (setq-default aw-dispatch-always t))
 
 (use-package color-theme-modern
+  :config
+  (load-theme 'clarity t t)
+  (enable-theme 'clarity)
+  ;; Kludge to put color-theme-modern on the custom-theme-load-path
   :init
   (require 'clarity-theme)
-  (load-theme 'clarity t t)
-  (enable-theme 'clarity))
+  )
 
 (use-package default-text-scale
   :bind (("C-M-=" . default-text-scale-increase)
@@ -103,13 +106,28 @@
 (use-package flycheck-color-mode-line
   :hook (flycheck-mode . flycheck-color-mode-line-mode))
 
+(use-package minions
+  :commands (minions-mode)
+  :init (setq minions-mode-line-lighter "[+]")
+  (setq-default minions-direct '(flycheck-mode))
+  (minions-mode))
+
 (use-package move-text
   :commands (move-text-default-bindings) ;; Enable M-up M-down to move line or region
   :init (move-text-default-bindings))
 
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 (use-package smart-mode-line
-  :commands (sml/setup sml/appy-theme)
-  :init (sml/setup))
+  :commands (sml/setup)
+  :config
+  (setq-default sml/theme 'dark)
+  (setq-default sml/shorten-modes t)
+  (setq-default sml/no-confirm-load-theme t)
+  (sml/setup)
+  )
+;; From https://github.com/DiegoVicen/my-emacs
 
 (use-package whitespace)
 
@@ -121,8 +139,7 @@
 (use-package midnight
   :commands (midnight-delay-set)
   :config (midnight-delay-set 'midnight-delay "4:30am")
-  :defer 30
-  )
+  :defer 30)
 
 (use-package smex
   :bind (("M-x" . smex)
@@ -135,23 +152,24 @@
 
 (use-package ws-butler
   :commands (ws-butler-global-mode)
-  :custom (ws-butler-keep-whitespace-before-point nil)
-  :delight
+  :config (setq-default ws-butler-keep-whitespace-before-point nil)
   :init (ws-butler-global-mode))
 
 ;;;; Project management
 (use-package helm-projectile
-  :bind (("s-p" . projectile-command-map)
-	 ("C-c p" . projectile-command-map))
-  :commands (helm-projectile-on projectile-mode)
+  :commands (helm-projectile-on)
+  )
+;; Kludge cannot handle in (use-package delight)
+(use-package projectile
+  :commands (projectile-mode)
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
   :config
   (require 'uniquify)
-  :custom ((uniquify-buffer-name-style 'reverse))
-  :delight
-  :init
+  (setq-default uniquify-buffer-name-style 'reverse)
+  (projectile-mode +1)
   (helm-projectile-on)
-  (projectile-mode +1))
-
+  )
 ;;;; General development
 (use-package compile
   :bind (("C-z c" . compile)
@@ -160,74 +178,160 @@
 (use-package diff-hl
   :after (vc-git)
   :commands (global-diff-hl-mode diff-hl-margin-mode)
-  :config
-  (require 'diff-hl-margin)
+  :config (require 'diff-hl-margin)
   (diff-hl-margin-mode)
-  :delight
-  :hook ((magit-post-refresh-hook . diff-hl-magit-post-refresh)
-	 (dired-mode-hook . diff-hl-dired-mode))
+  :hook ((magit-post-refresh . diff-hl-magit-post-refresh)
+	 (magit-pre-refresh . diff-hl-magit-pre-refresh)
+	 (dired-mode . diff-hl-dired-mode))
   :init (global-diff-hl-mode))
 
 (use-package forge
   :after (magit))
 
 (use-package magit
-  :delight (magit magit-mode auto-revert-mode)
   :bind ("C-c g" . magit-status)
-  :custom
-  (vc-follow-symlinks t))
+  :config (setq-default vc-follow-symlinks t))
 
 (use-package magit-gitflow
   :hook (magit-mode . turn-on-magit-gitflow))
 
+(use-package magit-lfs)
+
 (use-package flycheck
-  :commands (global-flycheck-mode flycheck-add-mode)
-  :config (append flycheck-disabled-checkers '(javascript-jshint))
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-  :init (global-flycheck-mode))
+  :hook (prog-mode . flycheck-mode)
+  :commands (global-flycheck-mode flycheck-add-mode flycheck-mode)
+  :config (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (setq-default flycheck-indication-mode 'left-fringe)
+  )
 
 (use-package flycheck-checkbashisms
   :hook (flycheck-mode . flycheck-checkbashisms-setup))
 
+(use-package flycheck-pos-tip
+  :hook (flycheck-mode . flycheck-pos-tip-mode))
+
+(use-package flycheck-rust
+  :hook (flycheck-mode . flycheck-rust-setup))
+
 (use-package flycheck-yamllint
   :hook (flycheck-mode . flycheck-yamllint-setup))
 
+(use-package flyspell
+  :config
+  (setq ispell-program-name "aspell"
+	ispell-dictionary "english"))
+
+(use-package lsp-mode
+  :commands (lsp lsp-deferred))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+
+(use-package helm-lsp
+  :commands helm-lsp-workspace-symbol)
+
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+(use-package treemacs
+  :hook (projectile-after-switch-project . treemacs-add-and-display-current-project)
+  :bind
+  (:map global-map
+	("M-0"       . treemacs-select-window)
+	("C-x t 1"   . treemacs-delete-other-windows)
+	("C-x t t"   . treemacs)
+	("C-x t B"   . treemacs-bookmark)
+	("C-x t C-t" . treemacs-find-file)
+	("C-x t M-t" . treemacs-find-tag)
+	("C-x t w"   . treemacs-switch-workspace))
+  )
+
+(use-package treemacs-all-the-icons
+  :after treemacs)
+;; https://github.com/Alexander-Miller/treemacs for suggestions on bindings
+
+(use-package treemacs-projectile
+  :after treemacs projectile)
+
+(use-package treemacs-magit
+  :after treemacs magit
+  )
+
+(use-package dap-mode)
+
+(use-package yasnippet-snippets)
+(use-package yasnippet
+  :bind (:map yas-minor-mode-map
+	      ("C-'" . yas-expand))
+  :config (define-key yas-minor-mode-map [(tab)] nil)
+  (define-key yas-minor-mode-map (kbd "TAB") nil)
+  :functions yas-global-mode
+  :init (yas-global-mode 1))
+
 ;;;; Language Specific
 
+(use-package cargo
+  :hook (rust-mode . cargo-minor-mode))
 (use-package coffee-mode)
 
 (use-package docker-compose-mode
-  :delight
-  :mode (".*docker-compose.*\\.yml\\'")  )
+  :mode (".*docker-compose.*\\.yml\\'"))
 
 (use-package dockerfile-mode
-  :delight
-  :mode ("Dockerfile.*\\'"))
+  :mode ("Dockerfile.*\\'")
+  :hook ((dockerfile-mode . subword-mode)
+	 (dockerfile-mode . (lambda()
+			      (setq indent-tabs-mode nil tab-width 4)))))
 
 (use-package elisp-format)
 
+;; python
 (use-package elpy
-  :delight
   :hook (python-mode . elpy-enable))
+
+(use-package company-jedi
+  :hook (python-mode . (lambda ()
+			 (add-to-list 'company-backends 'company-jedi))))
+
+(use-package importmagic
+  :bind (("C-c i l" . importmagic-fix-imports)
+	 ("C-c i f" . importmagic-fix-symbol-at-point)
+	 ("C-c i s" . importmagic-fix-symbol)
+	 ("C-c i u" . importmagic-update-index))
+  :config (setq importmagic-python-interpreter "python")
+  :hook (python-mode . importmagic-mode))
 
 (use-package groovy-mode)
 
-(use-package json-mode
-  :delight)
+(use-package json-mode)
 
 (use-package nginx-mode
   :mode (("/nginx/.*\\.conf\\'" . nginx-mode)
 	 ("/nginx/sites-\\(?:available\\|enabled\\)/" . nginx-mode)))
 
+(use-package nim-mode
+  :hook ((nim-mode . company-mode)))
+
 (use-package poly-markdown)
 
-(use-package powershell)
+(use-package powershell
+  :hook (powershell-mode . lsp-deferred))
 
-(use-package rjsx-mode
-  :delight)
+(use-package puppet-mode
+  :hook (puppet-mode . lsp-deferred)
+  :mode ("\\.pp"))
+
+(use-package rjsx-mode)
+
+(use-package rust-mode
+  :hook (rust-mode . lsp-deferred))
+
+(require 'tera-mode)
+
+(use-package toml-mode)
 
 (use-package web-mode
   :mode ("\\.html\\'" "\\.htm\\'"))
+
 
 ;;;; Omitted as haven't used much
 ;; neotree

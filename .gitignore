@@ -1,8 +1,8 @@
-*.elc
-*~
 *#
-.#*
-cf-own-custom.el
-flycheck_init.el
-elpa*/
+*.elc
 *.log
+*.zip
+*~
+.#*
+/build/
+/flycheck_init.el

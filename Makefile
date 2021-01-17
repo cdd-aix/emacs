@@ -1,22 +1,45 @@
 HOME ?= ~
-init.elc: init.el
-	rm -vf "$@"
-	emacs -Q -l $< --batch -f batch-byte-compile $<
-	if emacs -Q --batch -l $@ --eval '(message "foo")' 2>&1 | grep ^Error; then exit 1; fi
+DESTDIR ?= $(PWD)/build
+EMACSD = $(DESTDIR)/.emacs.d
+REPOLISP = $(EMACSD)/repo-lisp
 
-install: init.elc init.el | $(HOME)/.emacs.d
-	cp -v $^ $(HOME)/.emacs.d/
-	[ -r $(HOME)/.emacs.d/custom.el ] || cp -v custom.el $(HOME)/.emacs.d/
+init.elc: init.el | $(REPOLISP)
+	rm -vf $@ $(EMACSD)/$@ $(EMACSD)/$@ $(EMACSD)/$< || :
+	HOME=$(DESTDIR) emacs -Q -l $< --batch -f batch-byte-compile $<
+	HOME=$(DESTDIR) emacs -Q --batch -l $@ --eval '(message "foo")' 2>&1 > $@.test
+	! grep ^Error $@.test
+	rm -f $@.test
 
-$(HOME)/.emacs.d:
+.DELETE_ON_ERROR:
+
+$(REPOLISP): $(EMACSD)
+	rsync -av $(@F) $<
+
+$(EMACSD):
 	mkdir -p $@
 
-realclean:
-	rm -rvf $(HOME)/.emacs.d/elpa init.elc
+INITEL = $(addprefix $(EMACSD)/, init.el init.elc)
+install: $(INITEL) # Missing custom.el.  Need better handling
+	rsync -av $(EMACSD)/ $(HOME)/.emacs.d
 
-test: init.elc
-	emacs -Q -l init.elc init.el
+$(EMACSD)/%: % | $(EMACSD)
+	cp -pv $< $@
 
-cleantest: realclean test
+package: clean $(DESTDIR)/emacsd.zip
+
+$(DESTDIR)/emacsd.zip: $(INITEL)
+	cd $(@D); find .emacs.d -type f | sort | zip -9v $(@F) -@
+
+package.list: $(INITEL)
+	find $(EMACSD) -name \*-pkg.el | awk -F/ '{print $(NF-1)}' | sort > $@
+
+clean:
+	rm -rf $(DESTDIR) init.elc
+
+test: $(INITEL)
+	@echo Check init.el, foo.py, foo.yaml, and foo.md buffers
+	HOME=$(DESTDIR) emacs init.el foo.py foo.yaml foo.md
+
+cleantest: clean test
 
 .PHONY: install test cleantest
