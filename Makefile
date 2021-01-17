@@ -18,23 +18,23 @@ $(REPOLISP): $(EMACSD)
 $(EMACSD):
 	mkdir -p $@
 
-install: $(addprefix $(EMACSD)/, init.el init.elc) # Missing custom.el.  Need better handling
+INITEL = $(addprefix $(EMACSD)/, init.el init.elc)
+install: $(INITEL) # Missing custom.el.  Need better handling
 	rsync -av $(EMACSD)/ $(HOME)/.emacs.d
 
 $(EMACSD)/%: % | $(EMACSD)
 	cp -pv $< $@
 
-package: init.el
-	rm -rvf $(DESTDIR)
-	make -B init.elc install
-	cd $(HOME); find .emacs.d -type f | sort | zip -9v ../emacsd.zip -@
+package: clean $(DESTDIR)/emacsd.zip
 
-package.list: realclean init.elc
-	find $(HOME)/.emacs.d -name \*-pkg.el | awk -F/ '{print $(NF-1)}' | sort > $@
+$(DESTDIR)/emacsd.zip: $(INITEL)
+	cd $(@D); find .emacs.d -type f | sort | zip -9v $(@F) -@
 
-realclean:
-	rm -rvf $(HOME)/.emacs.d/elpa init.elc
-	rm -rvf $(DESTDIR)
+package.list: $(INITEL)
+	find $(EMACSD) -name \*-pkg.el | awk -F/ '{print $(NF-1)}' | sort > $@
+
+clean:
+	rm -rf $(DESTDIR) init.elc
 
 test: init.elc
 	@echo Check init.el, foo.py, foo.yaml, and foo.md buffers
