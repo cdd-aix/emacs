@@ -36,10 +36,10 @@ package.list: $(INITEL)
 clean:
 	rm -rf $(DESTDIR) init.elc
 
-test: init.elc
+test: $(INITEL)
 	@echo Check init.el, foo.py, foo.yaml, and foo.md buffers
-	emacs -Q -l init.elc init.el foo.py foo.yaml foo.md
+	HOME=$(DESTDIR) emacs init.el foo.py foo.yaml foo.md
 
-cleantest: realclean test
+cleantest: clean test
 
 .PHONY: install test cleantest
