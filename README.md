@@ -3,13 +3,13 @@
 Chris Dukes' emacs configuration
 
 ## Install
-mkdir -p ~/p
-git clone https://github.com/cdd-aix/emacs.git ~/p/emacs
-cd ~/p/emacs
+``` bash
+git clone https://github.com/cdd-aix/emacs
+cd emacs
 make install
+```
 
-## Recompile init.el
-make init-compile
+Or unzip the zipball in your home directory
 
 ## Highlights
 * Attempts to use 2019 use-package and compiled emacs init best practices
