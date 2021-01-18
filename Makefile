@@ -55,7 +55,7 @@ CACHEDIR ?= $(PWD)/cache
 ELPA = $(CACHEDIR)/.emacs.d/elpa
 cache-elpa: $(ELPA)
 $(ELPA): init.el
-	HOME=$(CACHEDIR) EMACSLOADPATH=$(PWD)/repo-lisp: emacs -Q -l init.el --batch --eval '(message "foo")'
+	HOME=$(CACHEDIR) EMACSLOADPATH=$(PWD)/repo-lisp: emacs -Q -l $< --batch --eval '(byte-recompile-directory (expand-file-name "~/.emacs.d/"))'
 
 update-cache-elpa: clean-cache-elpa cache-elpa
 
