@@ -20,7 +20,8 @@ $(EMACSD):
 	mkdir -p $@
 
 INITEL = $(addprefix $(EMACSD)/, init.elc init.el)
-install: $(INITEL) # Missing custom.el.  Need better handling
+install: $(INITEL) remove-rubbish
+# Missing custom.el.  Need better handling
 	rsync -a $(EMACSD)/ $(HOME)/.emacs.d
 
 $(EMACSD)/%: % | $(EMACSD)
@@ -28,10 +29,13 @@ $(EMACSD)/%: % | $(EMACSD)
 
 package: clean $(DESTDIR)/emacsd.zip
 
-$(DESTDIR)/emacsd.zip: RUBBISH = $(addprefix $(EMACSD)/, *.eld *.sqlite auto-save-list)
-$(DESTDIR)/emacsd.zip: Makefile package.list
-	rm -rvf $(RUBBISH) || true
+$(DESTDIR)/emacsd.zip: Makefile package.list remove-rubbish
 	cd $(@D); find .emacs.d package.list -type f | sort | zip -9q $(@F) -@
+
+remove-rubbish: RUBBISH = $(addprefix $(EMACSD)/, *.eld *.sqlite auto-save-list)
+remove-rubbish: $(INITEL)
+	rm -rvf $(RUBBISH) || true
+
 
 package.list: $(EMACSD)/package.list
 
