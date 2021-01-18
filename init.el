@@ -185,8 +185,9 @@
 	 (dired-mode . diff-hl-dired-mode))
   :init (global-diff-hl-mode))
 
-(use-package forge
-  :after (magit))
+;; (use-package forge
+;;   :after (magit))
+;; ;; Adds an undesirable sqlite dependency
 
 (use-package magit
   :bind ("C-c g" . magit-status)
